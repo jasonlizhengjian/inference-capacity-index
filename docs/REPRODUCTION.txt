@@ -66,6 +66,9 @@ pip check: no broken requirements.
 Editable local package installation and agent-index validate: passed.
 Test suite with AGENT_INDEX_TEST_AISIM=1: 14 tests passed.
 Without AISim: 9 tests passed, 5 gated tests skipped.
+Subsequent cleanup removed four inherited duplicate policy-test executions:
+the current suite has 10 distinct tests (9 lightweight checks plus 1 native
+fixture test covering five configurations), with unchanged coverage.
 
 Limits
 ------

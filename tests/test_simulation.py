@@ -13,12 +13,11 @@ from agent_index.simulation import enumerate_layouts, evaluate_candidate, make_c
 from agent_index.topology import events, phase_hops
 
 ROOT = Path(__file__).resolve().parents[1]
+CATALOG = json.loads((ROOT / "configs/catalog.json").read_text())
 
 
 class PolicyTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.catalog = json.loads((ROOT / "configs/catalog.json").read_text())
+    catalog = CATALOG
 
     def test_integral_experts_eliminate_72(self):
         for model in ("GLM-5.2", "Kimi-K3"):
@@ -55,7 +54,9 @@ class PolicyTests(unittest.TestCase):
 
 @unittest.skipUnless(os.environ.get("AGENT_INDEX_TEST_AISIM") == "1",
                      "Enable AGENT_INDEX_TEST_AISIM=1 with the pinned wheel")
-class NativeFixtureTests(PolicyTests):
+class NativeFixtureTests(unittest.TestCase):
+    catalog = CATALOG
+
     def test_saved_candidate_parity(self):
         # Extracted from frozen complete_results/frontier_nodes.csv, October 9.
         # hw, model, TP, DP, DCP, ETP, EP, PP, batch, raw ms, memory GiB.
