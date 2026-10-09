@@ -1,0 +1,14 @@
+{
+  "aisimulate_version": "0.13.0.dev202610050000000066",
+  "runtime_sha256": "a18acd9f505645ba217dc770085693df5516f61ed910c70911727f2ebdcc26d5",
+  "python_version": "3.12.3",
+  "model_config_sha256": {
+    "aisimulate_core/model_configs/moonshotai--Kimi-K3_config.json": "9710e121a58d03ac92c8d6da287a19541994319afbbe6d6202af001ffd379213",
+    "aisimulate_core/model_configs/nvidia--GLM-5.2-NVFP4_config.json": "d3783a603e5aa9cb58eff7a5d8ac9c42d83156b229efe185c72e9e2dc8444923"
+  },
+  "source_checkout_commit": "5c466b567d0ef62d983958ddfcbccbad0e201a29",
+  "checkout_is_wheel_build_commit": false,
+  "build_provenance_note": "Source checkout is separately identified. Exact wheel build commit is not established. Binary redistribution is not included.",
+  "platform": "Linux x86_64",
+  "runtime_path": "aisimulate/_runtime.abi3.so"
+}

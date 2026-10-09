@@ -1,0 +1,37 @@
+{
+  "release": "2026-10-09",
+  "phase": "decode",
+  "context": 262144,
+  "new_tokens": 1,
+  "nextn": 3,
+  "al": 3,
+  "verification_positions": 4,
+  "model_weights": {"GLM-5.2": 0.5, "Kimi-K3": 0.5},
+  "models": {
+    "GLM-5.2": {"model": "nvidia/GLM-5.2-NVFP4", "backend": "vllm", "backend_version": "0.24.0"},
+    "Kimi-K3": {"model": "moonshotai/Kimi-K3", "backend": "sglang", "backend_version": "0.5.17"}
+  },
+  "reference_hardware": "GB300 NVL72",
+  "speed_band": [50, 400],
+  "integration": "logarithmic",
+  "capacity_denominator": "allocated_chips_including_all_PP_stages",
+  "memory_admission_fraction": 0.9,
+  "metadata_guard_fraction_weights_plus_KV": 0.03125,
+  "database_mode": "SOL",
+  "estimation_mode": "op_level",
+  "fallback_policy": "deny",
+  "estimator_correction_enabled": false,
+  "enable_shared_layer": false,
+  "gemm_quant_mode": "bfloat16",
+  "fmha_quant_mode": "bfloat16",
+  "kvcache_quant_mode": "fp8",
+  "comm_quant_mode": "half",
+  "expert_precision_source": "catalog.json quant per hardware",
+  "notes": [
+    "Acceptance length is assumed identically across hardware, not predicted or quality validated.",
+    "FMHA setting is nominal: native Kimi decode MLA uses FP8; see historical methodology snapshot.",
+    "new_tokens=1 labels the decode workload; native speculative graph verifies four positions.",
+    "Cached-prefix prefill, queueing, tool waits, TTFT, and temporal duty cycles are excluded.",
+    "Native memory and topology behavior plus local conservative guards are part of this release's conditional methodology."
+  ]
+}

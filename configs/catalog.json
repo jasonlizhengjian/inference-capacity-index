@@ -1,0 +1,189 @@
+{
+  "GB300 NVL72": {
+    "name": "NVIDIA GB300 NVL72",
+    "profile": "gb300_deployment",
+    "chip_budget": 72,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": 72,
+    "topology_note": "72-GPU NVLink domain",
+    "source_notes": "Reference denominator for each model; frozen profile uses 288 decimal GB."
+  },
+  "GB200 NVL72": {
+    "name": "NVIDIA GB200 NVL72",
+    "profile": "gb200_deployment",
+    "chip_budget": 72,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": 72,
+    "topology_note": "72-GPU NVLink domain",
+    "source_notes": "Frozen profile uses 186 decimal GB; do not substitute 192 GB without recomputing scores."
+  },
+  "B200 · 800G": {
+    "name": "NVIDIA B200 HGX",
+    "profile": "b200_800g_hgx_audit",
+    "chip_budget": 64,
+    "restricted": true,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": 8,
+    "topology_note": "8-GPU NVLink domain; 800 Gb/s per-GPU scale-out",
+    "source_notes": "Dense FP4 9 PF/s; bandwidth 7.7 TB/s from pinned profile; 180 decimal GB."
+  },
+  "B300 · 800G": {
+    "name": "NVIDIA B300 HGX",
+    "profile": "b300_800g_hgx_audit",
+    "chip_budget": 64,
+    "restricted": true,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": 8,
+    "topology_note": "8-GPU NVLink domain; 800 Gb/s per-GPU scale-out",
+    "source_notes": "Dense FP4 13.5 PF/s; bandwidth 7.75 TB/s from pinned profile; 288 decimal GB."
+  },
+  "VR200": {
+    "name": "NVIDIA VR200 NVL72",
+    "profile": "vr200_deployment",
+    "chip_budget": 72,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": 72,
+    "topology_note": "72-GPU NVLink domain",
+    "source_notes": "Frozen Rubin profile: 288 decimal GB and 22 TB/s. Scores are not a new validation of shipping specifications."
+  },
+  "MI355X · 400G": {
+    "name": "AMD MI355X",
+    "profile": "mi355x_400g_hgx_audit",
+    "chip_budget": 64,
+    "restricted": true,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": 8,
+    "topology_note": "8-GPU Infinity Fabric domain; 400 Gb/s per-GPU scale-out",
+    "source_notes": "Aggregate local fabric bandwidth 537.6 GB/s one-way; small-group mesh/link utilization is not separately calibrated."
+  },
+  "MI455X": {
+    "name": "AMD MI455X Helios",
+    "profile": "mi455x_deployment",
+    "chip_budget": 72,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": 72,
+    "topology_note": "72-GPU scale-up domain",
+    "source_notes": "Frozen Helios resource projection with FP4 experts; vendor-specific collective execution is uncalibrated."
+  },
+  "Jalapeño": {
+    "name": "OpenAI Jalapeno",
+    "profile": "jalapeno_mid_deployment",
+    "chip_budget": 128,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": 128,
+    "topology_note": "128-chip scale-up assumption from reference study",
+    "source_notes": "BF16 1.7 PF/s assumed as half FP8. Fabric 600 GB/s treated as one-way; directionality uncertain. Memory input is 216 GiB, not 216 decimal GB."
+  },
+  "TPU7x Ironwood · FP8": {
+    "name": "Google TPU v7 Ironwood",
+    "profile": "tpu7x_fp8_injection_bound",
+    "chip_budget": 128,
+    "restricted": false,
+    "quant": "fp8",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": null,
+    "topology_note": "ICI torus; not a uniform all-to-all switch domain; modeled node=256 is a placeholder",
+    "source_notes": "FP8 experts; no native FP4 rate assigned. Memory is 192 GiB. Aggregate six-link outbound ICI bound; two-chiplet memory domains, internal D2D, torus congestion and placement omitted."
+  },
+  "TPU8t · FP4 equivalent": {
+    "name": "Google TPU v8t",
+    "profile": "tpu8t_fp4_injection_bound",
+    "chip_budget": 128,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": null,
+    "topology_note": "ICI torus; not a uniform all-to-all switch domain; modeled node=256 is a placeholder",
+    "source_notes": "Hardware-adapted FP4-equivalent experts, not an equal-accuracy claim. 216 decimal GB. Aggregate outbound ICI bound; torus forwarding, contention and placement omitted."
+  },
+  "TPU8i · corrected · hops": {
+    "name": "Google TPU v8i",
+    "profile": "tpu8i_audit_corrected",
+    "chip_budget": 128,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": true,
+    "local_scale_up_group_chips": 4,
+    "topology_note": "4-chip local / 32-chip intermediate hierarchy assumption; larger ICI domain is not limited to four",
+    "source_notes": "Corrected BF16/FP8 rates; 288 decimal GB. Aggregate outbound ICI plus assumed 250 ns/hop; 1/3/7 hop tiers at <=4/<=32/>32 chips with recursive collectives. Not a calibrated Boardfly simulation; two-core domains omitted."
+  },
+  "H100 SXM · FP8 · 400G": {
+    "name": "NVIDIA H100 SXM",
+    "profile": "h100_400g_hopper",
+    "chip_budget": 64,
+    "restricted": true,
+    "quant": "fp8",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": 8,
+    "topology_note": "8-GPU NVLink domain; 400 Gb/s per-GPU scale-out",
+    "source_notes": "FP8 experts, not FP4. 80 decimal GB. Sparse tensor-core bonus excluded. Separate weight-only FP4 sensitivity is not this score."
+  },
+  "H200 SXM · FP8 · 400G": {
+    "name": "NVIDIA H200 SXM",
+    "profile": "h200_400g_hopper",
+    "chip_budget": 64,
+    "restricted": true,
+    "quant": "fp8",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": 8,
+    "topology_note": "8-GPU NVLink domain; 400 Gb/s per-GPU scale-out",
+    "source_notes": "FP8 experts, not FP4. 141 decimal GB. Sparse tensor-core bonus excluded. Separate weight-only FP4 sensitivity is not this score."
+  },
+  "Ascend 950PR": {
+    "name": "Huawei Ascend 950PR",
+    "profile": "ascend950pr_base",
+    "chip_budget": 128,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": null,
+    "topology_note": "SuperPoD subdomain abstraction; modeled node=128 is not a physical node or maximum system size",
+    "source_notes": "32-core whitepaper specification. FP4 byte-accounting proxy for MXFP4; all 2.016 TB/s bidirectional chip ports allocated to fabric -> 1.008 TB/s one-way. Shared ports/optics may constrain this."
+  },
+  "Ascend 950DT": {
+    "name": "Huawei Ascend 950DT",
+    "profile": "ascend950dt_base",
+    "chip_budget": 128,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": null,
+    "topology_note": "SuperPoD subdomain abstraction; modeled node=128 is not a physical node or maximum system size",
+    "source_notes": "36-core / 144 GB whitepaper specification, not shipping-bin verification. FP4 byte-accounting proxy for MXFP4; 1.008 TB/s one-way allocates all ports to fabric. Separate 96 GB sensitivity excluded."
+  },
+  "Ascend 960DT": {
+    "name": "Huawei Ascend 960DT",
+    "profile": "ascend960dt_base",
+    "chip_budget": 128,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": null,
+    "topology_note": "SuperPoD subdomain abstraction; modeled node=128 is not a physical node or maximum system size",
+    "source_notes": "Q1 2027 roadmap. BF16 assumed half FP8. Advertised 2.2 TB/s fabric assumed bidirectional -> 1.1 TB/s one-way. FP8/FP4 treated as dense although slide does not establish peak convention. FP4 storage proxy."
+  },
+  "Ascend 960PR": {
+    "name": "Huawei Ascend 960PR",
+    "profile": "ascend960pr_base",
+    "chip_budget": 128,
+    "restricted": false,
+    "quant": "nvfp4",
+    "hop_overlay": false,
+    "local_scale_up_group_chips": null,
+    "topology_note": "SuperPoD subdomain abstraction; modeled node=128 is not a physical node or maximum system size",
+    "source_notes": "Q3 2027 roadmap. BF16 assumed half FP8. Advertised 2.2 TB/s fabric assumed bidirectional -> 1.1 TB/s one-way. FP8/FP4 treated as dense although slide does not establish peak convention. FP4 storage proxy."
+  }
+}

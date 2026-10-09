@@ -1,0 +1,78 @@
+STANDALONE PACKAGING VALIDATION — 9 OCTOBER 2026
+
+Scope
+-----
+This extraction preserves the current headline numerical methodology.
+It does not update hardware specifications, acceptance assumptions, empirical
+calibration or the native AISim implementation. Original study files remain
+untouched. The new repository uses no imports from the original study.
+
+Frozen-data rebuild
+-------------------
+python3 run.py validate
+python3 run.py rebuild
+
+Verified 33 immutable input hashes, 17 accelerators and 2 models.
+All 51 current headline score cells (combined plus both models) matched the
+frozen expected CSV. The historical non-Huawei log50-300 per-model scores
+were independently reproduced too. The exported frozen score CSV is byte
+identical to the original, SHA-256:
+39edd0f49114063d08bed73df39862d6b40289125f36bb5818ddd2d498375e65
+
+Native frontier replay
+----------------------
+Re-evaluated all 2,543 saved headline frontier candidates across both models
+and all 17 accelerators. Largest relative differences versus saved rows:
+raw iteration time: 3.119371732828386e-16
+TPS/user:           2.7372940200799334e-16
+memory/rank:        3.0710474968260885e-16
+requests/chip:      1.4988010832439637e-15
+
+The same replay was completed in a freshly downloaded, isolated virtual
+environment, not just the pre-existing analytical environment. Native runtime
+and model hashes matched; all 2,228 recorded AISim file hashes matched RECORD.
+See results/clean-env-native-replay/run.json and index/validation.json locally.
+
+Independent finite search
+-------------------------
+The extracted sweep evaluated 91,863 admitted candidates from the published
+layout family, searching integer batch sizes rather than reading the saved
+frontier as its candidate list. It covered 17 accelerators and both models,
+including node-local/serial-PP and TPU8i-hop policies. It ran through the
+extracted code using the original pinned runtime, separately identified from
+the fresh-install replay above.
+
+All 51 resulting score cells matched at relative tolerance 1e-12; maximum
+absolute score difference was 1.3322676295501878e-15. Native-replay and full-
+search exported score CSVs are byte-identical to each other, SHA-256:
+eaeb4e53f2cd35c6bb45439db634e6429afcf23e3e6f1eb47f3cf2895849a4c5
+They differ from the historical CSV only at floating-point rounding level
+in score calculations using reevaluated candidate numbers.
+See results/full-search/index/validation.json locally.
+
+After the full sweep, logging was deduplicated, completion status reporting
+was strengthened, and an admission/exclusion ledger was added without changing
+formulas or candidate enumeration. A fresh-environment H100/GLM search then
+evaluated 442 candidates through this final audit path and saved admission.json.
+All current native model rounding warnings are retained once per unique message;
+repeat suppression is counted in run.json. No timing correction is implied.
+
+Installation and tests
+----------------------
+Fresh Linux x86-64 Python 3.12.3 venv. Successfully downloaded and installed
+all 78 packages at recorded versions from public indexes. Generated artifact-
+hash lock with uv 0.12.8; validated --require-hashes installation constraints.
+pip check: no broken requirements.
+Editable local package installation and agent-index validate: passed.
+Test suite with AGENT_INDEX_TEST_AISIM=1: 14 tests passed.
+Without AISim: 9 tests passed, 5 gated tests skipped.
+
+Limits
+------
+These checks establish extraction parity and runnable packaging, NOT empirical
+accuracy, architectural completeness or vendor-specific achievable efficiency.
+The exact wheel build commit remains unknown; its native binary hash is pinned.
+Package index availability in the future is not guaranteed. No source-build
+fallback is claimed numerically equivalent. Resume of interrupted sweeps is not
+implemented; use a new output directory. Generated results are local artifacts,
+not included in the Git-tracked frozen release inputs.
