@@ -1,0 +1,7 @@
+# Preserve byte-level fixture hashes, including original CSV CRLF and table padding.
+reference/** -text -whitespace
+configs/** -text
+environment/** -text
+docs/METHODOLOGY.* -text -whitespace
+LICENSES/** -text
+*.py text eol=lf
