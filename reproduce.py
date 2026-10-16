@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Current four-model index: rebuild, native replay/search, or portable bundle."""
+"""Inference Capacity Index v1: rebuild, native replay/search, or portable bundle."""
 import argparse
 import csv
 import hashlib
@@ -143,7 +143,7 @@ def bundle(destination):
     def filter_file(info):
         return None if '__pycache__' in Path(info.name).parts or info.name.endswith(('.pyc','.pyo')) else info
     with tarfile.open(destination,'w:gz') as archive:
-        for name in names:archive.add(ROOT/name,arcname='agent-capacity-index/'+name,filter=filter_file)
+        for name in names:archive.add(ROOT/name,arcname='inference-capacity-index/'+name,filter=filter_file)
     print(destination,hashlib.sha256(destination.read_bytes()).hexdigest())
 
 
@@ -159,7 +159,7 @@ def main():
     verify()
     out=(args.output or Path('results/current' if args.command=='rebuild' else 'results/current-'+args.command))
     if not out.is_absolute():out=ROOT/out
-    if args.command=='bundle':bundle(args.output or ROOT/'dist/agent-capacity-index-current.tar.gz')
+    if args.command=='bundle':bundle(args.output or ROOT/'dist/inference-capacity-index-v1.0.0.tar.gz')
     elif args.command=='doctor':
         from agent_index.current_native import doctor
         print(json.dumps(doctor(REF),indent=2))

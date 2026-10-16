@@ -1,4 +1,4 @@
-# Agent capacity index
+# Inference Capacity Index v1
 
 Portable reproduction of the current **four-model, 23-accelerator** study:
 GLM-5.2, Kimi-K3, Qwen3-Coder 480B and MAI-2 2.8T, equally weighted.
@@ -24,7 +24,7 @@ connects the narrative, equations, charts and implementation references.
 
 GitHub displays HTML source rather than running these pages. Clone/download the
 repository and open the files in a browser, or download `visualizations.zip` from
-the [reproduction release](https://github.com/jasonlizhengjian/agent-capacity-index/releases/tag/current-reproduction-2026-10-16)
+the [v1 release](https://github.com/jasonlizhengjian/inference-capacity-index/releases/tag/v1.0.0)
 and extract it. Keep the files together so navigation and downloads work.
 These are generated snapshots; `python3 reproduce.py` regenerates them in
 `results/current/` without modifying the checked-in copies.
@@ -56,13 +56,13 @@ teaching curves and power annotations are frozen supporting inputs.
 ## Rerun AISim on CPU
 
 Supported frozen environment: **Linux x86-64, CPython 3.12**. Download the exact
-AISim wheel from this repository's `current-reproduction-2026-10-16` release
+AISim wheel from this repository's `v1.0.0` release
 into `vendor/`, or unpack the complete release archive, which includes it:
 
 ```bash
 mkdir -p vendor
-gh release download current-reproduction-2026-10-16 \
-  --repo jasonlizhengjian/agent-capacity-index --pattern '*.whl' --dir vendor
+gh release download v1.0.0 \
+  --repo jasonlizhengjian/inference-capacity-index --pattern '*.whl' --dir vendor
 
 python3 environment/setup_current.py
 .venv-current/bin/python reproduce.py doctor
@@ -126,7 +126,7 @@ guaranteed to produce a byte-identical runtime.
 python3 reproduce.py bundle
 ```
 
-Writes `dist/agent-capacity-index-current.tar.gz` and prints its SHA-256.
+Writes `dist/inference-capacity-index-v1.0.0.tar.gz` and prints its SHA-256.
 The explicit allowlist excludes environments, private references, credentials,
 logs and unrelated research scripts. Native setup still needs package-index
 access for dependencies; the quick rebuild is fully offline.
@@ -160,5 +160,10 @@ not added. The local explainer details the method and assumptions.
 
 `run.py`, `configs/`, `reference/2026-10-09/` and earlier tests retain the
 historical two-model release; **use `reproduce.py` for the current index**.
+The release tag is `v1.0.0`. Internal `agent_index` imports and saved CSV column
+names are retained for compatibility. The legacy `agent-index` command still
+targets the historical release; use `reproduce.py` for v1. Archived documents
+retain their original names and assumptions.
+
 Historical instructions are preserved in `docs/REPRODUCTION_HISTORY.md`, not
 current setup guidance. See `THIRD_PARTY_NOTICES.md` for licensing scope.

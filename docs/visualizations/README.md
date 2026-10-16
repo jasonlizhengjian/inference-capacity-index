@@ -1,4 +1,4 @@
-# Full explainer: from workload to hardware score
+# Inference Capacity Index v1: full explainer
 
 These three interactive chapters are the detailed companion to the short
 [methodology overview](https://docs.google.com/document/d/1w0XFlIYy276_eYZnJI-CLXsC8hPfNz0SBx8jaPrbra4).

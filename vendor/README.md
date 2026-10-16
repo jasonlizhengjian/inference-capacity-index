@@ -6,8 +6,8 @@ stored in Git (it exceeds GitHub's normal file-size limit).
 From the repository root:
 
 ```bash
-gh release download current-reproduction-2026-10-16 \
-  --repo jasonlizhengjian/agent-capacity-index --pattern '*.whl' --dir vendor
+gh release download v1.0.0 \
+  --repo jasonlizhengjian/inference-capacity-index --pattern '*.whl' --dir vendor
 ```
 
 The complete reproduction archive includes it. `environment/setup_current.py`
