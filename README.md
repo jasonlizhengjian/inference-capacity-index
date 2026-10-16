@@ -15,6 +15,9 @@ does not claim to reproduce Microsoft's exact implementation.
 All three current interactive HTML explainers are included, with their companion
 data and downloadable charts:
 
+Start with the [full explainer reading guide](docs/visualizations/README.md), which
+connects the narrative, equations, charts and implementation references.
+
 - [Methodology and configuration explorer](docs/visualizations/REPORT.html)
 - [Performance knees and bottlenecks](docs/visualizations/PERFORMANCE_KNEES.html)
 - [Accelerator comparison charts](docs/visualizations/ACCELERATOR_COMPARISON.html)
