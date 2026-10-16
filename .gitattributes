@@ -3,5 +3,6 @@ reference/** -text -whitespace
 configs/** -text
 environment/** -text
 docs/METHODOLOGY.* -text -whitespace
+docs/visualizations/*.csv -text -whitespace
 LICENSES/** -text
 *.py text eol=lf

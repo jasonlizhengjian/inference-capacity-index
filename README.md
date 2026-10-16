@@ -10,6 +10,22 @@ memory-admission, topology and search policies live in our Python wrappers.
 The MAI adapter uses native operators with explicitly assumed dimensions; it
 does not claim to reproduce Microsoft's exact implementation.
 
+## Ready-made visualizations
+
+All three current interactive HTML explainers are included, with their companion
+data and downloadable charts:
+
+- [Methodology and configuration explorer](docs/visualizations/REPORT.html)
+- [Performance knees and bottlenecks](docs/visualizations/PERFORMANCE_KNEES.html)
+- [Accelerator comparison charts](docs/visualizations/ACCELERATOR_COMPARISON.html)
+
+GitHub displays HTML source rather than running these pages. Clone/download the
+repository and open the files in a browser, or download `visualizations.zip` from
+the [reproduction release](https://github.com/jasonlizhengjian/agent-capacity-index/releases/tag/current-reproduction-2026-10-16)
+and extract it. Keep the files together so navigation and downloads work.
+These are generated snapshots; `python3 reproduce.py` regenerates them in
+`results/current/` without modifying the checked-in copies.
+
 ## Quick reproduction: no installation needed
 
 Use Python 3.12 on this checkout or the unpacked reproduction bundle:
