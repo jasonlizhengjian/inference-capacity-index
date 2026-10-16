@@ -1,0 +1,29 @@
+{
+  "band": [
+    50.0,
+    400.0
+  ],
+  "axis": "log",
+  "models": [
+    "GLM-5.2",
+    "Kimi-K3",
+    "Qwen-480B",
+    "MAI2-informed-h128-w512-sh4352"
+  ],
+  "weights": [
+    0.25,
+    0.25,
+    0.25,
+    0.25
+  ],
+  "inputs": {
+    "results/workload-capacity-oct15-mai2/curves_and_inputs.json": "997580835c6a44fa11cbe8e8b8636e857998062256aa8787814c27345a146975",
+    "results/workload-capacity-oct15-mai2/workload.json": "d896f67853a6c96d09cf9632fb532b44303d920beed0444019ff7cb74d53a886",
+    "results/workload-capacity-oct15-mai2/provenance.json": "2542be9cd496b89f20eb65e64ca2d48cfc4987c064a42d19a243d3b485f6a266"
+  },
+  "source_provenance": "results/workload-capacity-oct15-mai2/provenance.json",
+  "script_sha256": "7298c901edf8c664ab4dc99112616690d9509ff3d522645bd5a558f7408e6bf8",
+  "integration": "Integral C_combined(s) ds/s; exact at all saved speed breakpoints; infeasible capacity is zero.",
+  "simulation_rerun": false,
+  "upstream_commit": "2f0f4cd8606d580567b253d02f3d699fe36db865"
+}

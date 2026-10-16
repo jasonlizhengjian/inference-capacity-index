@@ -1,156 +1,145 @@
 # Agent capacity index
 
-A standalone reproduction of the **9 October 2026** headline: equal GLM-5.2 and
-Kimi-K3 weights, 256 Ki cached tokens, native speculative nextn3 / assumed AL3,
-log-capacity AUC over **50–400 SOL TPS/user**, normalized per model to GB300.
+Portable reproduction of the current **four-model, 23-accelerator** study:
+GLM-5.2, Kimi-K3, Qwen3-Coder 480B and MAI-2 2.8T, equally weighted.
+The score integrates capacity over **50–400 SOL TPS/user with log-speed weighting**,
+including separately provisioned prefill resources at the saved workload ratio.
 
-The repository is a study layer on **unmodified AISim**, not an AISim fork.
-It compares conditional analytical hardware potential, not achieved production
-agent throughput. No GPUs, model weights, API credentials, SGLang server,
-Dynamo service, or old experiment folders are required.
+This is a study layer on **unmodified AISim**, not an AISim fork. Architecture,
+memory-admission, topology and search policies live in our Python wrappers.
+The MAI adapter uses native operators with explicitly assumed dimensions; it
+does not claim to reproduce Microsoft's exact implementation.
 
-## Quick reproduction: Python only
+## Quick reproduction: no installation needed
 
-From this checkout, with Python 3.12 or newer:
-
-```bash
-python3 run.py validate
-python3 run.py rebuild
-```
-
-Open `results/frozen/REPORT.html`. The output also includes the complete score
-and hardware CSV, frontier JSON, target configurations, sensitivity scores, and
-validation hashes. **No AISim or third-party Python packages are required.**
-This re-integrates frozen frontiers; it does not rerun their timings.
+Use Python 3.12 on this checkout or the unpacked reproduction bundle:
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests -v
+python3 reproduce.py
 ```
 
-## Native timing reproduction: isolated CPU environment
+This verifies frozen input hashes, recomputes scores, checks all 161 score
+fields against the release, and renders local explainers. It needs only the
+standard library: **no AISim, GPUs, weights, API keys, private traces, sibling
+repositories or network access**.
 
-Tested on Linux x86-64, Python 3.12.3. The exact nightly wheel is available from
-the public package indexes as of packaging; future availability is not promised.
-Use a separate virtual environment, not an existing serving stack:
+Outputs in `results/current/`:
+
+- `index.csv`: combined, decode-only, prefill-only and per-model scores.
+- `per_model_scores.csv`, `capacity_at_targets.csv`, `ratio_sensitivity.csv`.
+- `REPORT.html`, `PERFORMANCE_KNEES.html`, `ACCELERATOR_COMPARISON.html`.
+- `provenance.json`, `validation.json`, `reproduction.json`.
+
+Expected combined score: **GB300 = 1; VR200 = 2.3889176225372135**.
+This re-integrates saved results; it does **not** rerun timings. The knee-point
+teaching curves and power annotations are frozen supporting inputs.
+
+## Rerun AISim on CPU
+
+Supported frozen environment: **Linux x86-64, CPython 3.12**. Download the exact
+AISim wheel from this repository's `current-reproduction-2026-10-16` release
+into `vendor/`, or unpack the complete release archive, which includes it:
 
 ```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install --extra-index-url https://pypi.nvidia.com \
-  --require-hashes -r environment/requirements-aisim.lock
-.venv/bin/python run.py doctor
+mkdir -p vendor
+gh release download current-reproduction-2026-10-16 \
+  --repo jasonlizhengjian/agent-capacity-index --pattern '*.whl' --dir vendor
+
+python3 environment/setup_current.py
+.venv-current/bin/python reproduce.py doctor
+
+# Replay every saved decode frontier point and prefill winner.
+.venv-current/bin/python reproduce.py replay
+
+# Fresh search: every admitted integer batch in the finite layout family.
+.venv-current/bin/python reproduce.py sweep
 ```
 
-The equivalent faster installation with `uv` is:
+Installation downloads hash-pinned Python dependencies into a separate
+`.venv-current`. No serving stack, CUDA or GPU is required. Replay checks
+timing and memory against saved values. A full replay or search also rebuilds
+and verifies the complete score table. Outputs go to `results/current-replay/`
+or `results/current-sweep/`; frozen inputs are never overwritten.
+
+For a smaller check:
 
 ```bash
-uv pip install --python .venv/bin/python --extra-index-url https://pypi.nvidia.com \
-  --require-hashes -r environment/requirements-aisim.lock
+.venv-current/bin/python reproduce.py replay --hardware 'GB300 NVL72' \
+  --model GLM-5.2 --limit 5 --output results/quick-replay
+.venv-current/bin/python reproduce.py sweep --hardware 'GB300 NVL72' \
+  --model 'MAI-2 2.8T' --output results/mai-search
 ```
 
-The lock records all 78 packages in the original simulation environment.
-It deliberately preserves upstream transitive dependencies rather than
-claiming they are all intrinsically necessary for SOL. It includes no Dynamo
-or serving-engine installation. `doctor` checks the native binary, both model
-configuration hashes, and all hashed AISim distribution files against RECORD.
+Hardware keys are in `reference/2026-10-15/catalog.json`. Model keys are
+`GLM-5.2`, `Kimi-K3`, `Qwen-480B` and `MAI-2 2.8T`. Repeat filters
+for multiple cases. Partial runs are not published as a complete index.
+Completed hardware/model cases resume when code, input and runtime signatures
+match; otherwise choose a new output directory. An interrupted case is recomputed.
+Unsupported prefill layouts are explicitly recorded in each part's audit.
+
+## Provenance and packaging
+
+Verified on 16 October 2026: fresh isolated environment installation; offline
+rebuild from an unpacked archive outside the workspace; native replay of 9,108
+decode frontier points and 92 prefill winners (identical timings); and a fresh
+search of 431,946 decode plus 286,343 prefill candidates across all 92 cases.
+Both native paths reproduce all 161 checked score fields, with maximum relative
+error below 2e-16. The sweep checks resulting scores; its per-row timing-error
+field is not an independent timing comparison (that check belongs to replay).
+
+`reference/2026-10-15/manifest.json` hashes the frozen profiles, model metadata,
+frontiers, prefill winners, workload ratio, expected scores and visual inputs.
+Expected scores are checks, not inputs to the calculation.
+
+AISim source: `ai-dynamo/aisimulate`, commit
+`2f0f4cd8606d580567b253d02f3d699fe36db865`, version `0.13.0`.
+`reference/2026-10-15/runtime.json` pins the wheel, native binary and bundled
+model configuration hashes. `doctor` rejects a different binary or configuration.
+`environment/requirements-current.lock` preserves the resolved upstream dependency
+environment, not a claim that every transitive package is intrinsically needed.
+
+The wheel is Git-ignored and distributed as a release asset / inside the archive.
+A Git-only copy supports saved-result rebuilding without it. Building upstream
+at the pinned commit is an alternative, but an arbitrary toolchain is not
+guaranteed to produce a byte-identical runtime.
 
 ```bash
-# Re-evaluate every saved headline frontier candidate and compare timing/memory.
-.venv/bin/python run.py rerun --output results/native-replay
-
-# Small check: one hardware/model and five saved candidates.
-.venv/bin/python run.py rerun --hardware 'GB300 NVL72' --model GLM-5.2 \
-  --limit 5 --output results/quick-check
-
-# Fresh exhaustive search: every admitted integer batch in the finite layout family.
-.venv/bin/python run.py sweep --hardware 'GB300 NVL72' --model GLM-5.2 \
-  --output results/gb300-search
-
-# All 17 accelerators and both models. CPU only; more work than frontier replay.
-.venv/bin/python run.py sweep --output results/all-search
-
-AGENT_INDEX_TEST_AISIM=1 PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -v
+python3 reproduce.py bundle
 ```
 
-Omit hardware/model filters for the full portfolio; repeat either flag for
-multiple selections. Hardware strings are exact keys in `configs/catalog.json`.
-Each run requires a fresh output directory if `native_candidates.csv` exists.
-Full-portfolio runs also rebuild the index and require agreement with the
-frozen scores. A partial run is not labeled a complete index. Interrupted runs
-retain their CSV and non-complete status; automatic resume is not implemented.
+Writes `dist/agent-capacity-index-current.tar.gz` and prints its SHA-256.
+The explicit allowlist excludes environments, private references, credentials,
+logs and unrelated research scripts. Native setup still needs package-index
+access for dependencies; the quick rebuild is fully offline.
 
-`rerun` proves saved timing parity, not search completeness. `sweep` searches
-the published finite candidate family independently, including losing layouts
-and batches; neither claims a globally optimal serving implementation.
-
-Optional editable installation provides `agent-index` instead of `python run.py`:
-
-```bash
-.venv/bin/python -m pip install --no-deps --no-build-isolation -e .
-agent-index --root /path/to/this/checkout validate
-```
-
-This is a **checkout-distributed research repository**. Configs and reference
-data are not embedded in a standalone package wheel; keep the checkout or
-supply `--root`. The checkout-local `run.py` is the simplest supported interface.
-
-## Repository map
+## Code map and scope
 
 | Path | Role |
 | --- | --- |
-| `configs/catalog.json` | 17 hardware selections, precision and deployment policies |
-| `configs/hardware/*.yaml` | Byte-identical frozen hardware resource profiles |
-| `configs/workload.json` | Human/machine-readable release definition |
-| `src/agent_index/simulation.py` | Pinned native API adapter, memory admission, finite search |
-| `src/agent_index/topology.py` | Explicit uncalibrated TPU8i hop overlay |
-| `src/agent_index/index.py` | Exact capacity envelope and AUC, standard library only |
-| `reference/2026-10-09/` | Frozen frontier inputs, expected scores, immutable input hashes |
-| `environment/` | Version/hash lock and native/model provenance |
-| `docs/METHODOLOGY.*` | Historical detailed methodology snapshots |
-| `tests/` | Analytic integral, score, export, policy and native regression tests |
-| `results/` | Generated outputs, deliberately ignored by Git |
+| `reproduce.py` | Rebuild, replay, search, validation and bundling |
+| `src/agent_index/current_native.py` | Native calls and portable search driver |
+| `src/agent_index/current_models.py` | Extracted model/memory rules and MAI adapter |
+| `src/agent_index/simulation.py`, `topology.py` | Shared layouts, memory and communication overlay |
+| `studies/log400_release.py` | Exact combined capacity AUC and normalization |
+| `studies/*visual.py` | HTML renderers used by the entry point |
+| `reference/2026-10-15/` | Current frozen inputs and provenance |
+| `environment/setup_current.py` | Isolated native environment |
 
-## Method and boundaries
+Decode: 262,144 resident tokens, native nextn3 / assumed AL3.
+Prefill: 1,024 new tokens over that prefix, without speculation.
+Saved new-input/output ratio: 1.513342523752522. Private traces are not
+redistributed: the aggregate is an input, not independently re-derived here.
 
-For each model and hardware, capacity at speed floor `s` is the maximum
-requests / allocated chips among admitted configurations with TPS/user >= `s`.
-All PP stages count. No interpolation, extrapolation, or idle deployment-budget
-chips are added. Capacity is zero above the fastest qualifying candidate.
+The search preserves the study's memory guards, precision, conservative serial
+pipeline schedule, deployment limits and topology assumptions, including MAI's
+screen against batches with fewer routed assignments than expert-parallel ranks.
+It searches a
+finite layout family, not every possible implementation. Reproduction checks
+establish computational consistency, not empirical calibration or achievable
+production throughput. Queueing, TTFT, tool pauses and temporal duty cycles are
+not added. The local explainer details the method and assumptions.
 
-We integrate that step function exactly over `d log(s)` from 50 to 400,
-divide by the same model's GB300 area, then average the two normalized scores.
-Reference fixture scores are **checks**, not inputs to this calculation. The
-publication layer reuses the frozen descriptive hardware columns from the
-expected CSV; its three score columns are independently recomputed.
-
-The simulator adapter preserves the original study's custom assumptions:
-hardware-adapted expert precision, 90% memory admission, metadata guards,
-TP/EP confined to eight-chip nodes for HGX/MI355X/Hopper, conservative serial PP,
-and the TPU8i overlay. Native Kimi PP layer-rounding warnings and packaged
-attention-default fallback are expected and not silently corrected. See the
-methodology snapshot for limitations of index reuse, recurrence, SRAM, vendor
-topology, speculative cache reuse, and interpretation of native source tags.
-
-The workload JSON documents the pinned implementation; it is not yet a generic
-runtime override API. Changes to context, AL, model portfolio, search or resource
-assumptions require a new release and regression review. Frozen input hashes
-intentionally reject casual in-place edits. Preserve prior releases when evolving
-the index; do not relabel changed projections as historical reproduction.
-
-The source checkout commit and installed wheel are identified separately. We
-do not know the exact source commit used to build the wheel. Source-building
-from the inspected commit is therefore not an asserted equivalent fallback.
-
-## Status and distribution
-
-Packaging validation is recorded in `docs/REPRODUCTION.txt`: all 51 headline
-score cells reproduced, all 2,543 saved frontier candidates re-evaluated, and
-a fresh 91,863-candidate search recovered the published index to floating-point
-precision. A fresh isolated installation also passed runtime identity checks,
-native replay and the test suite. These are computational reproducibility
-checks, not additional empirical validation of hardware performance.
-
-This local repository is not uploaded or published. Private reference PDFs,
-Slack images, raw agent logs and credentials are not included. Numerical
-hardware assumptions and attribution are included. See `THIRD_PARTY_NOTICES.md`.
-No blanket license has been assigned to the user's original study material.
-Choose its publication license before a public release.
+`run.py`, `configs/`, `reference/2026-10-09/` and earlier tests retain the
+historical two-model release; **use `reproduce.py` for the current index**.
+Historical instructions are preserved in `docs/REPRODUCTION_HISTORY.md`, not
+current setup guidance. See `THIRD_PARTY_NOTICES.md` for licensing scope.

@@ -1,0 +1,14 @@
+{
+  "version": "0.13.0",
+  "runtime_sha256": "2e2a1772e067c45253bbe6b6fe9f7fbdedbb8f90d7a9d2bbaf2c4a2ffbe3ccb4",
+  "model_config_sha256": {
+    "Qwen/Qwen3-Coder-480B-A35B-Instruct": "0c8da8dea4ef290b08290074f4c61c8cf10b998c073d9e5b778fe33862f8540b",
+    "moonshotai/Kimi-K3": "9710e121a58d03ac92c8d6da287a19541994319afbbe6d6202af001ffd379213",
+    "nvidia/GLM-5.2-NVFP4": "d3783a603e5aa9cb58eff7a5d8ac9c42d83156b229efe185c72e9e2dc8444923"
+  },
+  "source_commit": "2f0f4cd8606d580567b253d02f3d699fe36db865",
+  "source_url": "https://github.com/ai-dynamo/aisimulate.git",
+  "wheel": "aisimulate-0.13.0-cp311-abi3-linux_x86_64.whl",
+  "wheel_sha256": "0ea56943bfe475a22a757a6020b452b67d8d2f43c4ebc8eae788b614c493f6d1",
+  "platform": "Linux x86-64, CPython 3.12 (tested)"
+}

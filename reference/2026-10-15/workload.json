@@ -1,0 +1,14 @@
+{
+  "source": "Public syfi_coding_trace_v0.0.2 numeric warm-request cohort",
+  "database_sha256": "a7bab286bc640844560850965ccf47975cf66407154132abaab90f27ec9be744",
+  "query": "select input_tokens_total-claude_cache_read_input_tokens as q,\n        output_tokens as o from rounds where provider='claude'\n        and input_tokens_total>0 and output_tokens>0\n        and claude_cache_read_input_tokens>=.9*input_tokens_total\n        and claude_cache_read_input_tokens between 131072 and 393216\n        and input_tokens_total-claude_cache_read_input_tokens between 1 and 10240\n        order by round_pk",
+  "cohort_count": 110565,
+  "cohort_mean_new_tokens": 1422.854167231945,
+  "cohort_mean_output_tokens": 940.2062949396283,
+  "new_input_per_output": 1.513342523752522,
+  "source_artifact": "results/scheduler/chains-b4-GLM-5.2-gb300-q0-c11008/chain_workload.json",
+  "source_sha256": "12d99e6355e7f2173938f78003057f8cfaa1c4f7b8b0425dcddcb602df4fd98a",
+  "interpretation": "Ratio of aggregate warm-cohort new-input to output tokens; not mean per-request ratios.",
+  "prefill_proxy": "Use existing 1024-new-token per-token throughput at 262144 resident prefix; actual input-length distribution not replayed.",
+  "model_transfer": "Same workload token ratio for all four architectures; tokenizer/verbosity/quality differences not modeled."
+}

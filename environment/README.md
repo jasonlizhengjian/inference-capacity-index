@@ -1,5 +1,16 @@
 # Runtime provenance
 
+## Current four-model release
+
+Use `python3 environment/setup_current.py` from the repository root. This creates
+`.venv-current` using `requirements-current.lock` and the verified wheel in
+`vendor/`. Current provenance is `reference/2026-10-15/runtime.json`: AISim 0.13.0,
+source commit `2f0f4cd8606d580567b253d02f3d699fe36db865`. Unlike the historical
+package below, the complete current reproduction archive includes that wheel.
+Supported native installation: Linux x86-64, CPython 3.12.
+
+## Historical October 9 environment
+
 `requirements-aisim-frozen.txt` records the 78 distributions, excluding pip,
 installed in the original CPU analytical runtime on 2026-10-09. This is an
 observed version snapshot, not a hash-locked supply-chain manifest and not a

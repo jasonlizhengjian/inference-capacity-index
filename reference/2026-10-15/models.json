@@ -1,0 +1,36 @@
+{
+  "Qwen-480B": {
+    "model": "Qwen-480B",
+    "layers": 62,
+    "hidden": 6144,
+    "expert_width": 2560,
+    "experts": 160,
+    "topk": 8,
+    "q_heads": 96,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "total_params_T": 0.480154869248,
+    "active_params_B": 35.474759168,
+    "routed_params_T": 0.4680843264,
+    "selection_fraction": 0.05,
+    "fp8_kv_GiB_per_request": 31.0,
+    "config_sha256": "653230e2dd1c41bd1125d046f00259ed98d6294c75c63969f8890c6e139af7de",
+    "family": "GQA"
+  },
+  "MAI2-informed-h128-w512-sh4352": {
+    "model": "MAI2-informed-h128-w512-sh4352",
+    "layers": 102,
+    "hidden": 8704,
+    "experts": 512,
+    "topk": 7,
+    "expert_width": 4352,
+    "kv_heads": 2,
+    "q_heads": 96,
+    "head_dim": 128,
+    "window": 512,
+    "shared_intermediate": 4352,
+    "total_params_T": 2.84052803072,
+    "active_params_B": 85.90839296,
+    "kv_gib_unsharded": 2.291015625
+  }
+}

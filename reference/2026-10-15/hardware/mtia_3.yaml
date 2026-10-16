@@ -1,0 +1,29 @@
+data_dir: data/estimate_only
+gpu:
+  bfloat16_tc_flops: 5000000000000000.0
+  fp4_tc_flops: 3.0e+16
+  fp8_tc_flops: 1.0e+16
+  mem_bw: 27600000000000.0
+  mem_bw_empirical_scaling_factor: 1
+  mem_capacity: 512000000000
+  mem_empirical_constant_latency: 0
+  sm_version: 103
+misc:
+  nccl_mem:
+    1: 0
+    2: 0
+    4: 0
+    8: 0
+    16: 0
+    32: 0
+    64: 0
+    72: 0
+    128: 0
+  other_mem: 4294967296
+node:
+  inter_node_bw: 100000000000.0
+  inter_rack_bw: 100000000000.0
+  intra_node_bw: 1200000000000.0
+  num_gpus_per_node: 72
+  num_gpus_per_rack: 72
+  p2p_latency: 0

@@ -1,4 +1,6 @@
 .venv/
+.venv-current/
+vendor/*.whl
 .cache/
 __pycache__/
 *.py[cod]
