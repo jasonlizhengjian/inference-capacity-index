@@ -23,6 +23,9 @@ connects the narrative, equations, charts and implementation references.
 - [Accelerator comparison charts](docs/visualizations/ACCELERATOR_COMPARISON.html)
 - [InferenceX validation: Kimi primarily, GLM step-timing check](docs/research/inferencex-validation/README.md)
   ([public interactive site](https://inferencex-sol-validation.epoch-3293.chatgpt.site)).
+  The detailed report reproduces the approximately 12% average throughput
+  difference at five Kimi/GB300 frontier points under the half-SOL scenario,
+  including winning layouts, wider-band results and cross-hardware checks.
 
 GitHub displays HTML source rather than running these pages. Clone/download the
 repository and open the files in a browser, or download `visualizations.zip` from

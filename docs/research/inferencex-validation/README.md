@@ -2,12 +2,42 @@
 
 [Public interactive comparison](https://inferencex-sol-validation.epoch-3293.chatgpt.site) ·
 [Offline HTML](index.html) · [Observed rows](observed_points.csv) ·
-[Curve ratios](curve_summary.csv) · [GLM strata](matched_glm_strata.csv)
+[Current curve ratios](three_curve_summary.csv) ·
+[Pointwise agreement](point_agreement.csv) · [GLM strata](matched_glm_strata.csv)
 
 Kimi K3 is primary, covering NVIDIA, AMD and Google TPU. GLM-5.2 is secondary:
 its TensorRT-LLM logs provide the stronger execution-time check. This study
 **does not change the index, frozen timings, hardware specifications or scores**
 and fits no achieved-performance multiplier.
+
+## What the comparison establishes
+
+**Kimi-K3 on GB300 provides encouraging agreement at the measured frontier
+points.** With decode and prefill performance set to 50% of modeled SOL,
+predicted output throughput differs from measured throughput by **11.6%
+on average (about 12%) at five frontier points in the 50–400 TPS/user band**.
+The prediction searches only the admitted deployment layouts and pool sizes
+found in the benchmark submissions. The 50% assumption was specified before
+this pointwise calculation; it was not fitted to minimize these errors.
+
+This is an **envelope comparison**, not five iso-config replays: the modeled
+winner at a speed floor can use a different submitted layout from the measured
+winner. Both sides optimize throughput at that speed requirement. The measured
+points are selected by Pareto dominance, not by their agreement with the model.
+The model holds the index workload, precision and speculation fixed.
+
+The result is informative about this setup, not a universal 12% error bar on
+the index. The wider measured speed range gives 31.1% average frontier-point
+error, and other hardware/model combinations differ considerably. The full
+point table, alternative cohorts and scenarios are saved—not just the five
+points supporting the short explainer.
+
+| Question | Comparison | What the number means |
+|---|---|---|
+| Does a half-SOL model describe observed operating points? | Modeled submitted-layout envelope versus measured frontier points | Average absolute throughput difference; 11.6% for Kimi/GB300, 50–400 |
+| How much integrated capacity or throughput does the model predict? | Areas under the unsmoothed curves | An area ratio, not average prediction error; can hide cancellation |
+| What does the broader configuration search add? | Best-known modeled envelope versus submitted-layout envelope | Modeled benefit of layout search and flexible pool allocation, not demonstrated engineering headroom |
+| How close is actual device execution to SOL? | GLM log-derived decode steps versus modeled steps | Achieved-speed fraction; a different quantity from service-curve error |
 
 ## Accuracy: upstream predictions versus this SOL study
 
@@ -19,15 +49,112 @@ node, across TensorRT-LLM and (for the smaller model) vLLM configurations.
 It is not an accuracy result for our specification-based SOL mode, 256Ki
 context workload, other hardware, or final capacity-index scores.
 
-Our separate InferenceX checks found approximately **54–74% of modeled SOL
-speed** in two sampled GB300 GLM configurations using live decode batches.
-These are achieved-speed fractions, not prediction-error percentages. Broader
-Kimi comparisons show configuration-dependent gaps between measured and
-modeled capacity curves; layout matching is not exact benchmark replay.
-These checks provide useful grounding, but do not establish a universal
-conversion from SOL to production performance. Similar integrated areas
-also do not establish agreement in curve shape. Detailed accounting and
-sampling limitations are documented below.
+Our Kimi result above tests a separate proposition: whether a simple half-SOL
+scenario describes the service frontier reasonably well. GLM's step-level
+check later in this report provides additional execution evidence, rather
+than being pooled into the Kimi prediction-error statistic. Neither comparison
+establishes an error bound on cross-hardware index ratios, especially for
+unmeasured architectures or future chips.
+
+## The five-point result, worked through
+
+At each measured **output-throughput frontier** point with speed `s_i` between
+50 and 400, look up the best modeled throughput among admitted submitted
+layouts and batches reaching at least `s_i`. Apply `ηD = ηP = 0.5` first.
+Both throughputs count all allocated prefill and decode chips:
+
+```text
+signed difference_i = predicted_Q(s_i) / measured_Q_i − 1
+average absolute difference = (1/n) × Σ abs(signed difference_i)
+```
+
+Every retained point receives equal weight. The denominator is measured
+throughput. The absolute value prevents over- and underprediction from
+cancelling. There is no smoothing, efficiency fitting or interpolation in this
+calculation. It is not time-, token-, traffic- or log-speed-weighted.
+
+| InferenceX result | TPS/user | Measured output TPS/chip | Predicted output TPS/chip | Signed difference |
+|---|---:|---:|---:|---:|
+| 445228 | 60.50 | 108.95 | 123.92 | +13.7% |
+| 445230 | 79.81 | 95.12 | 72.80 | −23.5% |
+| 445229 | 108.81 | 70.93 | 63.07 | −11.1% |
+| 445232 | 143.88 | 58.30 | 58.91 | +1.0% |
+| 445223 | 387.60 | 27.76 | 25.41 | −8.5% |
+
+The mean absolute difference is **11.5552%**, median 11.1%, largest 23.5%.
+Four of five points are within 20%. These five points are from one benchmark
+snapshot and are not independent replications supporting a statistical
+confidence interval.
+
+**Which configuration actually wins?** All five modeled predictions above
+use the submitted TP16/DCP16 aggregated layout represented by result 445218,
+with native per-replica batches 39, 16, 10, 7 and 1 respectively. The measured
+winners use TP8 layouts: the first four use separate prefill/decode pools,
+and the last uses eight shared chips. Thus “using the benchmark's layouts”
+means choosing from the **union** of submitted layouts, not holding each
+point's own layout fixed. `winning_recipe_id`, `winning_batch` and
+`winning_native_speed` in [the point CSV](point_agreement.csv) expose this.
+Shared-pool modeled throughput uses ideal time-sharing without interference.
+
+For example, at the first observed speed floor of 60.496 TPS/user, the modeled
+TP16 candidate has native SOL speed 121.927 and half-SOL speed 60.964, so it
+qualifies. After including the modeled prefill resource requirement its
+throughput is 123.916 output TPS per total chip, versus 108.953 observed:
+`abs(123.916 / 108.953 − 1) = 13.7%`. The model need not run at exactly the
+threshold; it must meet or exceed it.
+
+### How sensitive is this description of agreement?
+
+| Kimi/GB300 comparison | Average absolute difference | Interpretation |
+|---|---:|---|
+| Five frontier points, 50–400; both phases at 50% | **11.6%** | The short-explainer result |
+| Same points; decode 50%, prefill 100% | 12.6% | Small change from prefill-efficiency assumption here |
+| Same points; both phases at undiscounted SOL | 256.3% | SOL is not an achieved-performance prediction |
+| All 11 frontier points, full observed 31–680 range; both phases 50% | 31.1% | Includes two fast points with zero qualifying modeled throughput |
+| All nine observations in 50–400, including dominated runs; both phases 50% | 130.3% | An optimized envelope should not be expected to predict inefficient individual runs |
+| Entire unsmoothed step curves, log-uniform thresholds over 50–400; both phases 50% | 34.9% | Weights speed intervals, including sparsely measured regions, instead of measured points |
+
+There is no output-frontier observation between 143.9 and 387.6 TPS/user.
+The conservative measured step envelope drops immediately above 143.9;
+the smoothed display draws a gradual decline. Neither establishes actual
+performance at intermediate configurations. This explains part of the
+difference between pointwise agreement and full-curve agreement.
+
+The measured/model **throughput AUC ratio is 84.1%** over 50–400, while the
+capacity AUC ratio is 77.5%. Neither is the 11.6% error statistic. Throughput
+and streaming-equivalent density have different Pareto frontiers. Even though
+`C_i = Q_i/s_i` for an individual measurement, independently maximizing `Q`
+and `C` over all qualifying measurements need not select the same run.
+
+### Other hardware and model checks
+
+For the same 50–400 band and half-SOL/both-phases scenario, the saved
+output-frontier point comparisons include:
+
+| Model / hardware | Points in band | Average absolute throughput difference |
+|---|---:|---:|
+| Kimi / GB300 | 5 | 11.6% |
+| Kimi / GB200 | 5 | 202.5% |
+| Kimi / B300 | 5 | 82.2% |
+| Kimi / MI355X | 11 | 40.0% |
+| GLM / GB300 | 11 | 165.5% |
+| GLM / MI355X | 10 | 344.0% |
+
+These are descriptive **service-envelope gaps**, not a ranking of simulator
+or vendor kernel accuracy: workloads, measured contexts, serving policies,
+precision and graph matching differ. A gap over 100% is possible when modeled
+throughput is more than twice measured throughput. Missing layout mappings
+(including TPU) have unavailable errors, not fabricated zero-efficiency results.
+The complete table is in [point_agreement_summary.csv](point_agreement_summary.csv).
+This contrast is why we name Kimi/GB300 in the short explanation rather than
+generalizing its 12% agreement to all platforms or GLM service curves.
+
+**Next evidence that would be most useful:** replay the measured winning
+deployment at its observed batch, context distribution, precision and draft
+graph; obtain comparable all-rank logs for AMD and TPU; and extend empirical
+checks to Qwen and the MAI proxy. Those are more direct tests of generalization
+than selecting an efficiency multiplier separately for every hardware. This
+revision adds no new native timings and makes no new calibration fit.
 
 ## Three-curve explorer: the current default
 
@@ -105,7 +232,7 @@ checks. `layout_restricted.json` retains native candidates, pool sizes and
 exclusions. The original undiscounted frozen-curve results below remain in
 `curve_summary.csv`; they are not the new default explorer statistics.
 
-## Findings
+## Additional execution evidence and legacy comparison
 
 - GB300 GLM sampled decode steps achieve **73.5%** of modeled SOL speed for
   TP1/DP8/EP8 and **53.6%** for TP1/DP16/EP16 using live batches. Treating padded
@@ -114,10 +241,13 @@ exclusions. The original undiscounted frozen-curve results below remain in
 - Kimi exact matched-step validation remains unavailable. Actual DCP can differ
   from API metadata; some recipes exceed the pinned engine's speculative-width
   support. Interval running-request samples do not identify kernel batches.
-- Whole-service streaming-equivalent capacity AUC ratios are **13.3% GB300,
+- In the **original frozen-envelope, undiscounted-SOL** comparison over
+  50–400, whole-service streaming-equivalent capacity AUC ratios are **13.3% GB300,
   31.6% MI355X and 6.4% TPU7** for Kimi. These are **not matched-workload execution
   efficiency**: workload, precision, implementation, utilization and search
-  coverage differ. Do not rank hardware implementation quality from them.
+  coverage differ. These are legacy `curve_summary.csv` values, not the
+  current half-SOL, submitted-layout comparison. Do not rank hardware
+  implementation quality from them.
 - Approximate Kimi scenarios can exceed 100%. This signals mismatched graphs
   or workload assumptions, not exceeding a physical roofline for identical work.
 
@@ -140,6 +270,7 @@ can change; reproduction from re-fetched logs must compare hashes.
 # Offline, standard-library curve recomputation and HTML regeneration:
 python3 studies/inferencex_validation/analyze.py
 python3 studies/inferencex_validation/compare.py
+python3 studies/inferencex_validation/agreement.py
 python3 studies/inferencex_validation/render.py
 
 # Optional public-log acquisition and native replay in the pinned environment:
@@ -148,6 +279,7 @@ python3 studies/inferencex_validation/fetch_logs.py \
 .venv-current/bin/python studies/inferencex_validation/analyze.py --native
 .venv-current/bin/python studies/inferencex_validation/layouts.py
 python3 studies/inferencex_validation/compare.py
+python3 studies/inferencex_validation/agreement.py
 python3 studies/inferencex_validation/render.py
 ```
 
@@ -155,6 +287,22 @@ python3 studies/inferencex_validation/render.py
 offline reproduction. Raw logs stay in ignored `results/`. No private trace,
 GPU, credentials, model-weight download or SGLang scheduler is needed. The
 public report contains technical summaries, not raw serving logs.
+
+`agreement.py` reads only the existing curve and layout artifacts and records
+their SHA-256 hashes in `point_agreement.json`. The detailed CSV retains all
+point/scenario/metric combinations. The JSON and summary CSV store equal-point
+errors for both Pareto and all-observation cohorts, separately for both
+comparators. Error fields are fractions (`0.115552` means `11.5552%`);
+`restricted_signed_error` is positive for overprediction. `winning_native_speed`
+is the winning candidate's undiscounted SOL TPS/user, including the fixed AL3
+assumption. Winner IDs refer to representative submitted deployment shapes,
+not the IDs of the measured rows being predicted. A zero modeled prediction
+at an observed point counts as 100%
+error; an entirely unavailable layout comparison remains null. Output step-curve
+error is integrated exactly over the union of measured and modeled breakpoints,
+excluding intervals without observed coverage and reporting that coverage.
+The 50–400 report includes only measured points in that band; it does not invent
+measurements at the band boundaries.
 
 ## Service-curve equations
 
@@ -279,6 +427,7 @@ are preserved. All-rank and whole-run representativeness remain unresolved.
 | GLM pairing/strata; Kimi audit | `studies/inferencex_validation/analyze.py:native` |
 | Observed-layout batch sweep and exclusions | `studies/inferencex_validation/layouts.py` |
 | Three curves, efficiency scenarios and AUC | `studies/inferencex_validation/compare.py` |
+| Pointwise errors, cohorts, winners, exact output step-curve gaps | `studies/inferencex_validation/agreement.py` |
 | Existing envelope implementation | `src/agent_index/index.py:envelope`, `capacity`, `area` |
 | Existing prefill-adjusted integral | `studies/log400_release.py:combined_area` |
 | Native configuration and runtime pin | `src/agent_index/simulation.py:make_config`; `current_native.py:doctor` |

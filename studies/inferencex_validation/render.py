@@ -10,7 +10,7 @@ OUT=ROOT/'docs/research/inferencex-validation'
 
 def main(site=None):
     payload={key:json.loads((OUT/file).read_text()) for key,file in
-             [('curves','curves.json'),('glm','matched_glm.json'),('kimi','kimi_config_audit.json'),('layouts','layout_restricted.json'),('comparison','three_curve_comparison.json')]}
+             [('curves','curves.json'),('glm','matched_glm.json'),('kimi','kimi_config_audit.json'),('layouts','layout_restricted.json'),('comparison','three_curve_comparison.json'),('agreement','point_agreement.json')]}
     page=(HERE/'template.html').read_text().replace('__PAYLOAD__',json.dumps(payload,allow_nan=False).replace('</',r'<\/'))
     (OUT/'index.html').write_text(page)
     if site:
