@@ -70,6 +70,12 @@ between observations and does not extrapolate above the fastest observation.
 Every AUC uses the **unsmoothed** data. Full-band statistics cover min–max
 observed speed for each chip; the 50–400 option supplies a common band instead.
 
+The Y-axis can be linear or logarithmic. Log Y makes multiplicative gaps and
+low-capacity fast tails easier to compare; zero-capacity segments are omitted,
+not replaced with an arbitrary positive floor. This is display-only: the AUC
+still integrates capacity against log speed, not log capacity. Geometric area
+on a log–log plot therefore is not the reported AUC.
+
 Measured areas use exact step integration. New modeled three-curve areas use
 midpoint quadrature in log speed, split at all candidate speed breakpoints and
 refined until successive results agree relatively within 1e-6. This handles
