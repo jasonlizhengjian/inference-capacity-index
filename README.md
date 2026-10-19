@@ -21,6 +21,8 @@ connects the narrative, equations, charts and implementation references.
 - [Methodology and configuration explorer](docs/visualizations/REPORT.html)
 - [Performance knees and bottlenecks](docs/visualizations/PERFORMANCE_KNEES.html)
 - [Accelerator comparison charts](docs/visualizations/ACCELERATOR_COMPARISON.html)
+- [InferenceX validation: Kimi primarily, GLM step-timing check](docs/research/inferencex-validation/README.md)
+  ([public interactive site](https://inferencex-sol-validation.epoch-3293.chatgpt.site)).
 
 GitHub displays HTML source rather than running these pages. Clone/download the
 repository and open the files in a browser, or download `visualizations.zip` from

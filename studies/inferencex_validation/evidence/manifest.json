@@ -1,0 +1,18 @@
+[
+  {
+    "file": "GLM-5.2.json",
+    "url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=GLM-5.2",
+    "retrieved_at": "2026-10-19T20:04:53.341799+00:00",
+    "sha256": "ec387202337cecefc1aac2780549601f6d7501a7a440cd518eb11c493270799b",
+    "etag": null,
+    "rows": 116
+  },
+  {
+    "file": "Kimi-K3.json",
+    "url": "https://inferencex.semianalysis.com/api/v1/benchmarks?model=Kimi-K3",
+    "retrieved_at": "2026-10-19T20:04:53.627822+00:00",
+    "sha256": "c74230571c49d7f2c961edeaa5845586cf206f7ecdbf49c6800b34ba68755c1e",
+    "etag": null,
+    "rows": 117
+  }
+]

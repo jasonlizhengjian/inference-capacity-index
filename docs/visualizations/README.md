@@ -12,6 +12,11 @@ Expand the side notes and detail panels when you want the underlying assumptions
 HTML is the full explainer here: a static PDF would lose the configuration
 explorer, model switching and interactive curve examples.
 
+For empirical grounding, see the separate [InferenceX validation study](../research/inferencex-validation/README.md)
+and [public interactive comparison](https://inferencex-sol-validation.epoch-3293.chatgpt.site).
+It centers Kimi K3 and uses GLM's detailed logs for a secondary step-timing check.
+Whole-service gaps are distinguished from matched execution efficiency.
+
 ## 1. Understand the calculation
 
 Start with [the methodology and configuration explorer](REPORT.html). Its six

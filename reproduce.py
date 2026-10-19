@@ -138,7 +138,8 @@ def bundle(destination):
     names=['README.md','reproduce.py','run.py','pyproject.toml','.gitignore','.gitattributes',
            'THIRD_PARTY_NOTICES.md','LICENSES','src','configs','reference','environment','tests',
            'docs','vendor','studies/log400_release.py','studies/methodology_visual.py',
-           'studies/performance_knees_visual.py','studies/accelerator_comparison_visual.py']
+           'studies/performance_knees_visual.py','studies/accelerator_comparison_visual.py',
+           'studies/inferencex_validation']
     destination.parent.mkdir(parents=True,exist_ok=True)
     def filter_file(info):
         return None if '__pycache__' in Path(info.name).parts or info.name.endswith(('.pyc','.pyo')) else info
