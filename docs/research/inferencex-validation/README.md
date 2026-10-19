@@ -9,6 +9,76 @@ its TensorRT-LLM logs provide the stronger execution-time check. This study
 **does not change the index, frozen timings, hardware specifications or scores**
 and fits no achieved-performance multiplier.
 
+## Three-curve explorer: the current default
+
+The public explorer now defaults to the **full observed InferenceX speed range**,
+a smoothed measured frontier, and **50% of SOL speed** for both modeled phases.
+Real TPS = 0.5 × SOL TPS means real TPOT = 2 × SOL TPOT, not half the latency.
+The prefill efficiency can instead be left at 100%, or both can be shown at SOL.
+This is a scenario, not a fitted multiplier or a change to index scores.
+
+The three lines are:
+
+1. **InferenceX measured:** all saved observations, with a Pareto frontier.
+2. **Model restricted to InferenceX layouts and pool sizes:** observed TP/DP/EP/
+   DCP, physical pool allocations, and all memory-admitted integer batches.
+3. **Best-known model configurations:** frozen search plus newly evaluated
+   submitted layouts, with freely provisioned pools and the best prefill rate.
+
+Curve 2 is **layout-matched, not exact iso-config replay**. Both modeled curves
+hold index context (256Ki), precision, graph, nextn3/AL3 and memory rules fixed.
+Client concurrency is not used as live batch. Actual per-step batch, context,
+draft graph and speculative width remain unmatched. Prefill is PCP1/DCP1.
+There are 45 admitted unique deployment shapes; unsupported mappings or
+admission failures are recorded, not imputed. In particular, TPU's TP32 across
+16 physical chips has no audited native logical-device mapping, so its green
+curve is unavailable. Some other platforms have no admitted observed-layout
+recipe at the fixed index workload/precision; this is not zero real performance.
+
+The blue curve includes the new observed layouts in addition to the original
+search so it cannot lose merely because the frozen search omitted, for example,
+TP16/DCP16. It is not the unchanged published index curve or a globally optimal
+search. Its candidate-set extension affects this validation only.
+
+For each candidate, decode speed shifts by ηD while admitted batch and decode
+requests/chip stay fixed. Prefill rate shifts by ηP. At achieved speed floor s:
+
+```text
+Freely provisioned or ideal shared pools:
+  C(s) = 1 / [1/Cdecode(s/ηD) + r*s/(ηP*P)]
+Fixed separate pools (N = ND + NP):
+  C(s) = min[Cdecode(s/ηD)*ND/N, ηP*P*NP/(r*s*N)]
+```
+
+The shared-pool equation is an ideal accelerator-time bound, not a mixed-batch
+scheduler. For output throughput, evaluate each candidate at its own discounted
+speed and maximize its resulting Q among qualifying candidates. Both modeled
+curves receive the same efficiency assumptions. The measured data never shift.
+
+Under the default half-speed/both-phases scenario over each chip's **own full
+observed band**, Kimi GB300 measured/layout-restricted capacity AUC is 68.1%,
+measured/best-known is 38.6%, and restricted/best-known is 56.6%. MI355X gives
+98.0%, 91.8%, and 93.7%. These describe conditional curve gaps, not matched-step
+efficiency or a cross-chip ranking. Workload/precision differences still apply.
+Some measured fast points exceed even the scenario's modeled maximum speed;
+they remain plotted and explicitly warned about rather than being clipped.
+
+Smoothing uses shape-preserving cubic Hermite interpolation through measured
+Pareto points in **log speed**, not a regression or altered measurements. Raw
+points remain visible. The smoothed guide need not be an achievable frontier
+between observations and does not extrapolate above the fastest observation.
+Every AUC uses the **unsmoothed** data. Full-band statistics cover min–max
+observed speed for each chip; the 50–400 option supplies a common band instead.
+
+Measured areas use exact step integration. New modeled three-curve areas use
+midpoint quadrature in log speed, split at all candidate speed breakpoints and
+refined until successive results agree relatively within 1e-6. This handles
+crossings between fixed-pool limits. Numerical convergence is not physical
+accuracy. `three_curve_summary.csv` preserves bounds, assumptions and convergence
+checks. `layout_restricted.json` retains native candidates, pool sizes and
+exclusions. The original undiscounted frozen-curve results below remain in
+`curve_summary.csv`; they are not the new default explorer statistics.
+
 ## Findings
 
 - GB300 GLM sampled decode steps achieve **73.5%** of modeled SOL speed for
@@ -43,12 +113,15 @@ can change; reproduction from re-fetched logs must compare hashes.
 ```bash
 # Offline, standard-library curve recomputation and HTML regeneration:
 python3 studies/inferencex_validation/analyze.py
+python3 studies/inferencex_validation/compare.py
 python3 studies/inferencex_validation/render.py
 
 # Optional public-log acquisition and native replay in the pinned environment:
 python3 studies/inferencex_validation/fetch_logs.py \
   --ids 444604 444605 444607 444602 445218 445220 445227 445368 445370
 .venv-current/bin/python studies/inferencex_validation/analyze.py --native
+.venv-current/bin/python studies/inferencex_validation/layouts.py
+python3 studies/inferencex_validation/compare.py
 python3 studies/inferencex_validation/render.py
 ```
 
@@ -178,6 +251,8 @@ are preserved. All-rank and whole-run representativeness remain unresolved.
 | Bounded public logs | `studies/inferencex_validation/fetch_logs.py:fetch` |
 | Pool counts, envelopes, exact AUC | `studies/inferencex_validation/analyze.py:curves` |
 | GLM pairing/strata; Kimi audit | `studies/inferencex_validation/analyze.py:native` |
+| Observed-layout batch sweep and exclusions | `studies/inferencex_validation/layouts.py` |
+| Three curves, efficiency scenarios and AUC | `studies/inferencex_validation/compare.py` |
 | Existing envelope implementation | `src/agent_index/index.py:envelope`, `capacity`, `area` |
 | Existing prefill-adjusted integral | `studies/log400_release.py:combined_area` |
 | Native configuration and runtime pin | `src/agent_index/simulation.py:make_config`; `current_native.py:doctor` |

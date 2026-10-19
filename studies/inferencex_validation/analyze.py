@@ -37,6 +37,23 @@ def csvout(name, rows):
 def snapshots():
     return {model:json.loads((HERE/'evidence'/(model+'.json')).read_text()) for model in ('Kimi-K3','GLM-5.2')}
 
+def scenario_summary(g, decode_efficiency, prefill_efficiency, low, high):
+    """Shift native speed, not capacity; integrate exact unsmoothed frontiers."""
+    shifted=[dict(p,speed=p['speed']*decode_efficiency) for p in g['sol_frontier']]
+    prefill=g['prefill_rate']*prefill_efficiency;r=g['input_output_ratio']
+    edges=sorted({low,high,*(p['speed'] for p in shifted if low<p['speed']<high)})
+    ca=math.fsum(c*math.log1p((b-a)/(a*(1+r*c*b/prefill)))
+                for a,b in zip(edges,edges[1:]) if (c:=capacity(shifted,(a+b)/2)))
+    qfront=envelope([dict(p,capacity=p['capacity']*p['speed']/(1+r*p['capacity']*p['speed']/prefill)) for p in shifted])
+    qa=area(qfront,low,high)
+    measured_c=area(g['frontier'],low,high);measured_q=area(g['throughput_frontier'],low,high)
+    return dict(model=g['model'],hardware=g['hardware'],decode_efficiency=decode_efficiency,prefill_efficiency=prefill_efficiency,
+                low=low,high=high,measured_capacity_auc=measured_c,scenario_capacity_auc=ca,
+                measured_capacity_ratio=measured_c/ca if ca else None,
+                measured_output_auc=measured_q,scenario_output_auc=qa,measured_output_ratio=measured_q/qa if qa else None,
+                scenario_max_speed=max(p['speed'] for p in shifted),
+                observations_above_scenario_max=sum(p['speed']>max(x['speed'] for x in shifted) for p in g['observations']))
+
 def curves():
     saved=json.loads((REF/'curves_and_inputs.json').read_text())
     rates={(r['hardware'],r['model']):r['tokens_chip_second'] for r in saved['prefill_rates']}
@@ -90,7 +107,15 @@ def curves():
                 measured_max_speed=maxspeed,observed_log_band_coverage=max(0,math.log(shared_high/50)/math.log(8)),
                 observed_min_speed=min(x['speed'] for x in chosen),mean_context_range=[min(x['mean_context'] for x in chosen),max(x['mean_context'] for x in chosen)],
                 dates=sorted({x['date'] for x in chosen}),notes=notes,plot_segments=segments,targets=[vals(s) for s in (50,100,200,400)]))
+    scenarios=[]
+    for g in groups:
+        g['efficiency_scenarios']=[]
+        for name,lo,hi in [('observed_range',g['observed_min_speed'],g['measured_max_speed']),('index_band',50.,400.)]:
+            for d,p in [(1.,1.),(.5,1.),(.5,.5)]:
+                s=dict(scenario_summary(g,d,p,lo,hi),band=name)
+                g['efficiency_scenarios'].append(s);scenarios.append(s)
     save('curves.json',dict(snapshot='2026-10-19',band=[50,400],groups=groups,excluded=exclusions,manifest=json.loads((HERE/'evidence/manifest.json').read_text()),reference_sha256=hashlib.sha256((REF/'curves_and_inputs.json').read_bytes()).hexdigest()))
+    csvout('efficiency_scenarios.csv',scenarios)
     csvout('observed_points.csv',points)
     csvout('curve_summary.csv',[{k:g[k] for k in ('model','hardware','measured_capacity_auc','sol_capacity_auc','capacity_auc_ratio','measured_throughput_auc','sol_throughput_auc','throughput_auc_ratio','measured_max_speed','observed_log_band_coverage')} for g in groups])
     print('Curve comparisons',[(g['model'],g['hardware'],round(g['capacity_auc_ratio'],3),round(g['throughput_auc_ratio'],3)) for g in groups],flush=True)
