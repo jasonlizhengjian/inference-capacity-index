@@ -9,6 +9,26 @@ its TensorRT-LLM logs provide the stronger execution-time check. This study
 **does not change the index, frozen timings, hardware specifications or scores**
 and fits no achieved-performance multiplier.
 
+## Accuracy: upstream predictions versus this SOL study
+
+AISim’s predecessor, [AIConfigurator](https://arxiv.org/abs/2601.06288),
+reported **7.8% mean absolute percentage error in decode-token latency** in
+its aggregated-serving evaluation (§5.1). That evaluation used measured
+kernel-performance data for Qwen3-32B and Qwen3-235B on an eight-H100 SXM
+node, across TensorRT-LLM and (for the smaller model) vLLM configurations.
+It is not an accuracy result for our specification-based SOL mode, 256Ki
+context workload, other hardware, or final capacity-index scores.
+
+Our separate InferenceX checks found approximately **54–74% of modeled SOL
+speed** in two sampled GB300 GLM configurations using live decode batches.
+These are achieved-speed fractions, not prediction-error percentages. Broader
+Kimi comparisons show configuration-dependent gaps between measured and
+modeled capacity curves; layout matching is not exact benchmark replay.
+These checks provide useful grounding, but do not establish a universal
+conversion from SOL to production performance. Similar integrated areas
+also do not establish agreement in curve shape. Detailed accounting and
+sampling limitations are documented below.
+
 ## Three-curve explorer: the current default
 
 The public explorer now defaults to the **full observed InferenceX speed range**,
