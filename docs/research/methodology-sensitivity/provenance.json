@@ -1,0 +1,19 @@
+{
+  "source_release": "2026-10-15",
+  "simulation_rerun": false,
+  "source_sha256": {
+    "manifest.json": "51f458d5c0183eb183f6f7e3bc5e6e01b52ecd383d5b6bae6e316e0af949fa97",
+    "curves_and_inputs.json": "997580835c6a44fa11cbe8e8b8636e857998062256aa8787814c27345a146975",
+    "expected_index.csv": "e5b84782da3e913d2930e84c60cf7f56d0aac7c6fbfdce177ffea3522e31f090"
+  },
+  "code_sha256": "13ed2bbee0e4297db853e72e26f50a4928a49f7e532628878c6a60405c79db7b",
+  "capacity_code_sha256": "99f94d162ad06af81bac3d511d9c96ffeddad00aac5762ba8f292cbf2d6326f9",
+  "hardware": 23,
+  "scenarios": 28,
+  "score_cells": 644,
+  "headline_max_relative_error": 2.220446049250313e-16,
+  "undefined_scores": 0,
+  "integration": "Exact saved-breakpoint integration; no interpolation or extrapolation.",
+  "normalization": "Per-model GB300 denominator recomputed within every scenario; weighted arithmetic mean.",
+  "ranking": "Competition rank; 1e-12 relative tie tolerance; positive rank_change is improvement."
+}

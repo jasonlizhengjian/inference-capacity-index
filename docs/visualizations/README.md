@@ -17,6 +17,11 @@ and [public interactive comparison](https://inferencex-sol-validation.epoch-3293
 It centers Kimi K3 and uses GLM's detailed logs for a secondary step-timing check.
 Whole-service gaps are distinguished from matched execution efficiency.
 
+For sensitivity to the choice of models, speed range, linear/log weighting and
+prefill provisioning, see the [consolidated methodology sensitivity study](../research/methodology-sensitivity/README.md)
+and its [interactive tables](../research/methodology-sensitivity/index.html).
+Those comparisons reuse the same frozen simulations and leave the headline unchanged.
+
 ## 1. Understand the calculation
 
 Start with [the methodology and configuration explorer](REPORT.html). Its six

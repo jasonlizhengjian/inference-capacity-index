@@ -1,3 +1,7 @@
+ARCHIVED — HISTORICAL TWO-MODEL PACKAGING VALIDATION
+Use the repository README and reproduce.py for the current four-model release.
+The historical commands below are preserved for auditability, not current setup.
+
 STANDALONE PACKAGING VALIDATION — 9 OCTOBER 2026
 
 Scope

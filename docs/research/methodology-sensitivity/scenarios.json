@@ -1,0 +1,432 @@
+[
+  {
+    "id": "log_50_400",
+    "family": "axis_band",
+    "label": "Headline: log 50\u2013400",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "log_50_200",
+    "family": "axis_band",
+    "label": "Log 50\u2013200",
+    "axis": "log",
+    "low": 50.0,
+    "high": 200.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "log_50_300",
+    "family": "axis_band",
+    "label": "Log 50\u2013300",
+    "axis": "log",
+    "low": 50.0,
+    "high": 300.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "log_50_800",
+    "family": "axis_band",
+    "label": "Log 50\u2013800",
+    "axis": "log",
+    "low": 50.0,
+    "high": 800.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "linear_50_200",
+    "family": "axis_band",
+    "label": "Linear 50\u2013200",
+    "axis": "linear",
+    "low": 50.0,
+    "high": 200.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "linear_50_300",
+    "family": "axis_band",
+    "label": "Linear 50\u2013300",
+    "axis": "linear",
+    "low": 50.0,
+    "high": 300.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "linear_50_400",
+    "family": "axis_band",
+    "label": "Linear 50\u2013400",
+    "axis": "linear",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "linear_50_800",
+    "family": "axis_band",
+    "label": "Linear 50\u2013800",
+    "axis": "linear",
+    "low": 50.0,
+    "high": 800.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "glm_kimi",
+    "family": "basket",
+    "label": "GLM + Kimi",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.5,
+      "Kimi-K3": 0.5
+    }
+  },
+  {
+    "id": "only_0",
+    "family": "single_model",
+    "label": "GLM-5.2 only",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 1.0
+    }
+  },
+  {
+    "id": "without_0",
+    "family": "leave_one_out",
+    "label": "Without GLM-5.2",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "Kimi-K3": 0.3333333333333333,
+      "Qwen-480B": 0.3333333333333333,
+      "MAI2-informed-h128-w512-sh4352": 0.3333333333333333
+    }
+  },
+  {
+    "id": "only_1",
+    "family": "single_model",
+    "label": "Kimi-K3 only",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "Kimi-K3": 1.0
+    }
+  },
+  {
+    "id": "without_1",
+    "family": "leave_one_out",
+    "label": "Without Kimi-K3",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.3333333333333333,
+      "Qwen-480B": 0.3333333333333333,
+      "MAI2-informed-h128-w512-sh4352": 0.3333333333333333
+    }
+  },
+  {
+    "id": "only_2",
+    "family": "single_model",
+    "label": "Qwen3-Coder 480B only",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "Qwen-480B": 1.0
+    }
+  },
+  {
+    "id": "without_2",
+    "family": "leave_one_out",
+    "label": "Without Qwen3-Coder 480B",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.3333333333333333,
+      "Kimi-K3": 0.3333333333333333,
+      "MAI2-informed-h128-w512-sh4352": 0.3333333333333333
+    }
+  },
+  {
+    "id": "only_3",
+    "family": "single_model",
+    "label": "MAI-Base-2 2.8T proxy only",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "MAI2-informed-h128-w512-sh4352": 1.0
+    }
+  },
+  {
+    "id": "without_3",
+    "family": "leave_one_out",
+    "label": "Without MAI-Base-2 2.8T proxy",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.3333333333333333,
+      "Kimi-K3": 0.3333333333333333,
+      "Qwen-480B": 0.3333333333333333
+    }
+  },
+  {
+    "id": "proxy_0",
+    "family": "proxy_weight",
+    "label": "Proxy weight 0%",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.3333333333333333,
+      "Kimi-K3": 0.3333333333333333,
+      "Qwen-480B": 0.3333333333333333,
+      "MAI2-informed-h128-w512-sh4352": 0.0
+    }
+  },
+  {
+    "id": "proxy_10",
+    "family": "proxy_weight",
+    "label": "Proxy weight 10%",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.3,
+      "Kimi-K3": 0.3,
+      "Qwen-480B": 0.3,
+      "MAI2-informed-h128-w512-sh4352": 0.1
+    }
+  },
+  {
+    "id": "proxy_25",
+    "family": "proxy_weight",
+    "label": "Proxy weight 25%",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "proxy_50",
+    "family": "proxy_weight",
+    "label": "Proxy weight 50%",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.16666666666666666,
+      "Kimi-K3": 0.16666666666666666,
+      "Qwen-480B": 0.16666666666666666,
+      "MAI2-informed-h128-w512-sh4352": 0.5
+    }
+  },
+  {
+    "id": "decode_only",
+    "family": "prefill_ratio",
+    "label": "Decode only",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 0.0,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "half_input",
+    "family": "prefill_ratio",
+    "label": "Half new-input/output ratio",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 0.756671261876261,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "double_input",
+    "family": "prefill_ratio",
+    "label": "Double new-input/output ratio",
+    "axis": "log",
+    "low": 50.0,
+    "high": 400.0,
+    "target": null,
+    "ratio": 3.026685047505044,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "point_50",
+    "family": "single_point",
+    "label": "Capacity at 50 TPS/user",
+    "axis": "point",
+    "low": null,
+    "high": null,
+    "target": 50.0,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "point_100",
+    "family": "single_point",
+    "label": "Capacity at 100 TPS/user",
+    "axis": "point",
+    "low": null,
+    "high": null,
+    "target": 100.0,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "point_200",
+    "family": "single_point",
+    "label": "Capacity at 200 TPS/user",
+    "axis": "point",
+    "low": null,
+    "high": null,
+    "target": 200.0,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  },
+  {
+    "id": "point_400",
+    "family": "single_point",
+    "label": "Capacity at 400 TPS/user",
+    "axis": "point",
+    "low": null,
+    "high": null,
+    "target": 400.0,
+    "ratio": 1.513342523752522,
+    "weights": {
+      "GLM-5.2": 0.25,
+      "Kimi-K3": 0.25,
+      "Qwen-480B": 0.25,
+      "MAI2-informed-h128-w512-sh4352": 0.25
+    }
+  }
+]

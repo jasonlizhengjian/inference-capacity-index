@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Inference Capacity Index v1: rebuild, native replay/search, or portable bundle."""
+"""Inference Capacity Index v1: rebuild, sensitivity, native replay/search, or bundle."""
 import argparse
 import csv
 import hashlib
@@ -135,9 +135,9 @@ def bundle(destination):
     wheel=ROOT/'vendor'/runtime['wheel']
     if not wheel.exists() or hashlib.sha256(wheel.read_bytes()).hexdigest()!=runtime['wheel_sha256']:
         raise RuntimeError('Complete bundle requires the verified frozen wheel in vendor/')
-    names=['README.md','reproduce.py','run.py','pyproject.toml','.gitignore','.gitattributes',
+    names=['README.md','AGENTS.md','reproduce.py','run.py','pyproject.toml','.gitignore','.gitattributes',
            'THIRD_PARTY_NOTICES.md','LICENSES','src','configs','reference','environment','tests',
-           'docs','vendor','studies/log400_release.py','studies/methodology_visual.py',
+           'docs','vendor','studies/log400_release.py','studies/methodology_sensitivity.py','studies/methodology_visual.py',
            'studies/performance_knees_visual.py','studies/accelerator_comparison_visual.py',
            'studies/inferencex_validation']
     destination.parent.mkdir(parents=True,exist_ok=True)
@@ -150,7 +150,7 @@ def bundle(destination):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=['rebuild','doctor','replay','sweep','bundle'],nargs='?',default='rebuild')
+    parser.add_argument('command',choices=['rebuild','sensitivity','doctor','replay','sweep','bundle'],nargs='?',default='rebuild')
     parser.add_argument('--output',type=Path)
     parser.add_argument('--hardware',action='append',help='Exact hardware key from reference/2026-10-15/catalog.json')
     parser.add_argument('--model',action='append',help='GLM-5.2, Kimi-K3, Qwen-480B or "MAI-2 2.8T"')
@@ -158,9 +158,16 @@ def main():
     args=parser.parse_args()
     if args.limit is not None and (args.limit<1 or args.command!='replay'):parser.error('--limit is a positive replay-only option')
     verify()
-    out=(args.output or Path('results/current' if args.command=='rebuild' else 'results/current-'+args.command))
+    if args.command=='sensitivity' and (args.hardware or args.model or args.limit):
+        parser.error('Sensitivity uses the complete frozen basket; use its scenario families instead of partial-run filters')
+    default_output = ('results/methodology-sensitivity' if args.command=='sensitivity'
+                      else 'results/current' if args.command=='rebuild' else 'results/current-'+args.command)
+    out=args.output or Path(default_output)
     if not out.is_absolute():out=ROOT/out
     if args.command=='bundle':bundle(args.output or ROOT/'dist/inference-capacity-index-v1.0.0.tar.gz')
+    elif args.command=='sensitivity':
+        import methodology_sensitivity
+        methodology_sensitivity.main(REF,out)
     elif args.command=='doctor':
         from agent_index.current_native import doctor
         print(json.dumps(doctor(REF),indent=2))

@@ -1,7 +1,7 @@
 # Inference Capacity Index v1
 
 Portable reproduction of the current **four-model, 23-accelerator** study:
-GLM-5.2, Kimi-K3, Qwen3-Coder 480B and MAI-2 2.8T, equally weighted.
+GLM-5.2, Kimi-K3, Qwen3-Coder 480B and the MAI-Base-2 2.8T proxy, equally weighted.
 The score integrates capacity over **50–400 SOL TPS/user with log-speed weighting**,
 including separately provisioned prefill resources at the saved workload ratio.
 
@@ -11,6 +11,22 @@ The MAI adapter uses native operators with explicitly assumed dimensions; it
 does not claim to reproduce Microsoft's exact implementation.
 
 ## Ready-made visualizations
+
+### Reading order
+
+1. **Method:** [full explainer guide](docs/visualizations/README.md).
+2. **Robustness:** [methodology sensitivity](docs/research/methodology-sensitivity/README.md),
+   including the complete linear/log × speed-band table, model-basket choices,
+   prefill provisioning and single-point alternatives
+   ([interactive tables](docs/research/methodology-sensitivity/index.html),
+   [full CSV](docs/research/methodology-sensitivity/score_matrix.csv)).
+3. **Empirical grounding:** [InferenceX validation](docs/research/inferencex-validation/README.md).
+
+The sensitivity study reuses this release's frozen 23-accelerator inputs; it does
+not change the headline or silently include later standalone hardware studies.
+The [documentation reading guide](docs/README.md) identifies historical
+two-model documents as archived, not current setup or methodology instructions.
+Their hash-listed original contents are preserved.
 
 All three current interactive HTML explainers are included, with their companion
 data and downloadable charts:
@@ -57,6 +73,21 @@ Outputs in `results/current/`:
 Expected combined score: **GB300 = 1; VR200 = 2.3889176225372135**.
 This re-integrates saved results; it does **not** rerun timings. The knee-point
 teaching curves and power annotations are frozen supporting inputs.
+
+### Reproduce methodology sensitivity
+
+```bash
+python3 reproduce.py sensitivity
+```
+
+This writes 28 named scenarios to `results/methodology-sensitivity/`, including
+interactive tables, full-precision score and rank-change CSVs, per-model
+contributions, family-specific robustness ranges and provenance hashes.
+It uses the standard library only and checks the headline against the frozen
+release. The weighting-by-band matrix integrates exactly over saved breakpoints;
+these are re-integrations, not new AISim runs. Min/max ranges are **not confidence
+intervals**. See the [study](docs/research/methodology-sensitivity/README.md)
+for assumptions and definitions.
 
 ## Rerun AISim on CPU
 
@@ -145,6 +176,7 @@ access for dependencies; the quick rebuild is fully offline.
 | `src/agent_index/current_models.py` | Extracted model/memory rules and MAI adapter |
 | `src/agent_index/simulation.py`, `topology.py` | Shared layouts, memory and communication overlay |
 | `studies/log400_release.py` | Exact combined capacity AUC and normalization |
+| `studies/methodology_sensitivity.py` | Frozen-run sensitivity to axis, band, basket and prefill provision |
 | `studies/*visual.py` | HTML renderers used by the entry point |
 | `reference/2026-10-15/` | Current frozen inputs and provenance |
 | `environment/setup_current.py` | Isolated native environment |
@@ -172,3 +204,6 @@ retain their original names and assumptions.
 
 Historical instructions are preserved in `docs/REPRODUCTION_HISTORY.md`, not
 current setup guidance. See `THIRD_PARTY_NOTICES.md` for licensing scope.
+
+Public-repository safety rules are recorded in [AGENTS.md](AGENTS.md). Publication
+must exclude secrets, private traces, credentials and unrelated workspace files.
