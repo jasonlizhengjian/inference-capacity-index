@@ -1,10 +1,44 @@
 {
-  "score_file": "results/workload-capacity-oct15-log400/index.csv",
-  "score_sha256": "e5b84782da3e913d2930e84c60cf7f56d0aac7c6fbfdce177ffea3522e31f090",
+  "score_file": "results/rubin-update/index.csv",
+  "revision": {
+    "date": "2026-10-20",
+    "hardware": "VR200",
+    "hbm_bytes_second": 19200000000000,
+    "nvlink_outbound_bytes_second": 1500000000000,
+    "prior_hbm_bytes_second": 22000000000000,
+    "prior_nvlink_outbound_bytes_second": 1800000000000,
+    "scope": "Rubin only; other 22 frozen profiles unchanged. Not the later live-sheet hardware roster.",
+    "native_sweep_candidates": {
+      "GLM-5.2": {
+        "decode": 2426,
+        "prefill": 1088
+      },
+      "Kimi-K3": {
+        "decode": 3442,
+        "prefill": 2416
+      },
+      "Qwen-480B": {
+        "decode": 6293,
+        "prefill": 2491
+      },
+      "MAI2-informed-h128-w512-sh4352": {
+        "decode": 8070,
+        "prefill": 7268
+      }
+    },
+    "native_runtime": {
+      "version": "0.13.0",
+      "runtime_sha256": "2e2a1772e067c45253bbe6b6fe9f7fbdedbb8f90d7a9d2bbaf2c4a2ffbe3ccb4",
+      "source_commit": "2f0f4cd8606d580567b253d02f3d699fe36db865",
+      "bundled_model_hashes_checked": 3
+    },
+    "reference_manifest_sha256": "f2e2ccaa463fa8252c8f01ce69fddbccade9d2f20f3eda41ae273c22219c115c"
+  },
+  "score_sha256": "d32355eb9749bbab5f39ccfee972af24de25601caad0d60357e012cc0ae97f7f",
   "epoch_archive_sha256": "11c35d8fdd6910ebe59ef92145a8462514c167a71ee7c425ea1eef653b24c022",
   "epoch_download_url": "https://epoch.ai/data/ml_hardware.zip",
   "epoch_retrieved": "2026-10-15",
-  "note": "Only chart arithmetic; no timing, model, hardware, layout, search or index changes.",
+  "note": "Chart rendering only; score revision is recorded separately when present.",
   "rows": [
     {
       "hardware": "Meta MTIA 500 (512 GB)",
@@ -45,7 +79,7 @@
     {
       "hardware": "VR200",
       "manufacturer": "NVIDIA",
-      "score": 2.3889176225372135,
+      "score": 2.177366570368923,
       "watts": null,
       "power_basis": "Absolute GPU rating unverified",
       "power_source": "https://dam-cdn.nvd.orangelogic.com/AssetLink/05p8225000qc1l606krfd80k80kis0om.pdf",

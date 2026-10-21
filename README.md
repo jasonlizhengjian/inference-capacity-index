@@ -1,6 +1,6 @@
 # Inference Capacity Index v1
 
-Portable reproduction of the current **four-model, 23-accelerator** study:
+Portable reproduction of the **four-model, 23-accelerator** study:
 GLM-5.2, Kimi-K3, Qwen3-Coder 480B and the MAI-Base-2 2.8T proxy, equally weighted.
 The score integrates capacity over **50–400 SOL TPS/user with log-speed weighting**,
 including separately provisioned prefill resources at the saved workload ratio.
@@ -9,6 +9,28 @@ This is a study layer on **unmodified AISim**, not an AISim fork. Architecture,
 memory-admission, topology and search policies live in our Python wrappers.
 The MAI adapter uses native operators with explicitly assumed dimensions; it
 does not claim to reproduce Microsoft's exact implementation.
+
+## Latest score revision: Rubin, 20 October 2026
+
+The current repo tables and main explainer include Rubin's revised **19.2 TB/s
+HBM** and **1.5 TB/s outbound NVLink** profile. Its combined score changes from
+**2.389 to 2.177 GB300e** (−8.86%); other hardware scores are unchanged.
+This was a fresh decode and prefill search, not a bandwidth-ratio adjustment.
+See [the complete revision, component scores and provenance](docs/research/rubin-spec-update/README.md).
+
+Rebuild the updated table and HTMLs without installing AISim:
+
+```bash
+python3 reproduce.py rubin-update
+```
+
+Outputs go to `results/rubin-update/`. The frozen `v1.0.0` tag and October 15
+reference files remain unchanged. For backward compatibility, the no-argument
+command below still reproduces that original release. The checked-in
+`docs/visualizations/` table and main explainer show the Rubin revision; the
+knee-point teaching curves and methodology-sensitivity study remain clearly
+labeled historical snapshots. This revision retains the original 23-profile
+roster, not the later live-sheet additions/exclusions.
 
 ## Ready-made visualizations
 
@@ -47,10 +69,11 @@ GitHub displays HTML source rather than running these pages. Clone/download the
 repository and open the files in a browser, or download `visualizations.zip` from
 the [v1 release](https://github.com/jasonlizhengjian/inference-capacity-index/releases/tag/v1.0.0)
 and extract it. Keep the files together so navigation and downloads work.
-These are generated snapshots; `python3 reproduce.py` regenerates them in
-`results/current/` without modifying the checked-in copies.
+These are generated snapshots: `python3 reproduce.py rubin-update` regenerates
+the revised version in `results/rubin-update/`. The no-argument command and
+release ZIP retain the original snapshot. Neither command modifies checked-in copies.
 
-## Quick reproduction: no installation needed
+## Original v1.0.0 reproduction: no installation needed
 
 Use Python 3.12 on this checkout or the unpacked reproduction bundle:
 
@@ -70,7 +93,8 @@ Outputs in `results/current/`:
 - `REPORT.html`, `PERFORMANCE_KNEES.html`, `ACCELERATOR_COMPARISON.html`.
 - `provenance.json`, `validation.json`, `reproduction.json`.
 
-Expected combined score: **GB300 = 1; VR200 = 2.3889176225372135**.
+Original frozen combined score: **GB300 = 1; VR200 = 2.3889176225372135**.
+For the updated **VR200 = 2.177366570368923**, use `rubin-update` above.
 This re-integrates saved results; it does **not** rerun timings. The knee-point
 teaching curves and power annotations are frozen supporting inputs.
 
@@ -176,6 +200,8 @@ access for dependencies; the quick rebuild is fully offline.
 | `src/agent_index/current_models.py` | Extracted model/memory rules and MAI adapter |
 | `src/agent_index/simulation.py`, `topology.py` | Shared layouts, memory and communication overlay |
 | `studies/log400_release.py` | Exact combined capacity AUC and normalization |
+| `studies/rubin_release.py`, `reference/2026-10-20-rubin/` | Offline Rubin revision and saved native sweeps |
+| `studies/rubin_oct20.py` | Native old/new Rubin bandwidth re-search |
 | `studies/methodology_sensitivity.py` | Frozen-run sensitivity to axis, band, basket and prefill provision |
 | `studies/*visual.py` | HTML renderers used by the entry point |
 | `reference/2026-10-15/` | Current frozen inputs and provenance |

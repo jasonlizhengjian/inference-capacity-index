@@ -108,7 +108,9 @@ def chart(curves, model, num, prefills, ratio):
 def main():
     saved = json.loads(INPUT.read_text())
     curves, ratio = saved['curves'], saved['ratio']
-    visual = json.loads((REFERENCE/'visual_inputs.json').read_text())
+    visual_path = STUDY/'visual_inputs.json' if (STUDY/'visual_inputs.json').exists() else REFERENCE/'visual_inputs.json'
+    visual = json.loads(visual_path.read_text())
+    revision = json.loads((STUDY/'revision.json').read_text()) if (STUDY/'revision.json').exists() else None
     memory_profiles = visual['memory_profiles']
     memory_sources = visual['memory_component_sources']
     models = saved['models']
@@ -147,13 +149,13 @@ def main():
     vr = next(r for r in scores if r['hardware']=='VR200')
     combined = sum(e['combined_ratio'] for e in examples)/4
     assert math.isclose(combined,float(vr['agent_index_GB300e']),rel_tol=1e-12)
-    data = dict(updated='2026-10-15',low=LOW,high=HIGH,weighting='log',context=262144,
+    data = dict(updated=revision['date'] if revision else '2026-10-15',revision=revision,low=LOW,high=HIGH,weighting='log',context=262144,
                 nextn=3,accepted_length=3,ratio=ratio,model_weights=[.25]*4,
                 models=examples,memory_profiles=memory_profiles,memory_component_sources=memory_sources,decode_score=float(vr['decode_only_GB300e']),combined_score=combined,
                 workload=workload,scores=scores,
                 prefill_winners=prefill_winners,
                 source_commit='2f0f4cd8606d580567b253d02f3d699fe36db865',
-                source_sha256={str(f.relative_to(ROOT)) if f.is_relative_to(ROOT) else f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in (INPUT,STUDY/'workload.json',STUDY/'index.csv',STUDY/'per_model_scores.csv',REFERENCE/'visual_inputs.json')},
+                source_sha256={str(f.relative_to(ROOT)) if f.is_relative_to(ROOT) else f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in (INPUT,STUDY/'workload.json',STUDY/'index.csv',STUDY/'per_model_scores.csv',visual_path)},
                 simulation_rerun=False)
     page = TEMPLATE.replace('%%PANELS%%',''.join(panels)).replace('%%DATA%%',json.dumps(data).replace('</','<\\/'))
     page = page.replace('%%PREFILL_ROWS%%', prefill_rows)
@@ -163,6 +165,8 @@ def main():
     page = page.replace('%%VR_GLM%%',f"{examples[0]['combined_ratio']:.2f}")
     page = page.replace('%%VR_KIMI%%',f"{examples[1]['combined_ratio']:.2f}")
     page = add_sidenotes(page)
+    if revision:
+        page = page.replace('<main>', '<main><p class="context"><strong>20 October Rubin revision:</strong> VR200 uses 19.2 TB/s HBM and 1.5 TB/s outbound NVLink. Four model sweeps were rerun; other hardware is unchanged. <a href="https://github.com/jasonlizhengjian/inference-capacity-index/tree/master/docs/research/rubin-spec-update">Revision details and reproduction</a>.</p>', 1)
     assert '%%' not in page and '/home/' not in page
     OUT.mkdir(parents=True,exist_ok=True)
     (OUT/'REPORT.html').write_text(page)

@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "unchanged_hardware": 22,
+  "score_cells_checked": 161,
+  "revised_hardware": "VR200",
+  "native_timings_rerun": false,
+  "revision": {
+    "date": "2026-10-20",
+    "hardware": "VR200",
+    "hbm_bytes_second": 19200000000000,
+    "nvlink_outbound_bytes_second": 1500000000000,
+    "prior_hbm_bytes_second": 22000000000000,
+    "prior_nvlink_outbound_bytes_second": 1800000000000,
+    "scope": "Rubin only; other 22 frozen profiles unchanged. Not the later live-sheet hardware roster.",
+    "native_sweep_candidates": {
+      "GLM-5.2": {
+        "decode": 2426,
+        "prefill": 1088
+      },
+      "Kimi-K3": {
+        "decode": 3442,
+        "prefill": 2416
+      },
+      "Qwen-480B": {
+        "decode": 6293,
+        "prefill": 2491
+      },
+      "MAI2-informed-h128-w512-sh4352": {
+        "decode": 8070,
+        "prefill": 7268
+      }
+    },
+    "native_runtime": {
+      "version": "0.13.0",
+      "runtime_sha256": "2e2a1772e067c45253bbe6b6fe9f7fbdedbb8f90d7a9d2bbaf2c4a2ffbe3ccb4",
+      "source_commit": "2f0f4cd8606d580567b253d02f3d699fe36db865",
+      "bundled_model_hashes_checked": 3
+    },
+    "reference_manifest_sha256": "f2e2ccaa463fa8252c8f01ce69fddbccade9d2f20f3eda41ae273c22219c115c"
+  }
+}

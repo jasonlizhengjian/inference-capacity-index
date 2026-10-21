@@ -41,6 +41,7 @@ PAGE = r'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name
 <h1>Reading the knees in inference performance</h1>
 <p class="lead">Adding more concurrent requests spreads weight reads over more output tokens—but also adds compute, cache traffic and communication. Several different effects can make a curve bend. They should not all be called “saturation.”</p>
 <p class="small">Inference Capacity Index v1 · saved AISim SOL results plus explicitly labeled teaching examples · no new accelerator predictions</p>
+<p class="small"><strong>Historical teaching curves (15 October):</strong> Rubin here retains the original 22 TB/s HBM and 1.8 TB/s outbound NVLink profile. These fixed-layout examples are not the revised October 20 index frontiers shown in the main explainer.</p>
 <p>A <strong>knee point</strong> is a bend or change in slope. It can reflect a resource limit, but it can also arise from changing axes or selecting a different configuration. This page separates those explanations.</p>
 <nav class="section-nav" aria-label="Knee-point guide sections"><a href="#native-curves">1 · Saved curves</a><a href="#axes">2 · Changing axes</a><a href="#experts">3 · Expert coverage</a><a href="#roofline">4 · Resource crossover</a><a href="#diagnosis">5 · Diagnose a knee</a></nav>
 <div class="grid">

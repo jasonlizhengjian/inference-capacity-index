@@ -5,6 +5,13 @@ These three interactive chapters are the detailed companion to the short
 The current score uses four equally weighted models, log 50–400 SOL TPS/user,
 and workload-based provisioning of separate prefill and decode pools.
 
+**20 October update:** the main explainer, index CSV and accelerator bars now
+use the revised Rubin bandwidths and **2.177 GB300e** score. See the
+[Rubin revision](../research/rubin-spec-update/README.md). Run
+`python3 reproduce.py rubin-update` to regenerate these results. The existing
+`v1.0.0` release download and no-argument rebuild remain the original snapshot
+(Rubin 2.389); fixed-layout knee examples also retain their labeled old profile.
+
 Download the repository or the release's `visualizations.zip`, keep its files
 together, and open `REPORT.html` in a browser. GitHub shows HTML source rather
 than executing it. No server or Python setup is needed to read the pages.
@@ -93,7 +100,7 @@ included beside the HTML pages.
 
 | Question | Implementation / frozen evidence |
 | --- | --- |
-| What are the workload and hardware inputs? | [Current reference files](../../reference/2026-10-15/) |
+| What are the workload and hardware inputs? | [Frozen base](../../reference/2026-10-15/) plus [Rubin revision](../../reference/2026-10-20-rubin/) |
 | How are native timing calls made? | [current_native.py](../../src/agent_index/current_native.py) |
 | Where are the MAI adapter and model memory rules? | [current_models.py](../../src/agent_index/current_models.py) |
 | Where are shared layouts and topology rules? | [simulation.py](../../src/agent_index/simulation.py), [topology.py](../../src/agent_index/topology.py) |

@@ -108,16 +108,21 @@ def main():
     ranked = [r for r in power_rows if r['watts']]
     missing = [r for r in power_rows if not r['watts']]
     assert len(ranked)==15 and len(missing)==4
-    provenance = dict(score_file='results/workload-capacity-oct15-log400/index.csv',
+    revision = json.loads((STUDY/'revision.json').read_text()) if (STUDY/'revision.json').exists() else None
+    score_path = STUDY/'index.csv'
+    provenance = dict(score_file=str(score_path.relative_to(ROOT)) if score_path.is_relative_to(ROOT) else score_path.name,revision=revision,
         score_sha256=hashlib.sha256((STUDY/'index.csv').read_bytes()).hexdigest(),
         epoch_archive_sha256=ledger['epoch_archive_sha256'],
         epoch_download_url='https://epoch.ai/data/ml_hardware.zip',epoch_retrieved='2026-10-15',
-        note='Only chart arithmetic; no timing, model, hardware, layout, search or index changes.',rows=rows)
+        note='Chart rendering only; score revision is recorded separately when present.',rows=rows)
     OUT.mkdir(exist_ok=True,parents=True)
     (OUT/'accelerator_comparison_data.json').write_text(json.dumps(provenance,indent=2)+'\n')
     with (OUT/'accelerator_comparison.csv').open('w',newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
     first,second=svg_chart(rows),svg_chart(power_rows,True)
+    if revision:
+        first = first.replace('October 15, 2026 MAI-2 basket', 'October 20 Rubin update; same four-model basket')
+        second = second.replace('October 15, 2026 MAI-2 basket', 'October 20 Rubin update; same four-model basket')
     (OUT/'accelerator_scores.svg').write_text(first)
     (OUT/'accelerator_scores_per_watt.svg').write_text(second)
     legend=''.join(f'<span><i style="background:{c}"></i>{n}</span>' for n,c in COLORS.items())

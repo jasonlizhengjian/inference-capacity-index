@@ -1,0 +1,90 @@
+{
+  "signature": {
+    "runtime": {
+      "version": "0.13.0",
+      "runtime_sha256": "2e2a1772e067c45253bbe6b6fe9f7fbdedbb8f90d7a9d2bbaf2c4a2ffbe3ccb4",
+      "source_commit": "2f0f4cd8606d580567b253d02f3d699fe36db865",
+      "bundled_model_hashes_checked": 3
+    },
+    "files": {
+      "studies/rubin_oct20.py": "11bf906306718f71eb7ec97cfed67f41e2936bf32c20d1011702153a1217d1ec",
+      "studies/gb300_sensitivity/curvature.py": "36a63236e83d435c113e9130c03f316dfcfc10f09699b6bd6b8751665f27b58c",
+      "studies/gb300_sensitivity/run.py": "0570ece1998d75db82c477e5f892d30dde7c3ae39e673b1d878438bf70ae2c2d",
+      "studies/log400_release.py": "e94a15d5edd39cdd5c71ccf8c9fd7730f8360f1a79e4bcdd35b739106b441d74",
+      "src/agent_index/__init__.py": "cadd12d365deb71a6870b0e595c6038b531a1b0e7f9111bf5fb1bff4a61b088b",
+      "src/agent_index/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "src/agent_index/cli.py": "01fcaa0792f471f2a833e48a53c3892216eedee474da57c1eb3f0efe025e1d2f",
+      "src/agent_index/current_models.py": "ddf646ae6573475b529df3dabd03abdd0311cbe2dad00c07d878a6b12d224501",
+      "src/agent_index/current_native.py": "509420cf8af4c60389bb568f050657642515de3dd5f970b223294a9f033a1387",
+      "src/agent_index/index.py": "99f94d162ad06af81bac3d511d9c96ffeddad00aac5762ba8f292cbf2d6326f9",
+      "src/agent_index/interconnect.py": "383ad0af25d2ce9fb2c16668e8035b55dfd452a7bbf7fc2f48debb35e6074eb9",
+      "src/agent_index/publication.py": "d25993963557418f49df8721839f120eba4826781a3c61335b742240e113119d",
+      "src/agent_index/runner.py": "6204bc1b3f346da413d179e4d323edb22f1a6e25f90c94d2ec3988a29f4ca07a",
+      "src/agent_index/simulation.py": "997ea357a1ebb5f1d32ec0efef78d5368b4ca8c8b449f64905a7941291ea4a15",
+      "src/agent_index/topology.py": "299dce7be9694b1b568f1c86c044d5e42f8d484cd5969753b964c4ac0d86f1ea",
+      "reference/2026-10-15/manifest.json": "51f458d5c0183eb183f6f7e3bc5e6e01b52ecd383d5b6bae6e316e0af949fa97",
+      "reference/2026-10-15/curves_and_inputs.json": "997580835c6a44fa11cbe8e8b8636e857998062256aa8787814c27345a146975",
+      "reference/2026-10-15/prefill_winners.json": "acf6280cdac7085b78415b93ec788dd48dd628245fd9fbff9c0d282f472e578f",
+      "reference/2026-10-15/catalog.json": "f17a4cd87de1a575946568d9b3f71151667f7967a341cd191104f90453f4b774",
+      "reference/2026-10-15/hardware/vr200_deployment.yaml": "f5358d43b3176f9e4a246f2396ef8a3fc5cf25f523d6ae16d9f7394dd333bd01"
+    }
+  },
+  "changes": {
+    "frozen_baseline": {},
+    "october_specs": {
+      "hbm_bandwidth": 0.8727272727272727,
+      "interconnect_bandwidth": 0.8333333333333333
+    }
+  },
+  "source_urls": [
+    "https://www.nvidia.com/en-us/data-center/vera-rubin-nvl72/",
+    "https://www.nvidia.com/en-us/data-center/nvlink/"
+  ],
+  "source_checked": "2026-10-20",
+  "baseline_profile": {
+    "data_dir": "data/estimate_only",
+    "gpu": {
+      "bfloat16_tc_flops": 4000000000000000.0,
+      "fp4_tc_flops": 3.5e+16,
+      "fp8_tc_flops": 1.75e+16,
+      "mem_bw": 22000000000000.0,
+      "mem_bw_empirical_scaling_factor": 1,
+      "mem_capacity": 288000000000,
+      "mem_empirical_constant_latency": 0,
+      "sm_version": 103
+    },
+    "misc": {
+      "nccl_mem": {
+        "1": 0,
+        "2": 0,
+        "4": 0,
+        "8": 0,
+        "16": 0,
+        "32": 0,
+        "64": 0,
+        "72": 0,
+        "128": 0,
+        "256": 0
+      },
+      "other_mem": 4294967296
+    },
+    "node": {
+      "inter_node_bw": 1800000000000.0,
+      "inter_rack_bw": 1800000000000.0,
+      "intra_node_bw": 1800000000000.0,
+      "num_gpus_per_node": 72,
+      "num_gpus_per_rack": 256,
+      "p2p_latency": 0
+    }
+  },
+  "notes": [
+    "Only HBM bandwidth and NVLink outbound bandwidth change.",
+    "Literal revised values: 19.2e12 and 1.5e12 bytes/s.",
+    "72-chip domain/budget, capacity, precision, nextn3/AL3 and memory admission unchanged.",
+    "Full saved finite-layout family and every admitted integer batch re-searched in both phases.",
+    "Four models; 256Ki context; 1Ki new cached-prefix prefill; log 50-400.",
+    "Frozen GB300 denominator and input/output ratio retained.",
+    "No timing reuse: frozen Rubin baseline is also fully rerun to validate parity.",
+    "Frozen release files and production profiles remain unchanged."
+  ]
+}

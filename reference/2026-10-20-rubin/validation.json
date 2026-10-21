@@ -1,0 +1,68 @@
+{
+  "status": "complete",
+  "baseline_parity": [
+    {
+      "model": "GLM-5.2",
+      "relative_errors": {
+        "combined_GB300e": 0.0,
+        "decode_GB300e": 0.0,
+        "prefill_GB300e": 0.0
+      }
+    },
+    {
+      "model": "Kimi-K3",
+      "relative_errors": {
+        "combined_GB300e": 0.0,
+        "decode_GB300e": 0.0,
+        "prefill_GB300e": 2.220446049250313e-16
+      }
+    },
+    {
+      "model": "Qwen-480B",
+      "relative_errors": {
+        "combined_GB300e": 0.0,
+        "decode_GB300e": 0.0,
+        "prefill_GB300e": 0.0
+      }
+    },
+    {
+      "model": "MAI2-informed-h128-w512-sh4352",
+      "relative_errors": {
+        "combined_GB300e": 0.0,
+        "decode_GB300e": 0.0,
+        "prefill_GB300e": 0.0
+      }
+    }
+  ],
+  "revised_candidate_counts": {
+    "GLM-5.2": {
+      "decode": 2426,
+      "prefill": 1088
+    },
+    "Kimi-K3": {
+      "decode": 3442,
+      "prefill": 2416
+    },
+    "Qwen-480B": {
+      "decode": 6293,
+      "prefill": 2491
+    },
+    "MAI2-informed-h128-w512-sh4352": {
+      "decode": 8070,
+      "prefill": 7268
+    }
+  },
+  "profiles_differ_only_in_bandwidth": true,
+  "overall": {
+    "model": "Four-model average",
+    "combined_GB300e_before": 2.3889176225372135,
+    "combined_GB300e_after": 2.177366570368923,
+    "combined_GB300e_change_pct": -8.855518925077345,
+    "decode_GB300e_before": 2.6458119422209867,
+    "decode_GB300e_after": 2.3537410284497895,
+    "decode_GB300e_change_pct": -11.038989926321928,
+    "prefill_GB300e_before": 1.7595366386305806,
+    "prefill_GB300e_after": 1.7136501006576532,
+    "prefill_GB300e_change_pct": -2.607876242272522
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "comparison.csv": "5521a97693bc80f387be35faac0f261d2cb170625f3eda5946ce7bc8382e452a",
+  "frozen_baseline/GLM-5.2.json": "0d277d1e28203ed60c378a7b7811b4e3dffed82fd4c3d58b976c6f58ea313522",
+  "frozen_baseline/Kimi-K3.json": "ae14d6e8a363fe6409ced1b8028aeabdcb019bb41349e15df7cac598f919e464",
+  "frozen_baseline/MAI2-informed-h128-w512-sh4352.json": "0dbe315073d77e500861a0c34ca56c4155c04d15984716738e4b2a55cea2420b",
+  "frozen_baseline/Qwen-480B.json": "28ce758dd8bdf3f8d25d1d7f6bda95e8a47e31c68af24e94cd3b3c0148acd06e",
+  "hardware/vr200_deployment.yaml": "56cf2df08e85be57c10a6ed3067f876cb81e059b3ea80724ea53488c8d52b920",
+  "october_specs/GLM-5.2.json": "23cc8ad0c9616d070293100d3561b57676a94ccd72445d74524ea730970c9444",
+  "october_specs/Kimi-K3.json": "5558b55a39a1fb47bc539a339d09ff6489856f22fffa6feb224ae2a930bc7228",
+  "october_specs/MAI2-informed-h128-w512-sh4352.json": "777b6484820f98f258e76280957e81f106934be3d7539a4d83af5b01777b16b9",
+  "october_specs/Qwen-480B.json": "5a500051b87fe7c7b0d9feb1f9c30603aa8f018e59e227665aea4f8101360e39",
+  "provenance.json": "91648cc745ff546a328648a69ca4008add84f5271616669091b295b789da47cb",
+  "validation.json": "2696173ab111768a5c56964002664d20e9d17e008abc53a199c93f0443c37c48"
+}

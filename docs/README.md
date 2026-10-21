@@ -14,6 +14,12 @@ The current headline uses equal GLM-5.2, Kimi-K3, Qwen3-Coder 480B and
 MAI-Base-2 2.8T proxy weights, log 50–400 SOL TPS/user and separate prefill/decode
 provisioning. The sensitivity study does not replace that definition.
 
+The [20 October Rubin revision](research/rubin-spec-update/README.md) updates
+VR200 to 19.2 TB/s HBM and 1.5 TB/s outbound NVLink, giving **2.177 GB300e**.
+Current visualization tables include it; the dated methodology-sensitivity and
+InferenceX studies retain their original inputs. Original release reproduction
+remains available separately from `python3 reproduce.py rubin-update`.
+
 ## Historical archive — not the current methodology
 
 - `METHODOLOGY.txt` and `METHODOLOGY.html` describe the **9 October two-model
