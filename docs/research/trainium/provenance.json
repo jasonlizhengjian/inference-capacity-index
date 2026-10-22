@@ -1,0 +1,160 @@
+{
+  "runtime": {
+    "version": "0.13.0",
+    "runtime_sha256": "2e2a1772e067c45253bbe6b6fe9f7fbdedbb8f90d7a9d2bbaf2c4a2ffbe3ccb4",
+    "source_commit": "2f0f4cd8606d580567b253d02f3d699fe36db865",
+    "bundled_model_hashes_checked": 3
+  },
+  "signature": {
+    "studies/trainium/run.py": "6e55175cb478bb7b0453b9f78727d37d4f4388514d66835f253541710a22e56d",
+    "src/agent_index/__init__.py": "cadd12d365deb71a6870b0e595c6038b531a1b0e7f9111bf5fb1bff4a61b088b",
+    "src/agent_index/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "src/agent_index/cli.py": "01fcaa0792f471f2a833e48a53c3892216eedee474da57c1eb3f0efe025e1d2f",
+    "src/agent_index/current_models.py": "ddf646ae6573475b529df3dabd03abdd0311cbe2dad00c07d878a6b12d224501",
+    "src/agent_index/current_native.py": "509420cf8af4c60389bb568f050657642515de3dd5f970b223294a9f033a1387",
+    "src/agent_index/index.py": "99f94d162ad06af81bac3d511d9c96ffeddad00aac5762ba8f292cbf2d6326f9",
+    "src/agent_index/interconnect.py": "383ad0af25d2ce9fb2c16668e8035b55dfd452a7bbf7fc2f48debb35e6074eb9",
+    "src/agent_index/publication.py": "d25993963557418f49df8721839f120eba4826781a3c61335b742240e113119d",
+    "src/agent_index/runner.py": "6204bc1b3f346da413d179e4d323edb22f1a6e25f90c94d2ec3988a29f4ca07a",
+    "src/agent_index/simulation.py": "997ea357a1ebb5f1d32ec0efef78d5368b4ca8c8b449f64905a7941291ea4a15",
+    "src/agent_index/topology.py": "299dce7be9694b1b568f1c86c044d5e42f8d484cd5969753b964c4ac0d86f1ea",
+    "reference/2026-10-15/curves_and_inputs.json": "997580835c6a44fa11cbe8e8b8636e857998062256aa8787814c27345a146975",
+    "reference/2026-10-15/runtime.json": "c4acc1069dcd3f11696d290ffd6dde9a734acadc101fa52a2a7e60d736b5df4f",
+    "reference/2026-10-15/models.json": "761e6705acddc569a7afd5220e8f893e95476a1ecc5446a275a35951e64542c9",
+    "reference/2026-10-15/models/MAI2-informed-h128-w512-sh4352/config.json": "fd96a38b7d623cc9cf543d9c6080bbb8879b360d844afb0e9a811fd69352a177",
+    "reference/2026-10-15/models/Qwen-480B/config.json": "653230e2dd1c41bd1125d046f00259ed98d6294c75c63969f8890c6e139af7de"
+  },
+  "specs": {
+    "2": {
+      "capacity": 96,
+      "bandwidth": 2900000000000.0,
+      "bf16": 632000000000000.0,
+      "fp8": 1264000000000000.0,
+      "budget": 64,
+      "quant": "fp8"
+    },
+    "3": {
+      "capacity": 144,
+      "bandwidth": 4900000000000.0,
+      "bf16": 632000000000000.0,
+      "fp8": 2517000000000000.0,
+      "budget": 144,
+      "quant": "w4a8_mxfp4_mxfp8"
+    }
+  },
+  "cases": {
+    "2": {
+      "8_chip_control": [
+        8,
+        16,
+        137438953472,
+        68719476736,
+        0
+      ],
+      "16_link_limited": [
+        16,
+        16,
+        137438953472,
+        68719476736,
+        0
+      ],
+      "64_link_limited": [
+        64,
+        16,
+        137438953472,
+        68719476736,
+        0
+      ],
+      "64_link_limited_4us": [
+        64,
+        16,
+        137438953472,
+        68719476736,
+        4
+      ],
+      "64_link_limited_oneway_tables": [
+        64,
+        16,
+        274877906944,
+        137438953472,
+        0
+      ],
+      "64_injection_ceiling": [
+        64,
+        16,
+        1099511627776,
+        274877906944,
+        0
+      ]
+    },
+    "3": {
+      "8_chip_control": [
+        8,
+        4,
+        128000000000.0,
+        160000000000.0,
+        0
+      ],
+      "64_detailed_tiers": [
+        64,
+        4,
+        128000000000.0,
+        160000000000.0,
+        0
+      ],
+      "64_aggregate_half": [
+        64,
+        64,
+        1099511627776,
+        1099511627776,
+        0
+      ],
+      "144_detailed_slow_tier": [
+        144,
+        4,
+        128000000000.0,
+        64000000000.0,
+        0
+      ],
+      "144_detailed_slow_tier_4us": [
+        144,
+        4,
+        128000000000.0,
+        64000000000.0,
+        4
+      ],
+      "144_aggregate_half": [
+        144,
+        144,
+        1099511627776,
+        1099511627776,
+        0
+      ],
+      "144_injection_ceiling": [
+        144,
+        144,
+        2560000000000.0,
+        2560000000000.0,
+        0
+      ]
+    }
+  },
+  "sources": [
+    "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/arch/neuron-hardware/trn2-arch.html",
+    "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/arch/neuron-hardware/trn3-arch.html",
+    "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/arch/neuron-hardware/trainium2.html",
+    "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/about-neuron/arch/neuron-hardware/trainium3.html",
+    "https://awsdocs-neuron.readthedocs-hosted.com/en/latest/nki/guides/architecture/trainium3_arch.html"
+  ],
+  "axis": "log",
+  "band": [
+    50,
+    400
+  ],
+  "nextn": 3,
+  "accepted_length": 3,
+  "context": 262144,
+  "new_prefill_tokens": 1024,
+  "input_output_ratio": 1.513342523752522,
+  "status": "Experimental topology scenarios, not promoted. No Neuron kernel or routing simulation."
+}

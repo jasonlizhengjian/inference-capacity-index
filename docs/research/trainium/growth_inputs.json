@@ -1,0 +1,47 @@
+{
+  "source": "https://epoch.ai/data/ai-chip-sales",
+  "sales_archive_sha256": "a5d0e29684dd4d2ec1c1f6ecca3723482a2a89a329c308324f9d87248624d3df",
+  "snapshot_sha256": "2402cb4a3704c7e008b8cf1e08cf0b26e4bbb2dda24440159b37a4374b341f23",
+  "old_scores": {
+    "2": 0.02604692316935395,
+    "3": 0.0504696733004341
+  },
+  "assumptions": "60% shared NVL72 mix; 50% eligible H200; H100-scaled unscored chips. Shipment medians held fixed.",
+  "quarters": [
+    {
+      "date": "2025-06-30",
+      "baseline_capacity": 1375191.6526407176,
+      "peak_compute": 12203971.0,
+      "trainium2_units": 775000.0,
+      "trainium3_units": 0
+    },
+    {
+      "date": "2025-09-30",
+      "baseline_capacity": 2160557.2093757764,
+      "peak_compute": 15913967.0,
+      "trainium2_units": 1065000.0,
+      "trainium3_units": 0
+    },
+    {
+      "date": "2025-12-31",
+      "baseline_capacity": 3273591.2043681834,
+      "peak_compute": 20331360.0,
+      "trainium2_units": 1400000.0,
+      "trainium3_units": 0
+    },
+    {
+      "date": "2026-03-31",
+      "baseline_capacity": 4628069.597880973,
+      "peak_compute": 25321969.0,
+      "trainium2_units": 1750000.0,
+      "trainium3_units": 0
+    },
+    {
+      "date": "2026-06-30",
+      "baseline_capacity": 6432404.949177781,
+      "peak_compute": 31654723.0,
+      "trainium2_units": 2005000.0,
+      "trainium3_units": 95000.0
+    }
+  ]
+}

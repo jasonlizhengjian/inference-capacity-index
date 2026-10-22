@@ -20,6 +20,13 @@ Current visualization tables include it; the dated methodology-sensitivity and
 InferenceX studies retain their original inputs. Original release reproduction
 remains available separately from `python3 reproduce.py rubin-update`.
 
+## Separate hardware extensions
+
+- [Trainium2 and Trainium3 scenarios](research/trainium/README.md): matched-workload
+  scores, topology sensitivities, eight-chip controls, resource sanity checks and
+  the conditional effect on the inference-capacity growth estimate. This study
+  does not change the headline roster or published growth chart.
+
 ## Historical archive — not the current methodology
 
 - `METHODOLOGY.txt` and `METHODOLOGY.html` describe the **9 October two-model

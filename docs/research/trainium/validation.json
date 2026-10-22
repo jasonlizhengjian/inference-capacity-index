@@ -1,0 +1,15 @@
+{
+  "models": [
+    "GLM-5.2",
+    "Kimi-K3",
+    "Qwen-480B",
+    "MAI2-informed-h128-w512-sh4352"
+  ],
+  "input_output_ratio": 1.513342523752522,
+  "hardware_model_pairs": 8,
+  "unique_decode_candidates": 12642,
+  "unique_prefill_candidates": 7341,
+  "max_native_parity_error": 2.0071308848426902e-16,
+  "max_recomputed_score_error": 0.0,
+  "tested": "Saved-score replay, chip/request identities, 90% memory admission, and native operation/overlap parity. Not empirical hardware calibration."
+}
