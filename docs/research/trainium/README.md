@@ -1,5 +1,7 @@
 # Trainium inference-capacity scenarios
 
+**Hardware-profile revision: 22 October 2026 Trainium scenarios.** The GB300 reference is unchanged; no revised Rubin curve enters these Trainium/GB300 ratios. This remains a separate extension. [Snapshot guide](../../SNAPSHOTS.md).
+
 22 October 2026. **Separate research extension, not promoted to the headline
 index or the inference-compute-growth chart.** Scores are modeled SOL capacity,
 not Neuron benchmarks. [Charts and tables](index.html), [all scenario scores](overall.csv),

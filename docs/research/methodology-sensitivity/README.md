@@ -1,5 +1,9 @@
 # Sensitivity to methodology choices
 
+**Historical result snapshot: 15 October 2026 profiles.** Rubin uses 22 TB/s HBM and 1.8 TB/s outbound NVLink here, so its 2.389 baseline is **not** the report’s revised 2.177. Methodology is ICI v1. [Current methodology](../../METHODOLOGY.md) | [Snapshot guide](../../SNAPSHOTS.md).
+
+These saved sensitivity results are intentionally not relabeled as revised-profile results. A refreshed revision would require re-integration with the revised Rubin curves; no new timing is needed for these same scenarios.
+
 The headline is unchanged: equal GLM-5.2, Kimi-K3, Qwen3-Coder 480B and
 MAI-Base-2 2.8T proxy weights; log 50–400 SOL TPS/user; separate prefill/decode
 provisioning at the saved new-input/output ratio of 1.513342523752522.

@@ -1,0 +1,38 @@
+{
+  "score_revision": "2026-10-20-rubin",
+  "methodology": "ICI v1, four models, log 50\u2013400, separate prefill/decode provisioning",
+  "input_sha256": {
+    "reference/2026-10-15/manifest.json": "51f458d5c0183eb183f6f7e3bc5e6e01b52ecd383d5b6bae6e316e0af949fa97",
+    "reference/2026-10-20-rubin/manifest.json": "f2e2ccaa463fa8252c8f01ce69fddbccade9d2f20f3eda41ae273c22219c115c",
+    "docs/report/inputs/kimi_gb300_fixed_layout.csv": "1b248e8d44d16c8dfa246eb38bca58465267af19aba31b5468d6f9e03b00b2f9",
+    "studies/report_figures.py": "6e814d9d217a6d6d52c28658163a1cb6343fbda880fec5794d138c5cfbd9c5a9"
+  },
+  "output_sha256": {
+    "figure_1_selected_chips_preview.png": "e45e58a0c95f0f1fab9abcd8e012cad97ad062209d536148d0ca109cfd884466",
+    "figure_2_decode_tradeoff_preview.png": "04a27dc4b94ff97f0553788e225f552d021b571b28a27f78435ca3f1aa233b42",
+    "figure_1_selected_chips_article_preview.png": "0f5aa65b7897833d1702b53ccaa14fa97d02022b6be5d2fe9ecc49c62b844a91",
+    "figure_2_decode_tradeoff.png": "515ad3cfb8d8d461d0b6b292f88e0cba4975e1ddc24746bfc26d99684e3b8b8c",
+    "figure_1_selected_chips.svg": "1cc21f3286b884896e0cf4c0642188017b0f4495149c2d519d5adb3db34715e5",
+    "figure_4_model_average_article_preview.png": "b4e7f877e853e007005f060f729a6eef953225743f9ee8360e48c2db72be299e",
+    "figure_3_model_areas_preview.png": "ea42ddedd80480c21079d1579192e9891101434991723fc1cff10ed8b5a57d1f",
+    "figure_4_model_average.svg": "cad1ab4af74660e97085e6505743d4e73b760c28f1cf59ac83315a8031619960",
+    "figure_3_model_areas.png": "1bf5c6da857acc34c15cb645be57f0ff72a31bbb138c6c6b62376ae87a8d4b43",
+    "figure_3_capacity_curves.csv": "753f8a0fa3f7593d94df175e4081c729833c9055f569e65a2137eb214816c4d6",
+    "figure_2_decode_tradeoff.csv": "e11daedfa04ffbd8fcd58fdd25e8fce250fcedefc1a42442dc81655fa02d6dd4",
+    "figure_2_decode_tradeoff.svg": "dfc50ed7382792b403f3e0e5e93ce5a1b7420646c71eb322c0a68c16073409fb",
+    "figure_1_selected_chips.png": "f0c539c7740d14066948e8b37e2e9b36f5d5e2cb574a7612fc127fdcd8f6f7a7",
+    "figure_1_selected_chips.csv": "e301f6cd6944ab0452f6c801276155c58b554c0f9d9af5b77f46e26c8a4aad3a",
+    "figure_2_decode_tradeoff_article_preview.png": "453d72ba5ce372f55b7df355e969812dc8afd16ac1d337378c163239938d8768",
+    "figure_3_model_areas.svg": "7a9fc5946855cbabe2937dc96a47f6867c3889fcc7203ceddb3180fba5bdb0fa",
+    "figure_3_model_areas_article_preview.png": "1d234d2036bcaf30a5595857b2089a1a1df97e2f8db5c07f6cfcfdf92d7abd79",
+    "figure_4_model_average.png": "22eaf8293f8e25c0094bb617e39c57531b28b2165d59024bb891038c4a4ae8fa",
+    "figure_4_model_average_preview.png": "69c094b23f3b70bb2413a5f3b8def4083bccbf9e4df6045623608250069068a7",
+    "figure_4_model_ratios.csv": "d9b9e509e5e75477acadda97ae0effbbe2120d940fd3a224420d924a5c67a88a"
+  },
+  "matplotlib_version": "3.11.2",
+  "numpy_version": "2.5.3",
+  "VR200_ICI": 2.177366570368923,
+  "VR200_Kimi_ratio": 2.476489820823057,
+  "timings_rerun": false,
+  "note": "Curve CSV samples are for plotting; scores use exact saved-breakpoint integration."
+}

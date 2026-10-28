@@ -1,5 +1,7 @@
 # InferenceX versus modeled SOL — 19 October 2026
 
+**Validation snapshot: 19 October 2026, using 15 October SOL profiles** (Rubin 22 TB/s HBM, 1.8 TB/s outbound NVLink), with an expanded submitted-layout comparison. This is separate from the launch report’s October 27 InferenceX chart and October 20 revised Rubin index. [Evidence levels](../../METHODOLOGY.md#what-the-evidence-supports) | [Snapshot guide](../../SNAPSHOTS.md).
+
 [Public interactive comparison](https://inferencex-sol-validation.epoch-3293.chatgpt.site) ·
 [Offline HTML](index.html) · [Observed rows](observed_points.csv) ·
 [Current curve ratios](three_curve_summary.csv) ·

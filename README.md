@@ -2,13 +2,30 @@
 
 Portable reproduction of the **four-model, 23-accelerator** study:
 GLM-5.2, Kimi-K3, Qwen3-Coder 480B and the MAI-Base-2 2.8T proxy, equally weighted.
-The score integrates capacity over **50–400 SOL TPS/user with log-speed weighting**,
+The score integrates concurrency over **50–400 tokens/s/request with log-speed weighting**,
 including separately provisioned prefill resources at the saved workload ratio.
 
 This is a study layer on **unmodified AISim**, not an AISim fork. Architecture,
 memory-admission, topology and search policies live in our Python wrappers.
 The MAI adapter uses native operators with explicitly assumed dimensions; it
 does not claim to reproduce Microsoft's exact implementation.
+
+## Start here
+
+- **Intuition:** the short launch report introduces the ICI. Its public URL will
+  be added when published; the repository does not require access to a draft.
+- **Official scores:** [Epoch AI ML Hardware Data Explorer](https://epoch.ai/data/machine-learning-hardware).
+- **Method and assumptions:** [readable Markdown methodology](docs/METHODOLOGY.md),
+  including the workload, precision, model basket, equations and code references.
+- **Report reproduction:** [Figures 1–4, their CSVs and commands](docs/report/README.md).
+- **Versions and experiments:** [snapshot guide](docs/SNAPSHOTS.md), then
+  [sensitivity](docs/research/methodology-sensitivity/README.md) and
+  [empirical validation](docs/research/inferencex-validation/README.md).
+
+The report uses the **20 October Rubin revision**, not the no-argument historical
+rebuild. Start with `python3 reproduce.py rubin-update`. The native `replay` and
+`sweep` commands below still target the original 15 October snapshot; the
+Rubin study supplies its separate revised run.
 
 ## Latest score revision: Rubin, 20 October 2026
 
@@ -36,21 +53,22 @@ roster, not the later live-sheet additions/exclusions.
 
 ### Reading order
 
-1. **Method:** [full explainer guide](docs/visualizations/README.md).
+1. **Method:** [Markdown methodology](docs/METHODOLOGY.md), followed by the
+   [interactive explorer guide](docs/visualizations/README.md).
 2. **Robustness:** [methodology sensitivity](docs/research/methodology-sensitivity/README.md),
-   including the complete linear/log × speed-band table, model-basket choices,
+   historical 15 October profiles, including the linear/log × speed-band table, model-basket choices,
    prefill provisioning and single-point alternatives
    ([interactive tables](docs/research/methodology-sensitivity/index.html),
    [full CSV](docs/research/methodology-sensitivity/score_matrix.csv)).
 3. **Empirical grounding:** [InferenceX validation](docs/research/inferencex-validation/README.md).
 
-The sensitivity study reuses this release's frozen 23-accelerator inputs; it does
+The sensitivity study reuses the **original 15 October** 23-accelerator inputs; it does
 not change the headline or silently include later standalone hardware studies.
 The [documentation reading guide](docs/README.md) identifies historical
 two-model documents as archived, not current setup or methodology instructions.
 Their hash-listed original contents are preserved.
 
-All three current interactive HTML explainers are included, with their companion
+All three interactive HTML explainers are included, with their companion
 data and downloadable charts:
 
 Start with the [full explainer reading guide](docs/visualizations/README.md), which
@@ -204,7 +222,9 @@ access for dependencies; the quick rebuild is fully offline.
 | `studies/rubin_oct20.py` | Native old/new Rubin bandwidth re-search |
 | `studies/methodology_sensitivity.py` | Frozen-run sensitivity to axis, band, basket and prefill provision |
 | `studies/*visual.py` | HTML renderers used by the entry point |
-| `reference/2026-10-15/` | Current frozen inputs and provenance |
+| `reference/2026-10-15/` | Original four-model frozen inputs and provenance |
+| `studies/report_figures.py`, `docs/report/` | Portable report figures, CSVs and input hashes |
+| `docs/METHODOLOGY.md`, `docs/SNAPSHOTS.md` | Readable method and version boundaries |
 | `environment/setup_current.py` | Isolated native environment |
 
 Decode: 262,144 resident tokens, native nextn3 / assumed AL3.

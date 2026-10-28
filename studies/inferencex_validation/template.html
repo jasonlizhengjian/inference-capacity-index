@@ -5,6 +5,7 @@
 </style></head><body><main>
 <div class="eyebrow">Inference Capacity Index · empirical grounding · 19 October 2026 snapshot</div>
 <h1>How close does real inference get to modeled speed of light?</h1>
+<p class="callout"><strong>19 October 2026 validation snapshot.</strong> SOL comparisons use the 15 October profiles, including Rubin at 22 TB/s HBM and 1.8 TB/s outbound NVLink. This is separate from the report’s 20 October revised index and October 27 benchmark chart. See the README for provenance and conditional agreement.</p>
 <p class="lead">Kimi K3 is the main comparison across NVIDIA, AMD and Google TPU. GLM-5.2 provides a secondary check with more detailed decode-step logs. The answer depends on whether we compare execution time or an entire serving system.</p>
 <nav aria-label="Sections"><a href="#curves">Service curves</a><a href="#agreement">Pointwise agreement</a><a href="#kimi">Kimi configuration audit</a><a href="#glm">GLM step timing</a><a href="#methods">Method & evidence</a></nav>
 <p class="callout"><strong>The encouraging result:</strong> Kimi-K3 on GB300 differs from the half-SOL, submitted-layout prediction by <strong>about 12% on average across five measured output-frontier points</strong> in the 50–400 TPS/user band. This compares optimized envelopes, not exact individual-run replays. The full observed speed range gives 31% average error, and agreement differs across hardware and models. <a href="#agreement" id="show-gb300-agreement">Show the five-point comparison</a>.</p>

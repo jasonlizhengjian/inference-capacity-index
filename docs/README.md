@@ -1,14 +1,17 @@
 # Reading guide
 
-## Current four-model release
+## Report snapshot: 20 October 2026 Rubin revision
 
-1. [Methodology and configuration explorer](visualizations/README.md):
+1. [Markdown methodology](METHODOLOGY.md), [report figures](report/README.md) and
+   [interactive explorer](visualizations/README.md):
    workload, analytical SOL, capacity envelopes, prefill provisioning and scoring.
 2. [Sensitivity to methodology choices](research/methodology-sensitivity/README.md):
    model baskets, linear/log speed weighting, speed bands, prefill ratios and
    single-speed alternatives. Includes full CSVs and interactive tables.
 3. [InferenceX validation](research/inferencex-validation/README.md):
    empirical evidence, matched configurations, curve agreement and limitations.
+
+See the [snapshot and command guide](SNAPSHOTS.md) before comparing result files.
 
 The current headline uses equal GLM-5.2, Kimi-K3, Qwen3-Coder 480B and
 MAI-Base-2 2.8T proxy weights, log 50–400 SOL TPS/user and separate prefill/decode

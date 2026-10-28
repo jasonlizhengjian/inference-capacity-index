@@ -1,9 +1,12 @@
 # Inference Capacity Index v1: full explainer
 
-These three interactive chapters are the detailed companion to the short
-[methodology overview](https://docs.google.com/document/d/1w0XFlIYy276_eYZnJI-CLXsC8hPfNz0SBx8jaPrbra4).
-The current score uses four equally weighted models, log 50–400 SOL TPS/user,
-and workload-based provisioning of separate prefill and decode pools.
+**Score snapshot: 20 October 2026 Rubin revision.** Fixed-layout knee examples
+retain the older profiles as labeled. [Snapshot guide](../SNAPSHOTS.md).
+
+Start with the [Markdown methodology](../METHODOLOGY.md) for a complete account
+readable directly on GitHub, or the [report figures and reproduction map](../report/README.md).
+These HTML chapters add interactive exploration. The ICI uses four equally
+weighted models, log 50–400 tokens/s/request, and separate prefill/decode pools.
 
 **20 October update:** the main explainer, index CSV and accelerator bars now
 use the revised Rubin bandwidths and **2.177 GB300e** score. See the
@@ -16,8 +19,8 @@ Download the repository or the release's `visualizations.zip`, keep its files
 together, and open `REPORT.html` in a browser. GitHub shows HTML source rather
 than executing it. No server or Python setup is needed to read the pages.
 Expand the side notes and detail panels when you want the underlying assumptions.
-HTML is the full explainer here: a static PDF would lose the configuration
-explorer, model switching and interactive curve examples.
+The Markdown method stands on its own; HTML adds the configuration explorer,
+model switching and interactive curve examples.
 
 For empirical grounding, see the separate [InferenceX validation study](../research/inferencex-validation/README.md)
 and [public interactive comparison](https://inferencex-sol-validation.epoch-3293.chatgpt.site).
@@ -117,5 +120,5 @@ The exact MAI implementation and equal model quality across precisions are
 not established. The HTML expanders discuss these limitations, model-mixture
 sensitivity and why versions must remain fixed for comparisons over time.
 
-The older `docs/METHODOLOGY.*` files describe the historical two-model release;
+The older `docs/METHODOLOGY.txt` and `docs/METHODOLOGY.html` files describe the historical two-model release;
 this guide and the linked HTMLs describe the current four-model index.

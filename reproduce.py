@@ -140,6 +140,7 @@ def bundle(destination):
            'docs','vendor','studies/log400_release.py','studies/methodology_sensitivity.py','studies/methodology_visual.py',
            'studies/performance_knees_visual.py','studies/accelerator_comparison_visual.py',
            'studies/inferencex_validation','studies/rubin_release.py','studies/rubin_oct20.py',
+           'studies/report_figures.py',
            'studies/gb300_sensitivity/run.py','studies/gb300_sensitivity/curvature.py']
     destination.parent.mkdir(parents=True,exist_ok=True)
     def filter_file(info):

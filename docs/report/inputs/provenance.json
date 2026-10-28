@@ -1,0 +1,13 @@
+{
+  "source": "Saved Kimi-K3 GB300 TP8 DP8 DCP8 EP64 ETP1 PP1 fixed-layout candidate export",
+  "source_sha256": "bcb50b62243ba9ce08f03bdf802fcdc45b1f1650d6351c7d41eaa55a6738f029",
+  "csv_sha256": "1b248e8d44d16c8dfa246eb38bca58465267af19aba31b5468d6f9e03b00b2f9",
+  "columns": "Only model/layout/timing/memory values; no serving traces or external services",
+  "context_tokens": 262144,
+  "nextn": 3,
+  "accepted_length": 3,
+  "decode_only": true,
+  "upstream_commit": "2f0f4cd8606d580567b253d02f3d699fe36db865",
+  "selection": "TP8 DP8 DCP8 EP64 ETP1 PP1; one row per evaluated batch",
+  "rows": 255
+}
