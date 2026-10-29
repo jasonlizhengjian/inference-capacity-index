@@ -5,6 +5,9 @@ parallelism and P/D pool counts to submitted recipes. Never use client conc as
 batch. Keep unsupported physical-device mappings explicit.
 """
 import json
+import argparse
+import hashlib
+import shutil
 from pathlib import Path
 import sys
 
@@ -14,14 +17,57 @@ from analyze import REF, OUT, HW, snapshots, save
 from agent_index.current_native import Native, doctor
 from agent_index.index import envelope
 
+def rubin_reference():
+    from rubin_release import report_inputs, REV
+    target=report_inputs()/'native-reference'
+    target.mkdir(exist_ok=True)
+    for name in ('models.json','runtime.json','catalog.json'):
+        shutil.copyfile(REF/name,target/name)
+    for name in ('models','hardware'):
+        shutil.copytree(REF/name,target/name,dirs_exist_ok=True)
+    shutil.copyfile(REV/'hardware/vr200_deployment.yaml',target/'hardware/vr200_deployment.yaml')
+    return target
+
+
+def refresh_rubin():
+    """Retiming only saved Rubin recipes preserves other hardware and evidence."""
+    data=json.loads((OUT/'layout_restricted.json').read_text())
+    reference=rubin_reference();runtime=doctor(REF)
+    catalog=json.loads((REF/'catalog.json').read_text());engines={};cache={}
+    def run(model,phase,layout):
+        key=(model,phase,tuple(layout.items()))
+        if key not in cache:
+            if model not in engines:engines[model]=Native(reference,catalog['VR200'],model)
+            engine=engines[model];n=engine.batches(phase,layout)
+            cache[key]=[engine.evaluate(phase,layout,b) for b in range(1,n+1)]
+        return cache[key]
+    count=0
+    for q in data['recipes']:
+        if q['hardware']!='VR200':continue
+        ds=run(q['model'],'decode',q['decode_layout'])
+        ps=run(q['model'],'prefill',q['prefill_layout'])
+        if not ds or not ps:raise ValueError('Previously admitted Rubin recipe became infeasible')
+        winner=max(ps,key=lambda p:p['input_tokens_chip_second'])
+        q.update(prefill_rate=winner['input_tokens_chip_second'],prefill_winner=winner,
+                 decode_frontier=envelope(ds),decode_candidates=len(ds))
+        count+=1
+        print('Retimed Rubin',q['model'],q['representative_result_id'],len(ds),'decode candidates',flush=True)
+    data['hardware_refresh']=dict(date='2026-10-29',modeled_revision='2026-10-20-rubin',
+        retimed_hardware='VR200',retimed_recipes=count,runtime=runtime,
+        profile_sha256=hashlib.sha256((reference/'hardware/vr200_deployment.yaml').read_bytes()).hexdigest(),
+        unchanged='Non-Rubin recipes, observations, exclusions and workload are retained.')
+    save('layout_restricted.json',data)
+
+
 def main():
     runtime=doctor(REF);catalog=json.loads((REF/'catalog.json').read_text())
+    revised=rubin_reference()
     logs={str(r['result_id']):r for r in json.loads((OUT/'kimi_config_audit.json').read_text())['records']}
     engines={};cache={};recipes=[];excluded=[]
     def run(model,hw,phase,layout):
         key=(model,hw,phase,tuple(layout.items()))
         if key not in cache:
-            engine=engines.setdefault((model,hw),Native(REF,catalog[hw],model))
+            engine=engines.setdefault((model,hw),Native(revised if hw=='VR200' else REF,catalog[hw],model))
             n=engine.batches(phase,layout)
             cache[key]=[engine.evaluate(phase,layout,b) for b in range(1,n+1)]
         return cache[key]
@@ -63,4 +109,7 @@ def main():
         recipes=recipes,excluded=excluded))
     print('Saved',len(recipes),'recipes;',len(excluded),'exclusions',flush=True)
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--rubin-only',action='store_true')
+    args=parser.parse_args()
+    refresh_rubin() if args.rubin_only else main()

@@ -55,7 +55,9 @@ def scenario_summary(g, decode_efficiency, prefill_efficiency, low, high):
                 observations_above_scenario_max=sum(p['speed']>max(x['speed'] for x in shifted) for p in g['observations']))
 
 def curves():
-    saved=json.loads((REF/'curves_and_inputs.json').read_text())
+    from rubin_release import report_inputs, REV
+    revised=report_inputs()
+    saved=json.loads((revised/'curves_and_inputs.json').read_text())
     rates={(r['hardware'],r['model']):r['tokens_chip_second'] for r in saved['prefill_rates']}
     groups=[];points=[];exclusions=[]
     for model, rows in snapshots().items():
@@ -98,7 +100,7 @@ def curves():
             notes=[]
             if hw in ('h200','tpuv7') and model=='Kimi-K3':notes.append('Published FP4 weights versus index FP8 expert storage: not precision-matched.')
             if hw=='mi355x':notes.append('Mixed recipes and dates; index uses conservative node-local collectives/serial PP. Actual communication and precision vary.')
-            if hw=='vr200':notes.append('Frozen theoretical Rubin specification; not a verified match to measured system specifications.')
+            if hw=='vr200':notes.append('20 October Rubin profile: 19.2 TB/s HBM, 1.5 TB/s outbound NVLink; measured-system specifications are not independently matched.')
             if len({r['precision'] for r in chosen})>1:notes.append('Observed envelope includes multiple precisions; see per-point evidence.')
             if hw=='tpuv7':notes.append('32 physical chips in the listed P/D deployments; TP32 is a logical-device count, not 32 physical chips per pool. Private serving branch; logs unavailable.')
             groups.append(dict(model=model,hardware=key,observations=chosen,frontier=observed,throughput_frontier=throughput,sol_frontier=sol,sol_throughput_frontier=sol_q,prefill_rate=p,input_output_ratio=ratio,
@@ -114,7 +116,7 @@ def curves():
             for d,p in [(1.,1.),(.5,1.),(.5,.5)]:
                 s=dict(scenario_summary(g,d,p,lo,hi),band=name)
                 g['efficiency_scenarios'].append(s);scenarios.append(s)
-    save('curves.json',dict(snapshot='2026-10-19',band=[50,400],groups=groups,excluded=exclusions,manifest=json.loads((HERE/'evidence/manifest.json').read_text()),reference_sha256=hashlib.sha256((REF/'curves_and_inputs.json').read_bytes()).hexdigest()))
+    save('curves.json',dict(snapshot='2026-10-19',modeled_revision='2026-10-20-rubin',refreshed='2026-10-29',band=[50,400],groups=groups,excluded=exclusions,manifest=json.loads((HERE/'evidence/manifest.json').read_text()),reference_sha256=hashlib.sha256((revised/'curves_and_inputs.json').read_bytes()).hexdigest(),revision_manifest_sha256=hashlib.sha256((REV/'manifest.json').read_bytes()).hexdigest()))
     csvout('efficiency_scenarios.csv',scenarios)
     csvout('observed_points.csv',points)
     csvout('curve_summary.csv',[{k:g[k] for k in ('model','hardware','measured_capacity_auc','sol_capacity_auc','capacity_auc_ratio','measured_throughput_auc','sol_throughput_auc','throughput_auc_ratio','measured_max_speed','observed_log_band_coverage')} for g in groups])

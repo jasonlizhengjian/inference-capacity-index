@@ -147,18 +147,15 @@ def csv_file(path, rows):
         writer.writerows(rows)
 
 
-def main(source=ROOT/"reference/2026-10-15", output=ROOT/"results/methodology-sensitivity"):
-    source, output = Path(source), Path(output)
-    saved = json.loads((source/"curves_and_inputs.json").read_text())
-    # Verify the actual source files before labeling this as the frozen release.
-    manifest = json.loads((source/"manifest.json").read_text())
-    for name, digest in manifest.items():
-        if hashlib.sha256((source/name).read_bytes()).hexdigest() != digest:
-            raise ValueError("Frozen input hash mismatch: " + name)
+def main(output=ROOT/"results/methodology-sensitivity"):
+    from rubin_release import report_inputs, BASE, REV
+    source, output = BASE, Path(output)
+    revised = report_inputs()
+    saved = json.loads((revised/"curves_and_inputs.json").read_text())
     cases = scenarios(saved["models"], saved["ratio"])
     rows, components = evaluate(saved, cases)
     expected = {r["hardware"]:float(r["agent_index_GB300e"])
-                for r in csv.DictReader((source/"expected_index.csv").open())}
+                for r in csv.DictReader((revised/"index.csv").open())}
     base = {r["hardware"]:r["score_GB300e"] for r in rows if r["scenario"] == BASELINE}
     if set(base) != set(expected):
         raise ValueError("Incomplete release hardware set")
@@ -176,7 +173,10 @@ def main(source=ROOT/"reference/2026-10-15", output=ROOT/"results/methodology-se
                        ("family_robustness.csv", family_summary)):
         csv_file(output/name, data)
     (output/"scenarios.json").write_text(json.dumps(cases, indent=2, allow_nan=False)+"\n")
-    provenance = dict(source_release="2026-10-15", simulation_rerun=False,
+    provenance = dict(source_release="2026-10-15 + 2026-10-20-rubin", refreshed="2026-10-29", simulation_rerun=False,
+        revision_manifest_sha256=hashlib.sha256((REV/"manifest.json").read_bytes()).hexdigest(),
+        merged_inputs_sha256=hashlib.sha256((revised/"curves_and_inputs.json").read_bytes()).hexdigest(),
+        expected_revised_index_sha256=hashlib.sha256((revised/"index.csv").read_bytes()).hexdigest(),
         source_sha256={n:hashlib.sha256((source/n).read_bytes()).hexdigest()
                        for n in ("manifest.json", "curves_and_inputs.json", "expected_index.csv")},
         code_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -205,9 +205,9 @@ def render(output, cases, rows, summary, hardware, provenance):
     vr = {c["id"]:lookup["VR200",c["id"]]["score_GB300e"] for c in cases}
     text = f"""# Sensitivity to methodology choices
 
-**Historical result snapshot: 15 October 2026 profiles.** Rubin uses 22 TB/s HBM and 1.8 TB/s outbound NVLink here, so its 2.389 baseline is **not** the report’s revised 2.177. Methodology is ICI v1. [Current methodology](../../METHODOLOGY.md) | [Snapshot guide](../../SNAPSHOTS.md).
+**Report hardware revision: 20 October 2026, refreshed 29 October.** The 15 October base is combined with revised Rubin inputs: 19.2 TB/s HBM and 1.5 TB/s outbound NVLink. Baseline VR200 = 2.177367 GB300e. [Methodology](../../METHODOLOGY.md) | [Snapshot guide](../../SNAPSHOTS.md) | [Pre-revision archive](../archives/2026-10-19-pre-rubin-refresh/README.md).
 
-These saved sensitivity results are intentionally not relabeled as revised-profile results. A refreshed revision would require re-integration with the revised Rubin curves; no new timing is needed for these same scenarios.
+All 28 scenarios are re-integrated from saved native curves. No timings, workload, runtime, precision or non-Rubin inputs change. Scores for other chips remain unchanged; their ranks can change.
 
 The headline is unchanged: equal GLM-5.2, Kimi-K3, Qwen3-Coder 480B and
 MAI-Base-2 2.8T proxy weights; log 50–400 SOL TPS/user; separate prefill/decode
@@ -309,7 +309,7 @@ Outputs go to `results/methodology-sensitivity/`. Use
 
 Source: `studies/methodology_sensitivity.py`. [Provenance](provenance.json) records
 input/code hashes and headline parity. All {len(hardware)} headline scores are
-checked against the frozen release; maximum relative error:
+checked against the revised report snapshot; maximum relative error:
 `{provenance['headline_max_relative_error']:.3g}`.
 
 Changed context length, speculative step size, precision, memory guards, topology
@@ -331,10 +331,10 @@ thead th{background:#e7eee4}td.base,th.base{background:#e7eee4}.scroll{overflow:
 label{display:inline-block;margin:10px 24px 10px 0}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #ba612b}
 </style>
 <h1>How sensitive is the index to methodological choices?</h1>
-<p class="note"><strong>Historical snapshot: 15 October 2026 profiles. Rubin uses 22 TB/s HBM and 1.8 TB/s outbound NVLink here (baseline 2.389), not the report’s revised 2.177. These are ICI v1 methodology sensitivities, not updated hardware scores.</strong></p>
+<p class="note"><strong>20 October 2026 report hardware revision, refreshed 29 October.</strong> Rubin uses 19.2 TB/s HBM and 1.5 TB/s outbound NVLink (baseline 2.177). All 28 scenarios use the revised curves; the other 22 hardware profiles and the workload are unchanged. <a href="../archives/2026-10-19-pre-rubin-refresh/README.md">Pre-revision archive</a>.</p>
 <p>Same frozen simulations. Different model baskets, interactivity weights, speed bands and input provisioning.</p>
 <p class="note"><b>The headline is unchanged.</b> Four equally weighted models, log 50–400 SOL TPS/user, workload-based prefill provisioning.
-Every alternative recomputes its own per-model GB300 normalization. This is the frozen 23-accelerator release, not a fresh hardware or simulator update.</p>
+Every alternative recomputes its own per-model GB300 normalization. This uses the report’s revised 23-accelerator inputs; it is not a new timing run.</p>
 <p><a href="README.md">Full method and interpretation</a> · <a href="score_matrix.csv">Full score CSV</a> · <a href="scenario_results.csv">Scores, changes and ranks</a> · <a href="per_model_sensitivity.csv">Per-model detail</a> · <a href="scenarios.json">Exact scenarios</a> · <a href="provenance.json">Provenance</a></p>
 <label>Scenario family <select id="family"><option value="axis_band">Linear/log × speed band</option><option value="basket">GLM + Kimi</option><option value="single_model">Each model individually</option><option value="leave_one_out">Leave one model out</option><option value="proxy_weight">MAI-Base-2 proxy weight</option><option value="prefill_ratio">Input/output ratio</option><option value="single_point">Single speed threshold</option><option value="all">All scenarios</option></select></label>
 <label>Show <select id="metric"><option value="score_GB300e">GB300-equivalent score</option><option value="change_percent">Change from headline (%)</option><option value="rank">Rank</option><option value="rank_change">Rank improvement</option></select></label>

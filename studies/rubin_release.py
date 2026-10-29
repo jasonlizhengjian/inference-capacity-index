@@ -17,6 +17,16 @@ BASE = ROOT / 'reference/2026-10-15'
 REV = ROOT / 'reference/2026-10-20-rubin'
 
 
+def report_inputs():
+    """Verified report inputs for supporting analyses; frozen references stay intact."""
+    for name, digest in json.loads((BASE / 'manifest.json').read_text()).items():
+        if hashlib.sha256((BASE / name).read_bytes()).hexdigest() != digest:
+            raise RuntimeError('Base reference changed: ' + name)
+    out = ROOT / 'results/analysis-refresh-inputs'
+    main(out)
+    return out
+
+
 def save(path, value):
     path.write_text(json.dumps(value, indent=2, allow_nan=False) + '\n')
 

@@ -11,9 +11,10 @@ weighted models, log 50–400 tokens/s/request, and separate prefill/decode pool
 **20 October update:** the main explainer, index CSV and accelerator bars now
 use the revised Rubin bandwidths and **2.177 GB300e** score. See the
 [Rubin revision](../research/rubin-spec-update/README.md). Run
-`python3 reproduce.py rubin-update` to regenerate these results. The existing
-`v1.0.0` release download and no-argument rebuild remain the original snapshot
-(Rubin 2.389); fixed-layout knee examples also retain their labeled old profile.
+`python3 reproduce.py rubin-update` to regenerate these results. The refreshed
+`v1.0.0` release includes this revision. The no-argument rebuild still reproduces
+the original snapshot (Rubin 2.389), preserved at `v1.0.0-original-2026-10-16`;
+fixed-layout knee examples also retain their labeled old profile.
 
 Download the repository or the release's `visualizations.zip`, keep its files
 together, and open `REPORT.html` in a browser. GitHub shows HTML source rather
@@ -22,8 +23,8 @@ Expand the side notes and detail panels when you want the underlying assumptions
 The Markdown method stands on its own; HTML adds the configuration explorer,
 model switching and interactive curve examples.
 
-For empirical grounding, see the separate [InferenceX validation study](../research/inferencex-validation/README.md)
-and [public interactive comparison](https://inferencex-sol-validation.epoch-3293.chatgpt.site).
+For refreshed empirical grounding, see the separate [InferenceX validation study](../research/inferencex-validation/README.md)
+and [historical hosted comparison](https://inferencex-sol-validation.epoch-3293.chatgpt.site).
 It centers Kimi K3 and uses GLM's detailed logs for a secondary step-timing check.
 Whole-service gaps are distinguished from matched execution efficiency.
 

@@ -160,7 +160,7 @@ Log weighting gives equal weight to each doubling: 50–100, 100–200 and
 estimated probability distribution of demand. The band covers slower bulk work
 and faster interactive use; SOL speeds are not promised achieved speeds.
 [Axis, band and single-speed alternatives](research/methodology-sensitivity/README.md#linear-versus-logarithmic-weighting)
-show the effect of this choice, using the historical snapshot labeled there.
+show the effect of this choice, using the same hardware revision as the report.
 
 Integration splits at **every saved speed breakpoint** inside the band. Between
 breakpoints decode capacity is constant, `c`, but prefill-adjusted capacity
@@ -240,7 +240,9 @@ Reproduction checks establish computational consistency: identical inputs and
 runtime reproduce saved results. They do not measure physical accuracy.
 The launch report's October 27 InferenceX chart is evidence about **broad
 ordering** under benchmark workloads. It is separate from the
-[October 19 validation study](research/inferencex-validation/README.md).
+[validation study](research/inferencex-validation/README.md), which retains
+19 October observations and uses the report’s hardware revision after its
+29 October refresh.
 That study's approximately 12% average throughput difference applies to five
 Kimi/GB300 frontier points under a 50%-SOL speed scenario, using a union of
 submitted layouts. It is not exact point-by-point iso-config replay or an

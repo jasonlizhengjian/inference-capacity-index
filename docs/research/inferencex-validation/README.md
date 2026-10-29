@@ -1,15 +1,15 @@
 # InferenceX versus modeled SOL — 19 October 2026
 
-**Validation snapshot: 19 October 2026, using 15 October SOL profiles** (Rubin 22 TB/s HBM, 1.8 TB/s outbound NVLink), with an expanded submitted-layout comparison. This is separate from the launch report’s October 27 InferenceX chart and October 20 revised Rubin index. [Evidence levels](../../METHODOLOGY.md#what-the-evidence-supports) | [Snapshot guide](../../SNAPSHOTS.md).
+**Benchmark observations: 19 October 2026. Modeled hardware: 15 October base plus the 20 October Rubin revision, refreshed 29 October.** Rubin uses 19.2 TB/s HBM and 1.5 TB/s outbound NVLink. All five admitted Rubin submitted-layout recipes were retimed with the pinned engine; non-Rubin recipes and benchmark observations are unchanged. This is separate from the launch report’s October 27 chart. [Evidence levels](../../METHODOLOGY.md#what-the-evidence-supports) | [Snapshot guide](../../SNAPSHOTS.md) | [Pre-refresh archive](../archives/2026-10-19-pre-rubin-refresh/README.md).
 
-[Public interactive comparison](https://inferencex-sol-validation.epoch-3293.chatgpt.site) ·
+[Historical hosted comparison](https://inferencex-sol-validation.epoch-3293.chatgpt.site) ·
 [Offline HTML](index.html) · [Observed rows](observed_points.csv) ·
 [Current curve ratios](three_curve_summary.csv) ·
 [Pointwise agreement](point_agreement.csv) · [GLM strata](matched_glm_strata.csv)
 
 Kimi K3 is primary, covering NVIDIA, AMD and Google TPU. GLM-5.2 is secondary:
 its TensorRT-LLM logs provide the stronger execution-time check. This study
-**does not change the index, frozen timings, hardware specifications or scores**
+**does not change the report’s index definition or scores**
 and fits no achieved-performance multiplier.
 
 ## What the comparison establishes
@@ -156,7 +156,7 @@ deployment at its observed batch, context distribution, precision and draft
 graph; obtain comparable all-rank logs for AMD and TPU; and extend empirical
 checks to Qwen and the MAI proxy. Those are more direct tests of generalization
 than selecting an efficiency multiplier separately for every hardware. This
-revision adds no new native timings and makes no new calibration fit.
+refresh retimes only the five Rubin recipes and makes no new calibration fit.
 
 ## Three-curve explorer: the current default
 
@@ -262,18 +262,23 @@ Runtime: unchanged AISim 0.13.0, upstream commit
 
 `studies/inferencex_validation/evidence/manifest.json` records source URLs,
 retrieval times and API hashes (117 Kimi rows, 116 GLM rows before filtering).
-The theoretical reference is `reference/2026-10-15/curves_and_inputs.json`;
-its hash is also recorded in `curves.json`. Log audit JSON includes exact file
+The theoretical reference combines `reference/2026-10-15/` with
+`reference/2026-10-20-rubin/`, using `rubin_release.report_inputs`.
+The merged-input and revision-manifest hashes are recorded in `curves.json`. Log audit JSON includes exact file
 names, source URLs, hashes, bytes and completeness. Large logs are bounded to
 100 chunks of 262,144 characters, about 26 MB. Later source availability/content
 can change; reproduction from re-fetched logs must compare hashes.
 
 ```bash
+# To repeat only the affected native timing refresh (optional; results are saved):
+.venv-current/bin/python studies/inferencex_validation/layouts.py --rubin-only
+
 # Offline, standard-library curve recomputation and HTML regeneration:
 python3 studies/inferencex_validation/analyze.py
 python3 studies/inferencex_validation/compare.py
 python3 studies/inferencex_validation/agreement.py
 python3 studies/inferencex_validation/render.py
+python3 studies/verify_analysis_refresh.py
 
 # Optional public-log acquisition and native replay in the pinned environment:
 python3 studies/inferencex_validation/fetch_logs.py \
@@ -439,3 +444,19 @@ Primary sources: [InferenceX](https://inferencex.semianalysis.com/) and its
 [benchmark code](https://github.com/SemiAnalysisAI/InferenceX). Exact API and
 workflow links are retained per observation. This analysis is independent and
 does not imply endorsement by SemiAnalysis.
+
+## 29 October hardware-only refresh
+
+The saved 19 October API observations and non-Rubin timing probes are unchanged.
+Five admitted GLM/Rubin recipes were retimed, preserving their layouts, pool
+sizes, graph, precision, context and nextn3/AL3 assumptions. The saved benchmark
+snapshot has no admitted Kimi/Rubin observations, so no Kimi/Rubin agreement
+claim is added. The historical hosted site is not the refreshed output; use
+this directory’s HTML and CSVs for the report revision.
+
+For GLM/Rubin, measured / index-optimal SOL capacity area changes from
+0.253789 to 0.256107, and output-throughput area from 0.087845 to 0.099725
+over 50–400 tokens/s/request. These are area ratios, not pointwise prediction
+errors. The Kimi/GB300 five-point mean absolute throughput difference remains
+11.5552%. [Refresh checks and hashes](refresh_verification.json) document
+what changed and verify the retained observations and unaffected results.

@@ -140,7 +140,7 @@ def bundle(destination):
            'docs','vendor','studies/log400_release.py','studies/methodology_sensitivity.py','studies/methodology_visual.py',
            'studies/performance_knees_visual.py','studies/accelerator_comparison_visual.py',
            'studies/inferencex_validation','studies/rubin_release.py','studies/rubin_oct20.py',
-           'studies/report_figures.py',
+           'studies/report_figures.py','studies/verify_analysis_refresh.py',
            'studies/gb300_sensitivity/run.py','studies/gb300_sensitivity/curvature.py']
     destination.parent.mkdir(parents=True,exist_ok=True)
     def filter_file(info):
@@ -171,8 +171,8 @@ def main():
     if not out.is_absolute():out=ROOT/out
     if args.command=='bundle':bundle(args.output or ROOT/'dist/inference-capacity-index-v1.0.0.tar.gz')
     elif args.command=='sensitivity':
-        import methodology_sensitivity
-        methodology_sensitivity.main(REF,out)
+        import methodology_sensitivity  # Base inputs plus the verified 20 October Rubin revision.
+        methodology_sensitivity.main(output=out)
     elif args.command=='doctor':
         from agent_index.current_native import doctor
         print(json.dumps(doctor(REF),indent=2))

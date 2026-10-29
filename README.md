@@ -41,12 +41,13 @@ Rebuild the updated table and HTMLs without installing AISim:
 python3 reproduce.py rubin-update
 ```
 
-Outputs go to `results/rubin-update/`. The frozen `v1.0.0` tag and October 15
+Outputs go to `results/rubin-update/`. The `v1.0.0` tag includes the 29 October documentation and analysis refresh.
+The original release is preserved at `v1.0.0-original-2026-10-16`; October 15
 reference files remain unchanged. For backward compatibility, the no-argument
 command below still reproduces that original release. The checked-in
 `docs/visualizations/` table and main explainer show the Rubin revision; the
-knee-point teaching curves and methodology-sensitivity study remain clearly
-labeled historical snapshots. This revision retains the original 23-profile
+knee-point teaching curves retain their historical inputs. Sensitivity and
+validation were refreshed on 29 October to use the report’s hardware revision. This revision retains the original 23-profile
 roster, not the later live-sheet additions/exclusions.
 
 ## Ready-made visualizations
@@ -56,13 +57,13 @@ roster, not the later live-sheet additions/exclusions.
 1. **Method:** [Markdown methodology](docs/METHODOLOGY.md), followed by the
    [interactive explorer guide](docs/visualizations/README.md).
 2. **Robustness:** [methodology sensitivity](docs/research/methodology-sensitivity/README.md),
-   historical 15 October profiles, including the linear/log × speed-band table, model-basket choices,
+   report-revision profiles, including the linear/log × speed-band table, model-basket choices,
    prefill provisioning and single-point alternatives
    ([interactive tables](docs/research/methodology-sensitivity/index.html),
    [full CSV](docs/research/methodology-sensitivity/score_matrix.csv)).
 3. **Empirical grounding:** [InferenceX validation](docs/research/inferencex-validation/README.md).
 
-The sensitivity study reuses the **original 15 October** 23-accelerator inputs; it does
+The sensitivity study uses the **15 October base plus 20 October Rubin revision**; it does
 not change the headline or silently include later standalone hardware studies.
 The [documentation reading guide](docs/README.md) identifies historical
 two-model documents as archived, not current setup or methodology instructions.
@@ -88,10 +89,10 @@ repository and open the files in a browser, or download `visualizations.zip` fro
 the [v1 release](https://github.com/jasonlizhengjian/inference-capacity-index/releases/tag/v1.0.0)
 and extract it. Keep the files together so navigation and downloads work.
 These are generated snapshots: `python3 reproduce.py rubin-update` regenerates
-the revised version in `results/rubin-update/`. The no-argument command and
-release ZIP retain the original snapshot. Neither command modifies checked-in copies.
+the revised version in `results/rubin-update/`. The no-argument command retains the original snapshot;
+the release ZIP contains the revised explainers. Neither command modifies checked-in copies.
 
-## Original v1.0.0 reproduction: no installation needed
+## Original 15 October reproduction: no installation needed
 
 Use Python 3.12 on this checkout or the unpacked reproduction bundle:
 
@@ -125,8 +126,8 @@ python3 reproduce.py sensitivity
 This writes 28 named scenarios to `results/methodology-sensitivity/`, including
 interactive tables, full-precision score and rank-change CSVs, per-model
 contributions, family-specific robustness ranges and provenance hashes.
-It uses the standard library only and checks the headline against the frozen
-release. The weighting-by-band matrix integrates exactly over saved breakpoints;
+It uses the standard library only and checks the headline against the revised
+report snapshot. The weighting-by-band matrix integrates exactly over saved breakpoints;
 these are re-integrations, not new AISim runs. Min/max ranges are **not confidence
 intervals**. See the [study](docs/research/methodology-sensitivity/README.md)
 for assumptions and definitions.

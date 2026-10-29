@@ -1,8 +1,8 @@
 # Sensitivity to methodology choices
 
-**Historical result snapshot: 15 October 2026 profiles.** Rubin uses 22 TB/s HBM and 1.8 TB/s outbound NVLink here, so its 2.389 baseline is **not** the report’s revised 2.177. Methodology is ICI v1. [Current methodology](../../METHODOLOGY.md) | [Snapshot guide](../../SNAPSHOTS.md).
+**Report hardware revision: 20 October 2026, refreshed 29 October.** The 15 October base is combined with revised Rubin inputs: 19.2 TB/s HBM and 1.5 TB/s outbound NVLink. Baseline VR200 = 2.177367 GB300e. [Methodology](../../METHODOLOGY.md) | [Snapshot guide](../../SNAPSHOTS.md) | [Pre-revision archive](../archives/2026-10-19-pre-rubin-refresh/README.md).
 
-These saved sensitivity results are intentionally not relabeled as revised-profile results. A refreshed revision would require re-integration with the revised Rubin curves; no new timing is needed for these same scenarios.
+All 28 scenarios are re-integrated from saved native curves. No timings, workload, runtime, precision or non-Rubin inputs change. Scores for other chips remain unchanged; their ranks can change.
 
 The headline is unchanged: equal GLM-5.2, Kimi-K3, Qwen3-Coder 480B and
 MAI-Base-2 2.8T proxy weights; log 50–400 SOL TPS/user; separate prefill/decode
@@ -37,9 +37,9 @@ Linear integrates capacity against **ds**: equal absolute speed intervals have
 equal weight. Log integrates against **ds/s**: equal multiplicative intervals
 have equal weight. Changing only a display axis does not change a score.
 
-For VR200, log 50–400 gives **2.389 GB300e**, while linear over the
-same band gives **2.703**. Log 50–200 gives
-**2.252** and log 50–800 gives **2.495**.
+For VR200, log 50–400 gives **2.177 GB300e**, while linear over the
+same band gives **2.425**. Log 50–200 gives
+**2.065** and log 50–800 gives **2.260**.
 These are sensitivity results, not a reason to pick the methodology that
 produces a preferred accelerator ratio.
 
@@ -49,7 +49,7 @@ produces a preferred accelerator ratio.
 | Meta MTIA 500 (512 GB) | 3.198 | 3.032 | 3.119 | 3.331 | 3.109 | 3.314 | 3.548 | 4.114 |
 | Meta MTIA 500 (384 GB) | 2.993 | 2.833 | 2.920 | 3.124 | 2.935 | 3.138 | 3.357 | 3.924 |
 | MI455X | 2.893 | 2.736 | 2.820 | 3.017 | 2.813 | 3.007 | 3.225 | 3.744 |
-| VR200 | 2.389 | 2.252 | 2.328 | 2.495 | 2.348 | 2.523 | 2.703 | 3.155 |
+| VR200 | 2.177 | 2.065 | 2.126 | 2.260 | 2.133 | 2.274 | 2.425 | 2.766 |
 | Meta MTIA 450 | 2.014 | 1.917 | 1.969 | 2.083 | 1.972 | 2.092 | 2.225 | 2.510 |
 | Maia 300 rack | 1.593 | 1.520 | 1.559 | 1.645 | 1.560 | 1.651 | 1.752 | 1.968 |
 | Jalapeño | 1.291 | 1.241 | 1.267 | 1.325 | 1.269 | 1.331 | 1.399 | 1.541 |
@@ -73,10 +73,10 @@ produces a preferred accelerator ratio.
 
 All columns below retain log 50–400 and the observed input/output ratio. Individual
 models are architecture diagnostics, not a proposed single-model headline.
-For VR200 the two-model GLM + Kimi basket gives **1.989**, versus
-**2.389** for the four-model headline. Removing the MAI proxy gives
-**2.199**; increasing its weight to 50% gives **2.579**.
-The per-model range is wider: **1.236–2.959**.
+For VR200 the two-model GLM + Kimi basket gives **1.851**, versus
+**2.177** for the four-model headline. Removing the MAI proxy gives
+**2.019**; increasing its weight to 50% gives **2.336**.
+The per-model range is wider: **1.225–2.654**.
 This shows why a basket score should not be presented as an architecture-independent
 hardware multiplier. See the full tables for other accelerators and rank changes.
 
@@ -86,7 +86,7 @@ hardware multiplier. See the full tables for other accelerators and rank changes
 | Meta MTIA 500 (512 GB) | 3.198 | 2.825 | 2.154 | 3.496 | 3.334 | 3.810 | 2.995 |
 | Meta MTIA 500 (384 GB) | 2.993 | 2.514 | 1.639 | 3.389 | 3.295 | 3.649 | 2.774 |
 | MI455X | 2.893 | 2.546 | 1.879 | 3.214 | 2.896 | 3.584 | 2.663 |
-| VR200 | 2.389 | 1.989 | 1.236 | 2.743 | 2.619 | 2.959 | 2.199 |
+| VR200 | 2.177 | 1.851 | 1.225 | 2.476 | 2.355 | 2.654 | 2.019 |
 | Meta MTIA 450 | 2.014 | 1.726 | 1.189 | 2.263 | 2.226 | 2.377 | 1.893 |
 | Maia 300 rack | 1.593 | 1.390 | 1.103 | 1.677 | 1.933 | 1.660 | 1.571 |
 | Jalapeño | 1.291 | 1.051 | 0.869 | 1.232 | 1.675 | 1.386 | 1.259 |
@@ -152,7 +152,7 @@ Outputs go to `results/methodology-sensitivity/`. Use
 
 Source: `studies/methodology_sensitivity.py`. [Provenance](provenance.json) records
 input/code hashes and headline parity. All 23 headline scores are
-checked against the frozen release; maximum relative error:
+checked against the revised report snapshot; maximum relative error:
 `2.22e-16`.
 
 Changed context length, speculative step size, precision, memory guards, topology

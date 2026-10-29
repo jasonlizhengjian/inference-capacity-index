@@ -19,8 +19,9 @@ provisioning. The sensitivity study does not replace that definition.
 
 The [20 October Rubin revision](research/rubin-spec-update/README.md) updates
 VR200 to 19.2 TB/s HBM and 1.5 TB/s outbound NVLink, giving **2.177 GB300e**.
-Current visualization tables include it; the dated methodology-sensitivity and
-InferenceX studies retain their original inputs. Original release reproduction
+Current visualization tables and methodology sensitivity include it. The
+InferenceX study retains its 19 October observations and now uses revised
+Rubin inputs, with the five affected layout recipes retimed on 29 October. Original release reproduction
 remains available separately from `python3 reproduce.py rubin-update`.
 
 ## Separate hardware extensions
