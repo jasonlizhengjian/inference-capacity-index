@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-10-28T15:04:56.266333</dc:date>
+    <dc:date>2026-10-29T12:46:03.108432</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -42,7 +42,7 @@ z
      <g id="line2d_1">
       <path d="M 198.288 439.632
 L 198.288 136.224
-" clip-path="url(#p27b7e6a096)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p28b766ecd2)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_2"/>
      <g id="text_1">
@@ -53,7 +53,7 @@ L 198.288 136.224
      <g id="line2d_3">
       <path d="M 287.064 439.632
 L 287.064 136.224
-" clip-path="url(#p27b7e6a096)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p28b766ecd2)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_4"/>
      <g id="text_2">
@@ -64,7 +64,7 @@ L 287.064 136.224
      <g id="line2d_5">
       <path d="M 375.84 439.632
 L 375.84 136.224
-" clip-path="url(#p27b7e6a096)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p28b766ecd2)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6"/>
      <g id="text_3">
@@ -75,7 +75,7 @@ L 375.84 136.224
      <g id="line2d_7">
       <path d="M 464.616 439.632
 L 464.616 136.224
-" clip-path="url(#p27b7e6a096)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p28b766ecd2)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_8"/>
      <g id="text_4">
@@ -86,7 +86,7 @@ L 464.616 136.224
      <g id="line2d_9">
       <path d="M 553.392 439.632
 L 553.392 136.224
-" clip-path="url(#p27b7e6a096)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p28b766ecd2)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_10"/>
      <g id="text_5">
@@ -97,7 +97,7 @@ L 553.392 136.224
      <g id="line2d_11">
       <path d="M 642.168 439.632
 L 642.168 136.224
-" clip-path="url(#p27b7e6a096)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p28b766ecd2)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_12"/>
      <g id="text_6">
@@ -108,7 +108,7 @@ L 642.168 136.224
      <g id="line2d_13">
       <path d="M 730.944 439.632
 L 730.944 136.224
-" clip-path="url(#p27b7e6a096)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p28b766ecd2)" style="fill: none; stroke: #e7eaec; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_14"/>
      <g id="text_7">
@@ -116,7 +116,7 @@ L 730.944 136.224
      </g>
     </g>
     <g id="text_8">
-     <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #263540" x="464.616" y="478.990281" transform="rotate(-0 464.616 478.990281)">VR200 / GB300 area ratio (GB300 = 1)</text>
+     <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #263540" x="464.616" y="478.990281" transform="rotate(-0 464.616 478.990281)">Capacity relative to GB300 (GB300 = 1)</text>
     </g>
    </g>
    <g id="matplotlib.axis_2">
@@ -147,7 +147,7 @@ L 730.944 136.224
     <g id="ytick_5">
      <g id="line2d_19"/>
      <g id="text_13">
-      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #263540" x="190.288" y="415.684853" transform="rotate(-0 190.288 415.684853)">Overall ICI</text>
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #263540" x="190.288" y="415.684424" transform="rotate(-0 190.288 415.684424)">ICI score</text>
      </g>
     </g>
    </g>
@@ -157,7 +157,7 @@ L 415.728439 150.015273
 L 415.728439 178.685302
 L 198.288 178.685302
 z
-" clip-path="url(#p27b7e6a096)" style="fill: #008b87; opacity: 0.48"/>
+" clip-path="url(#p28b766ecd2)" style="fill: #008b87; opacity: 0.48"/>
    </g>
    <g id="patch_4">
     <path d="M 198.288 199.446358
@@ -165,7 +165,7 @@ L 637.993721 199.446358
 L 637.993721 228.116387
 L 198.288 228.116387
 z
-" clip-path="url(#p27b7e6a096)" style="fill: #008b87; opacity: 0.48"/>
+" clip-path="url(#p28b766ecd2)" style="fill: #008b87; opacity: 0.48"/>
    </g>
    <g id="patch_5">
     <path d="M 198.288 248.877443
@@ -173,7 +173,7 @@ L 616.353028 248.877443
 L 616.353028 277.547472
 L 198.288 277.547472
 z
-" clip-path="url(#p27b7e6a096)" style="fill: #008b87; opacity: 0.48"/>
+" clip-path="url(#p28b766ecd2)" style="fill: #008b87; opacity: 0.48"/>
    </g>
    <g id="patch_6">
     <path d="M 198.288 298.308528
@@ -181,7 +181,7 @@ L 669.45997 298.308528
 L 669.45997 326.978557
 L 198.288 326.978557
 z
-" clip-path="url(#p27b7e6a096)" style="fill: #008b87; opacity: 0.48"/>
+" clip-path="url(#p28b766ecd2)" style="fill: #008b87; opacity: 0.48"/>
    </g>
    <g id="patch_7">
     <path d="M 198.288 397.170698
@@ -189,17 +189,17 @@ L 584.883789 397.170698
 L 584.883789 425.840727
 L 198.288 425.840727
 z
-" clip-path="url(#p27b7e6a096)" style="fill: #008b87; opacity: 0.85"/>
+" clip-path="url(#p28b766ecd2)" style="fill: #008b87; opacity: 0.85"/>
    </g>
    <g id="line2d_20">
     <path d="M 375.84 439.632
 L 375.84 136.224
-" clip-path="url(#p27b7e6a096)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #344958"/>
+" clip-path="url(#p28b766ecd2)" style="fill: none; stroke-dasharray: 3.7,1.6; stroke-dashoffset: 0; stroke: #344958"/>
    </g>
    <g id="line2d_21">
     <path d="M 198.288 362.074628
 L 730.944 362.074628
-" clip-path="url(#p27b7e6a096)" style="fill: none; stroke: #cbd1d4; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p28b766ecd2)" style="fill: none; stroke: #cbd1d4; stroke-width: 0.8; stroke-linecap: square"/>
    </g>
    <g id="patch_8">
     <path d="M 198.288 439.632
@@ -224,20 +224,17 @@ L 730.944 439.632
   </g>
   <g id="text_19">
    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; fill: #263540" transform="translate(50.544 38.870828)">Averaging across four models gives VR200</text>
-   <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; fill: #263540" transform="translate(50.544 62.876297)">an ICI of 2.18 GB300e</text>
+   <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; fill: #263540" transform="translate(50.544 62.876297)">a score of 2.18 GB300e</text>
   </g>
   <g id="text_20">
-   <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #263540" x="50.544" y="95.426203" transform="rotate(-0 50.544 95.426203)">For each model, compare VR200’s area under the capacity curve with GB300’s.</text>
+   <text style="font-size: 11.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #263540" x="50.544" y="95.426203" transform="rotate(-0 50.544 95.426203)">Each model’s ratio compares the area under VR200’s capacity curve with GB300’s.</text>
   </g>
   <g id="text_21">
    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #263540" x="198.288" y="520.128" transform="rotate(-0 198.288 520.128)">(1.22 + 2.48 + 2.35 + 2.65) ÷ 4 ≈ 2.18</text>
   </g>
-  <g id="text_22">
-   <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #263540" x="50.544" y="593.037375" transform="rotate(-0 50.544 593.037375)">Each model has equal weight. Values shown are rounded; the score uses full-precision values.</text>
-  </g>
  </g>
  <defs>
-  <clipPath id="p27b7e6a096">
+  <clipPath id="p28b766ecd2">
    <rect x="198.288" y="136.224" width="532.656" height="303.408"/>
   </clipPath>
  </defs>

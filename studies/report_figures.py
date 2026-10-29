@@ -109,15 +109,15 @@ def batch_panel(ax, decode_only=False):
                else f'Batch/chip: {q["requests"]/q["chips"]:g}')
         ax.annotate(label, (q['speed'],y),
                     xytext=(12,13),textcoords='offset points',fontsize=11)
-    style(ax, 'Concurrency (requests/chip)' if decode_only else 'Concurrent requests per total chip')
+    style(ax, 'Concurrency (requests/decode chip)' if decode_only else 'Concurrent requests per total chip')
     ax.set_ylim(0,12)
     ax.set_xlabel('Output speed (tokens/s/request)' if decode_only else 'Output speed per request (tokens/s)',labelpad=12)
 
 def area_figure(ratios,pdf):
     fig,ax=plt.subplots(figsize=(10.8,8.8))
-    fig.subplots_adjust(left=.10,right=.96,top=.79,bottom=.34)
+    fig.subplots_adjust(left=.10,right=.96,top=.79,bottom=.22)
     fig.text(.065,.965,f'VR200’s capacity curve has {ratios["Kimi-K3"]:.2f} times\nthe area of GB300’s',fontsize=20,weight='bold',va='top')
-    fig.text(.065,.865,'Modeled Kimi-K3 capacity over 50–400 tokens/s/request, including prefill and decode.',fontsize=11.5,va='top')
+    fig.text(.065,.865,'Modeled Kimi-K3 capacity per chip, including prefill and decode.',fontsize=11.5,va='top')
     for h in ['VR200','GB300']:
         g=grid(curve(h,'Kimi-K3'))
         y=[value(curve(h,'Kimi-K3'),s,prefill(h,'Kimi-K3')) for s in g]
@@ -127,28 +127,26 @@ def area_figure(ratios,pdf):
     ax.set_xlabel('Required output speed (tokens/s/request)',labelpad=12)
     ax.text(.97,.55,f'VR200 area ÷ GB300 area\n≈ {ratios["Kimi-K3"]:.2f}',transform=ax.transAxes,
             ha='right',fontsize=15,weight='bold',color=COL['VR200'],linespacing=1.5)
-    fig.text(.10,.20,'Each doubling of required output speed receives equal weight.\nEach area runs from zero to its curve; the overlap counts toward both.',fontsize=11.5,linespacing=1.6)
-    foot(fig,'Requests/chip counts both separately provisioned prefill and decode chips. Areas use the exact capacity\nenvelopes on a logarithmic output-speed axis. Speeds are analytical estimates.')
+    foot(fig,'The logarithmic speed axis gives equal weight to each doubling: 50–100, 100–200,\nand 200–400 tokens/s/request.')
     save(fig,'figure_3_model_areas',pdf)
 
 def average_figure(ratios,ici,pdf):
     fig,ax=plt.subplots(figsize=(10.8,8.6))
     fig.subplots_adjust(left=.255,right=.94,top=.78,bottom=.29)
-    fig.text(.065,.965,f'Averaging across four models gives VR200\nan ICI of {ici:.2f} GB300e',fontsize=20,weight='bold',va='top')
-    fig.text(.065,.86,'For each model, compare VR200’s area under the capacity curve with GB300’s.',fontsize=11.5,va='top')
+    fig.text(.065,.965,f'Averaging across four models gives VR200\na score of {ici:.2f} GB300e',fontsize=20,weight='bold',va='top')
+    fig.text(.065,.86,'Each model’s ratio compares the area under VR200’s capacity curve with GB300’s.',fontsize=11.5,va='top')
     positions=[0,1,2,3,5]
     vals=list(ratios.values())+[ici]
-    labels=[NAMES[m] for m in MODELS]+['Overall ICI']
+    labels=[NAMES[m] for m in MODELS]+['ICI score']
     for pos,v in zip(positions,vals):
         ax.barh(pos,v,color=COL['VR200'],alpha=.85 if pos==5 else .48,height=.58)
         ax.text(v+.045,pos,f'{v:.2f}',va='center',weight='bold' if pos==5 else 'normal',fontsize=13)
     ax.axvline(1,color=COL['GB300'],ls='--',lw=1)
     ax.axhline(4,color='#cbd1d4',lw=.8)
     ax.set_yticks(positions,labels);ax.invert_yaxis();ax.set_xlim(0,3)
-    ax.set_xlabel('VR200 / GB300 area ratio (GB300 = 1)',labelpad=12)
+    ax.set_xlabel('Capacity relative to GB300 (GB300 = 1)',labelpad=12)
     ax.grid(axis='x',color='#e7eaec');ax.set_axisbelow(True);ax.tick_params(length=0,pad=8)
     fig.text(.255,.16,'('+ ' + '.join(f'{ratios[m]:.2f}' for m in MODELS)+f') ÷ 4 ≈ {ici:.2f}',fontsize=15,weight='bold')
-    foot(fig,'Each model has equal weight. Values shown are rounded; the score uses full-precision values.')
     save(fig,'figure_4_model_average',pdf)
 
 
@@ -156,11 +154,10 @@ ratios={m:area('VR200',m)/area('GB300',m) for m in MODELS}
 ici=sum(ratios.values())/4
 assert math.isclose(ici,2.177366570368923,rel_tol=1e-12)
 fig,ax=plt.subplots(figsize=(10.8,8))
-fig.subplots_adjust(left=.10,right=.96,top=.78,bottom=.29)
+fig.subplots_adjust(left=.10,right=.96,top=.78,bottom=.14)
 heading(fig,'Serving more requests slows output for each request',
-        'Modeled Kimi-K3 decode performance on GB300 as batch size increases\nwithin a fixed configuration.')
+        'Modeled Kimi-K3 decode performance on GB300, varying batch size within one configuration.')
 batch_panel(ax,decode_only=True)
-foot(fig,'Concurrency is divided by 64 decode chips. The line connects evaluated batch sizes.\nSpeeds are analytical speed-of-light estimates.')
 save(fig,'figure_2_decode_tradeoff')
 csvout('figure_2_decode_tradeoff',[dict(batch_per_replica=q['batch'],decode_chips=q['chips'],
     concurrent_requests=q['requests'],output_tokens_per_second_per_request=q['speed'],
@@ -200,7 +197,7 @@ assert next(q['ici_relative_to_gb300'] for q in rows if q['chip']=='Nvidia GB300
 
 fig, ax = plt.subplots(figsize=(11,8.2))
 fig.subplots_adjust(left=.30,right=.94,top=.78,bottom=.22)
-heading(fig, 'Inference Capacity Index across selected chips',
+heading(fig, 'Inference Capacity Index v1',
           'Modeled inference capacity per chip, relative to Nvidia GB300.')
 ys=list(range(len(rows)))
 for i,q in enumerate(rows):
@@ -213,14 +210,14 @@ ax.set_yticks(ys,[q['chip'] for q in rows],fontsize=11.5)
 ax.invert_yaxis()
 ax.set_xlim(0,3.25)
 ax.set_xticks([0,.5,1,1.5,2,2.5,3],['0','0.5','1','1.5','2','2.5','3'])
-ax.set_xlabel('Inference Capacity Index (GB300 = 1)',labelpad=12)
+ax.set_xlabel('Inference Capacity Index (GB300e)',labelpad=12)
 ax.grid(axis='x',color='#e7eaec',lw=.7,zorder=0)
 ax.set_axisbelow(True)
 ax.axvline(1,color='#344958',lw=1,ls=(0,(3,3)),zorder=2)
-ax.text(1,1.025,'GB300 reference',transform=ax.get_xaxis_transform(),ha='center',fontsize=10,color='#344958')
+ax.text(1,1.025,'GB300 = 1',transform=ax.get_xaxis_transform(),ha='center',fontsize=10,color='#344958')
 ax.tick_params(length=0,pad=8)
 ax.spines['bottom'].set_visible(False)
-foot(fig, 'Scores include prefill and decode across four models and 50–400 tokens/s/request on a logarithmic speed axis.\nScores use the 20 October 2026 snapshot.')
+foot(fig, 'Includes prefill and decode across four models at output speeds of 50–400 tokens/s/request.')
 save(fig,'figure_1_selected_chips')
 csvout('figure_1_selected_chips',rows)
 

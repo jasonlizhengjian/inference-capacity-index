@@ -1,7 +1,7 @@
 # Launch report figures and reproduction
 
 **Report calculation snapshot: 20 October 2026 Rubin revision of ICI v1.**
-Documentation and figure wording updated 28 October 2026. GB300 = 1;
+Documentation and figure wording updated 29 October 2026. GB300 = 1;
 VR200 = 2.177366570368923. The report's publication URL will be linked here
 when available; no private draft link is needed to use this repository.
 
@@ -77,16 +77,18 @@ release, archive the chart's exact public observations and metadata first.
 ![More requests slow output for each request](figures/figure_2_decode_tradeoff.png)
 
 *Figure 2. Kimi-K3 on GB300, varying batch within TP8 DP8 DCP8 EP64 ETP1 PP1.
-Concurrency is divided by 64 decode chips.*
+Concurrency is divided by 64 decode chips. The line connects evaluated batch sizes.*
 
 ![VR200 and GB300 Kimi capacity areas](figures/figure_3_model_areas.png)
 
 *Figure 3. Shading marks each capacity curve's area over 50–400 tokens/s/request.
+Each shaded area extends from zero to its curve; the overlapping region counts toward both.
 The ratio is 2.48 for Kimi, not VR200's overall ICI.*
 
 ![Averaging the four model ratios](figures/figure_4_model_average.png)
 
-*Figure 4. Equal averaging gives VR200 2.18 GB300e.*
+*Figure 4. Equal averaging gives VR200 2.18 GB300e. Displayed values are rounded;
+the score uses full-precision values.*
 
 ## Validation and interpretation
 
