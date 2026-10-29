@@ -48,7 +48,7 @@ relative to the repository root. The renderer does not modify frozen inputs.
 
 | Report figure | Inputs | CSV in `results/report-figures/` | Image stem in the same directory |
 | --- | --- | --- | --- |
-| 1: ten selected accelerators | Base `reference/2026-10-15/` plus `reference/2026-10-20-rubin/`; ten named profiles selected from rebuilt index | `figure_1_selected_chips.csv` | `figure_1_selected_chips` |
+| 1: eleven selected accelerators | Base `reference/2026-10-15/` plus `reference/2026-10-20-rubin/`; eleven named profiles selected from rebuilt index | `figure_1_selected_chips.csv` | `figure_1_selected_chips` |
 | 2: concurrency/output-speed tradeoff | `docs/report/inputs/kimi_gb300_fixed_layout.csv`, its provenance, unchanged GB300 profile | `figure_2_decode_tradeoff.csv` | `figure_2_decode_tradeoff` |
 | 3: Kimi area comparison | Same revised snapshot as Figure 1; Kimi decode frontiers and optimized prefill rates | `figure_3_capacity_curves.csv` | `figure_3_model_areas` |
 | 4: averaging models | Exact per-model log areas from the same inputs as Figure 3 | `figure_4_model_ratios.csv` | `figure_4_model_average` |
@@ -73,7 +73,7 @@ release, archive the chart's exact public observations and metadata first.
 
 ![Selected accelerator ICI scores](figures/figure_1_selected_chips.png)
 
-*Figure 1. Modeled inference capacity for ten selected chips, in GB300 equivalents.*
+*Figure 1. Modeled inference capacity for eleven selected chips, in GB300 equivalents.*
 
 ![More requests slow output for each request](figures/figure_2_decode_tradeoff.png)
 

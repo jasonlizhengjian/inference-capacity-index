@@ -182,6 +182,7 @@ SELECTION = {
     'MI355X · 400G': 'AMD MI355X',
     'B300 · 800G': 'Nvidia B300',
     'H200 SXM · FP8 · 400G': 'Nvidia H200',
+    'H100 SXM · FP8 · 400G': 'Nvidia H100',
 }
 rows = []
 for q in csv.DictReader(SOURCE.open()):
@@ -192,7 +193,7 @@ for q in csv.DictReader(SOURCE.open()):
                      hardware_profile=q['hardware'],
                      score_snapshot='2026-10-20'))
 rows.sort(key=lambda q: q['ici_relative_to_gb300'], reverse=True)
-assert len(rows) == 10
+assert len(rows) == 11
 assert next(q['ici_relative_to_gb300'] for q in rows if q['chip']=='Nvidia GB300') == 1
 
 fig, ax = plt.subplots(figsize=(11,8.2))
