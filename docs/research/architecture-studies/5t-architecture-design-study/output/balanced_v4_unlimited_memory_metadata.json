@@ -1,0 +1,27 @@
+{
+  "architecture_id": "direct_L61_balanced_m3072_s1__v4_compressed",
+  "context": 262144,
+  "counterfactual_max_cpr": 2048,
+  "dep": 64,
+  "high_cpr_fits": {
+    "GB300": {
+      "asymptotic_dep64_tps": 329937.33064299915,
+      "intercept_ms": 1.4745124950000559,
+      "slope_ms_per_cpr": 0.19397623141119996
+    },
+    "VR200 HBM+NVLink": {
+      "asymptotic_dep64_tps": 511351.1324063859,
+      "intercept_ms": 0.015264529090984524,
+      "slope_ms_per_cpr": 0.1251586159569454
+    }
+  },
+  "interpretation": "Memory capacity ignored beyond physical_max_cpr; hardware bandwidth, compute, and fabric unchanged.",
+  "physical_max_cpr": {
+    "GB300": 191,
+    "VR200 HBM+NVLink": 191
+  },
+  "systems": [
+    "GB300",
+    "VR200 HBM+NVLink"
+  ]
+}

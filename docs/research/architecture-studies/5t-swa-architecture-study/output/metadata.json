@@ -1,0 +1,51 @@
+{
+  "scope": "Controlled 5T SWA/global decode-only study",
+  "layers": 61,
+  "hidden_size": 7168,
+  "experts": 1216,
+  "topk": 25,
+  "shared_experts": 0,
+  "routed_expert_hidden_size": 7168,
+  "moe_intermediate": 3072,
+  "parameters_per_routed_expert": 66060288,
+  "routed_parameters_per_layer": 80329310208,
+  "active_routed_parameters_per_layer": 1651507200,
+  "total_routed_parameters": 4900087922688,
+  "active_routed_parameters_per_token": 100741939200,
+  "dep": 64,
+  "contexts": [
+    32768,
+    262144,
+    1048576
+  ],
+  "systems": [
+    "GB300",
+    "VR200 HBM+NVLink"
+  ],
+  "capacity_gib": 277.546875,
+  "profile_count": 43,
+  "aic_database_mode": "SOL",
+  "memory_method": "Explicit per-layer FP8 KV; local layers capped at window",
+  "hybrid_methods": {
+    "mla": "AIC-derived MLA per-layer latency and latent-KV accounting on global layers",
+    "v4": "AIC-derived mean V4 attention-layer latency and compressed-cache accounting",
+    "dsa": "Published SOL extension averaged over shared-index cadence, charged to global layers",
+    "kda": "AIC-derived KDA per-layer latency and recurrent-state accounting on global layers"
+  },
+  "speculative_acceptance": {
+    "0": 1.0,
+    "1": 1.85,
+    "2": 2.51,
+    "3": 3.0,
+    "4": 3.36,
+    "5": 3.62,
+    "6": 3.75,
+    "7": 3.84,
+    "8": 4.0
+  },
+  "official_sources": {
+    "gpt_oss": "https://deploymentsafety.openai.com/gpt-oss/evaluation",
+    "inkling": "https://thinkingmachines.ai/news/introducing-inkling/",
+    "inkling_config": "https://huggingface.co/thinkingmachines/Inkling/blob/main/config.json"
+  }
+}

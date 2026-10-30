@@ -33,6 +33,11 @@ remains available separately from `python3 reproduce.py rubin-update`.
 
 ## Historical archive — not the current methodology
 
+- [Exploratory model architectures](research/architecture-studies/README.md):
+  nine saved studies covering 5T/10T scaling, attention hybrids, GLM depth/width/MoE,
+  cached-prefix prefill and Qwen-style GQA. Includes reports, compressed tables,
+  model inputs and historical source wrappers, with explicit reproduction limits.
+
 - `METHODOLOGY.txt` and `METHODOLOGY.html` describe the **9 October two-model
   decode-only release**. “Current” inside them refers to that date.
 - `REPRODUCTION.txt` documents historical packaging checks.

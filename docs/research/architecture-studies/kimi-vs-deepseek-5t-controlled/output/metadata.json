@@ -1,0 +1,58 @@
+{
+  "DeepSeek MoE-normalized": {
+    "active": 125927664128,
+    "active_ratio": 0.02542610580788115,
+    "base_ratio": 0.030625,
+    "experts": 1216,
+    "family": "DeepSeek",
+    "id": "deepseek_moe_normalized",
+    "path": "LEGACY_WORKSPACE/experiments/kimi-vs-deepseek-5t-controlled/models/deepseek_moe_normalized",
+    "routed_active": 100741939200,
+    "routed_total": 4900087922688,
+    "selection_fraction": 0.02055921052631579,
+    "topk": 25,
+    "total": 4952691736576
+  },
+  "DeepSeek ratio-preserved": {
+    "active": 150105729536,
+    "active_ratio": 0.030307908814000663,
+    "base_ratio": 0.030625,
+    "experts": 1216,
+    "family": "DeepSeek",
+    "id": "deepseek_ratio_preserved",
+    "path": "LEGACY_WORKSPACE/experiments/kimi-vs-deepseek-5t-controlled/models/deepseek_ratio_preserved",
+    "routed_active": 124920004608,
+    "routed_total": 4900087922688,
+    "selection_fraction": 0.02549342105263158,
+    "topk": 31,
+    "total": 4952691736576
+  },
+  "Kimi MoE-normalized": {
+    "active": 157471899648,
+    "active_ratio": 0.03201149633507458,
+    "base_ratio": 0.03790238318507834,
+    "experts": 1600,
+    "family": "Kimi",
+    "id": "kimi_moe_normalized",
+    "path": "LEGACY_WORKSPACE/experiments/kimi-vs-deepseek-5t-controlled/models/kimi_moe_normalized",
+    "routed_active": 100279517184,
+    "routed_total": 4862037196800,
+    "selection_fraction": 0.020625,
+    "topk": 33,
+    "total": 4919229579264
+  },
+  "Kimi ratio-preserved": {
+    "active": 187859632128,
+    "active_ratio": 0.038188832031723755,
+    "base_ratio": 0.03790238318507834,
+    "experts": 1600,
+    "family": "Kimi",
+    "id": "kimi_ratio_preserved",
+    "path": "LEGACY_WORKSPACE/experiments/kimi-vs-deepseek-5t-controlled/models/kimi_ratio_preserved",
+    "routed_active": 130667249664,
+    "routed_total": 4862037196800,
+    "selection_fraction": 0.026875,
+    "topk": 43,
+    "total": 4919229579264
+  }
+}

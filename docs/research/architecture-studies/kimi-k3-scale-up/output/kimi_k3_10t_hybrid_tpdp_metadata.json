@@ -1,0 +1,26 @@
+{
+  "created_at": "2026-09-02T16:34:49.163408+00:00",
+  "model": "LEGACY_WORKSPACE/experiments/kimi-k3-scale-up/models/k3_10t_trend",
+  "system": "gb300_nvl288",
+  "backend": "sglang",
+  "database_mode": "SOL",
+  "context": 262144,
+  "world_sizes": [
+    64,
+    128,
+    256
+  ],
+  "tp_sizes": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "rows": 75,
+  "pass_rows": 75,
+  "source_leak_rows": 0,
+  "no_speculation": true
+}

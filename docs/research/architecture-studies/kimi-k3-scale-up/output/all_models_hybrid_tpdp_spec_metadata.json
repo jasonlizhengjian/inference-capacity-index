@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-09-03T01:23:51.038424+00:00",
+  "system": "gb300_nvl288",
+  "backend": "sglang",
+  "database_mode": "SOL",
+  "context": 262144,
+  "world_sizes": [
+    64,
+    128,
+    256
+  ],
+  "tp_candidates": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "variants": [
+    "k3_2p8t",
+    "k3_5t_expert",
+    "k3_5t_trend",
+    "k3_10t_expert",
+    "k3_10t_trend"
+  ],
+  "rows": 864,
+  "pass_rows": 864,
+  "source_leak_rows": 0,
+  "oom_rows": 169,
+  "acceptance_source": "INFERENCEX_CHECKOUT/golden_al_distribution/kimik3_dspark_probabilistic_sample_method_block_rejection_sample_method.yaml",
+  "acceptance_curve": {
+    "0": 1.0,
+    "1": 1.85,
+    "2": 2.51,
+    "3": 3.0,
+    "4": 3.36,
+    "5": 3.62,
+    "6": 3.75,
+    "7": 3.84,
+    "8": 4.0
+  },
+  "acceptance_assumed_unchanged": true,
+  "selection": "max TPS/user among memory-fitting TP/DP and nextn; global concurrency = GPUs"
+}

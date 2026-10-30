@@ -1,0 +1,142 @@
+{
+  "GB300": {
+    "data_dir": "LEGACY_WORKSPACE/repos/aiconfigurator-kimi-k3-pr1435/aic-core/src/aiconfigurator_core/systems/data/gb300",
+    "gpu": {
+      "bfloat16_tc_flops": 2500000000000000,
+      "fp4_tc_flops": 15000000000000000,
+      "fp8_tc_flops": 5000000000000000,
+      "int8_tc_flops": 165000000000000,
+      "mem_bw": 8000000000000,
+      "mem_bw_empirical_scaling_factor": 0.8,
+      "mem_capacity": 298013687808,
+      "mem_empirical_constant_latency": 3e-06,
+      "power": 1400,
+      "sm_version": 103
+    },
+    "misc": {
+      "nccl_mem": {
+        "1": 0,
+        "2": 358612992,
+        "4": 411041792,
+        "8": 411041792
+      },
+      "nccl_version": "2.27",
+      "other_mem": 3758096384
+    },
+    "node": {
+      "inter_node_bw": 900000000000,
+      "inter_rack_bw": 100000000000,
+      "inter_rack_latency": 5e-06,
+      "intra_node_bw": 900000000000,
+      "num_gpus_per_node": 4,
+      "num_gpus_per_rack": 72,
+      "p2p_latency": 1e-05,
+      "pcie_bw": 64000000000
+    }
+  },
+  "HBM+fabric": {
+    "data_dir": "LEGACY_WORKSPACE/repos/aiconfigurator-kimi-k3-pr1435/aic-core/src/aiconfigurator_core/systems/data/gb300",
+    "gpu": {
+      "bfloat16_tc_flops": 2500000000000000,
+      "fp4_tc_flops": 15000000000000000,
+      "fp8_tc_flops": 5000000000000000,
+      "int8_tc_flops": 165000000000000,
+      "mem_bw": 22000000000000.0,
+      "mem_bw_empirical_scaling_factor": 0.8,
+      "mem_capacity": 298013687808,
+      "mem_empirical_constant_latency": 3e-06,
+      "power": 1400,
+      "sm_version": 103
+    },
+    "misc": {
+      "nccl_mem": {
+        "1": 0,
+        "2": 358612992,
+        "4": 411041792,
+        "8": 411041792
+      },
+      "nccl_version": "2.27",
+      "other_mem": 3758096384
+    },
+    "node": {
+      "inter_node_bw": 1800000000000.0,
+      "inter_rack_bw": 200000000000.0,
+      "inter_rack_latency": 5e-06,
+      "intra_node_bw": 1800000000000.0,
+      "num_gpus_per_node": 4,
+      "num_gpus_per_rack": 72,
+      "p2p_latency": 1e-05,
+      "pcie_bw": 64000000000
+    }
+  },
+  "HBM-only": {
+    "data_dir": "LEGACY_WORKSPACE/repos/aiconfigurator-kimi-k3-pr1435/aic-core/src/aiconfigurator_core/systems/data/gb300",
+    "gpu": {
+      "bfloat16_tc_flops": 2500000000000000,
+      "fp4_tc_flops": 15000000000000000,
+      "fp8_tc_flops": 5000000000000000,
+      "int8_tc_flops": 165000000000000,
+      "mem_bw": 22000000000000.0,
+      "mem_bw_empirical_scaling_factor": 0.8,
+      "mem_capacity": 298013687808,
+      "mem_empirical_constant_latency": 3e-06,
+      "power": 1400,
+      "sm_version": 103
+    },
+    "misc": {
+      "nccl_mem": {
+        "1": 0,
+        "2": 358612992,
+        "4": 411041792,
+        "8": 411041792
+      },
+      "nccl_version": "2.27",
+      "other_mem": 3758096384
+    },
+    "node": {
+      "inter_node_bw": 900000000000,
+      "inter_rack_bw": 100000000000,
+      "inter_rack_latency": 5e-06,
+      "intra_node_bw": 900000000000,
+      "num_gpus_per_node": 4,
+      "num_gpus_per_rack": 72,
+      "p2p_latency": 1e-05,
+      "pcie_bw": 64000000000
+    }
+  },
+  "VR200-dense": {
+    "data_dir": "LEGACY_WORKSPACE/repos/aiconfigurator-kimi-k3-pr1435/aic-core/src/aiconfigurator_core/systems/data/gb300",
+    "gpu": {
+      "bfloat16_tc_flops": 4000000000000000.0,
+      "fp4_tc_flops": 3.5e+16,
+      "fp8_tc_flops": 1.75e+16,
+      "int8_tc_flops": 250000000000000.0,
+      "mem_bw": 22000000000000.0,
+      "mem_bw_empirical_scaling_factor": 0.8,
+      "mem_capacity": 288000000000,
+      "mem_empirical_constant_latency": 3e-06,
+      "power": 1400,
+      "sm_version": 103
+    },
+    "misc": {
+      "nccl_mem": {
+        "1": 0,
+        "2": 358612992,
+        "4": 411041792,
+        "8": 411041792
+      },
+      "nccl_version": "2.27",
+      "other_mem": 3758096384
+    },
+    "node": {
+      "inter_node_bw": 1800000000000.0,
+      "inter_rack_bw": 200000000000.0,
+      "inter_rack_latency": 5e-06,
+      "intra_node_bw": 1800000000000.0,
+      "num_gpus_per_node": 4,
+      "num_gpus_per_rack": 72,
+      "p2p_latency": 1e-05,
+      "pcie_bw": 64000000000
+    }
+  }
+}

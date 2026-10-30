@@ -1,0 +1,9 @@
+{
+  "iterations": 117172,
+  "observed_ms": 30.35227800393094,
+  "old_sol_ms": 20.748845343120315,
+  "reuse_hybrid_ms": 14.01328912828932,
+  "reuse_padded_ms": 15.667550795788923,
+  "reuse_sol_ms": 13.730640887068533,
+  "strata": 98
+}

@@ -1,0 +1,51 @@
+{
+  "engine": "0.13.0.dev202610050000000066",
+  "source_inspected_commit": "5c466b567d0ef62d983958ddfcbccbad0e201a29",
+  "wheel_build_commit_unknown": true,
+  "script_sha256": "89a87573659b4bf54217463c255b803e27951a3cd9aa1724040b40ad530b25da",
+  "baseline_config_sha256": "0c8da8dea4ef290b08290074f4c61c8cf10b998c073d9e5b778fe33862f8540b",
+  "context": 262144,
+  "model_config_hashes": {
+    "Qwen-480B": "653230e2dd1c41bd1125d046f00259ed98d6294c75c63969f8890c6e139af7de",
+    "Qwen-like-1.5T": "4aafe666eaf9cbb1a2955e1999716b8954a4dfa6673b74b2d73cec76fe099a43",
+    "Qwen-like-3T": "f40daa5403395a2e0be0f12f97fd06f788694115a50a5d4406f0fe67eb417b21",
+    "Qwen-like-5T-joint": "08a7698afb269a77a7e34317a619b69b3dadc3dee68654e9817b63b088380dff",
+    "Qwen-like-5T-deeper": "6fa6efa1685bf5dc0805cd80845508545a446fad01a7038bbc40ab7d357d6cab",
+    "Qwen-like-5T-wide-experts": "c82661f7c382a889872cab10523e7917115abe623494f5981df611f1333a4e01",
+    "Qwen-like-5T-many-experts": "4b14f229c9418ded5daace98addd38b7ad96a00b1cf20fe4fe5d24ed04313171",
+    "Qwen-like-5T-deep-aligned": "1bd9b3d3811867ed2025c392bee4142e374f711d1008c816fb5173cd5e1d36b5",
+    "Qwen-like-5T-wide-trunk": "38dae7ca859c300dfa9920f1a9951ea158d54bc6bc043dbc428b08b51ef7cc7c"
+  },
+  "native_wheel_provenance": "../../environment/runtime.json",
+  "runtime_provenance_sha256": "7a2d4dd3385ab1f69dcf8c83d3e547b6aaf1f45517f9fdebc3c651ab92c3c22c",
+  "shared_wrapper_hashes": {
+    "simulation.py": "997ea357a1ebb5f1d32ec0efef78d5368b4ca8c8b449f64905a7941291ea4a15",
+    "index.py": "99f94d162ad06af81bac3d511d9c96ffeddad00aac5762ba8f292cbf2d6326f9",
+    "topology.py": "299dce7be9694b1b568f1c86c044d5e42f8d484cd5969753b964c4ac0d86f1ea"
+  },
+  "hardware_catalog_sha256": "56db15ea739f81bf02dc001f377c35ae9b18c2ca93fcfb750b26516f151d5788",
+  "hardware_hashes": {
+    "ascend960pr_base.yaml": "2c453e44e79abab941122e6f6d385dcbaa215e54129606a166f326896c70a56b",
+    "tpu7x_fp8_injection_bound.yaml": "e9d1a918056a3a5b2aa108b6861bcbeaa750159dd6db2d6f1acd99e89c105915",
+    "vr200_deployment.yaml": "f5358d43b3176f9e4a246f2396ef8a3fc5cf25f523d6ae16d9f7394dd333bd01",
+    "b300_800g_hgx_audit.yaml": "7d648a72335c3e88278cebdb724b72df29b82f44848a1058ff9c36eff3d911b7",
+    "h100_400g_hopper.yaml": "6804018a83c29d91bd0a545610766a5441ace5e7ec82e84442b8b4acc2d9e3d5",
+    "jalapeno_mid_deployment.yaml": "953d32aa3bba1acaf0452f918d835af238b26f7e4d7cd2fd19640d05e2e2c74d",
+    "ascend960dt_base.yaml": "b9ee6a1aca4cfc50c88536661e77241211a52e7daf1561d9226c9ef628548dcb",
+    "tpu8i_audit_corrected.yaml": "08080ad6b21c80c30580018263ed4ce876292bf6189eacca2d7a74d992bb0799",
+    "mi455x_deployment.yaml": "9d5c58805ec742ffb8056f6667342ee354b7f05243c21e0ef880894c5742f481",
+    "b200_800g_hgx_audit.yaml": "17d88d2cd3062d98117992c85c7350f78be66d2fd8c0c0977c83ec3447d9c4b2",
+    "ascend950pr_base.yaml": "ee45a0ffac5a004daeb450cb0e488d94b3544d316d7e06e9bf4895519a2d34b1",
+    "ascend950dt_base.yaml": "d9625d75d9b13e8981c3bbd578d829478a30f7708d5def16811810bb81bf64aa",
+    "h200_400g_hopper.yaml": "561224e34087456ede145e280666fd4d33a4987e9f403b86ab00b0f592feae87",
+    "gb300_deployment.yaml": "99d17193381bbec9c5a52d082c395f9c7282e651b67a5dd1292a723f924a7119",
+    "mi355x_400g_hgx_audit.yaml": "e306151a6991d299816d2204ca40462527967f4179ad44977631d735ecb2650e",
+    "gb200_deployment.yaml": "141f8b4234c8371765d0f420c8d4da3f24ef54166558c8aa85e9b23860eec9c3",
+    "tpu8t_fp4_injection_bound.yaml": "65ed8887089c08f93a285ff7e28c1ff32051dda26ceeb87f4661f24c1de89169"
+  },
+  "argv": [
+    "studies/qwen_gqa/run_study.py",
+    "--analyze-only"
+  ],
+  "frozen_index_unchanged": true
+}

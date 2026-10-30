@@ -1,0 +1,23 @@
+{
+  "acceptance_curve": {
+    "0": 1.0,
+    "1": 1.85,
+    "2": 2.51,
+    "3": 3.0,
+    "4": 3.36,
+    "5": 3.62,
+    "6": 3.75,
+    "7": 3.84,
+    "8": 4.0
+  },
+  "aic_estimates_added": 62368,
+  "context": 262144,
+  "controlled_architectures": 448,
+  "dep": 64,
+  "native_anchors": 4,
+  "search": "adaptive integer binary search with selected edge+1 validation",
+  "targets_tps_user": [
+    50,
+    100
+  ]
+}

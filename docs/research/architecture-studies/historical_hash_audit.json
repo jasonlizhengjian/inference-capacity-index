@@ -1,0 +1,6 @@
+{
+  "matched_entries": 305,
+  "mismatches": [],
+  "entries_without_packaged_source": 57,
+  "note": "Comparison uses original bytes before publication path normalization. A missing entry is not evidence of a match; sources outside this curated archive are not supplied."
+}

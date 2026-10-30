@@ -1,0 +1,13 @@
+{
+  "partitions_completed": 306,
+  "expected_full_partitions": 306,
+  "completed_admitted_layouts": 21294,
+  "excluded_layouts": 14286,
+  "admitted_rows": 578041,
+  "chip_accounting": true,
+  "timing_bucket_sum": true,
+  "matched_5T_routed_parameter_counts": true,
+  "native_cache_formula_checked": true,
+  "each_admitted_layout_next_batch_rejected": true,
+  "quality_or_empirical_validation": false
+}

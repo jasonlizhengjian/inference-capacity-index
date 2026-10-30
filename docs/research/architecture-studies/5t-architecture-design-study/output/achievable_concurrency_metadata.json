@@ -1,0 +1,45 @@
+{
+  "acceptance_curve": {
+    "0": 1.0,
+    "1": 1.85,
+    "2": 2.51,
+    "3": 3.0,
+    "4": 3.36,
+    "5": 3.62,
+    "6": 3.75,
+    "7": 3.84,
+    "8": 4.0
+  },
+  "achieved_targets_tps_user": [
+    50,
+    100
+  ],
+  "aic_estimates_added": 9632,
+  "calibrations": [
+    {
+      "efficiency": 0.4,
+      "name": "conservative"
+    },
+    {
+      "efficiency": 0.5,
+      "name": "central"
+    },
+    {
+      "efficiency": 0.7,
+      "name": "optimistic"
+    }
+  ],
+  "context": 262144,
+  "controlled_architectures": 448,
+  "dep": 64,
+  "native_anchors": 4,
+  "required_sol_targets_tps_user": [
+    71.42857142857143,
+    100.0,
+    125.0,
+    142.85714285714286,
+    200.0,
+    250.0
+  ],
+  "search": "adaptive integer binary search with selected edge+1 validation"
+}

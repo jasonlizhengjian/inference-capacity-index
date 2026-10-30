@@ -1,0 +1,44 @@
+{
+  "aic_estimates_added": 0,
+  "configs": [
+    {
+      "id": "direct_L61_balanced_m3072_s1__v4_compressed",
+      "kind": "controlled",
+      "label": "Balanced V4"
+    },
+    {
+      "id": "direct_L78_conservative_m3072_s1__v4_compressed",
+      "kind": "controlled",
+      "label": "Conservative V4"
+    },
+    {
+      "id": "direct_L61_balanced_m3072_s1__kda50_v4_50",
+      "kind": "controlled",
+      "label": "KDA + V4 hybrid"
+    },
+    {
+      "id": "deepseek_ratio",
+      "kind": "native",
+      "label": "DeepSeek ratio-preserved 5T"
+    },
+    {
+      "id": "kimi_ratio",
+      "kind": "native",
+      "label": "Kimi ratio-preserved 5T"
+    },
+    {
+      "id": "glm52_ratio",
+      "kind": "native",
+      "label": "GLM-5.2 ratio-preserved 5T"
+    }
+  ],
+  "context": 262144,
+  "dep": 64,
+  "graph_metric": "raw AIC SOL TPOT",
+  "speculative_decoding": "best nextn 0..8 at each point",
+  "systems": [
+    "GB300",
+    "VR200 HBM",
+    "VR200 HBM+NVLink"
+  ]
+}

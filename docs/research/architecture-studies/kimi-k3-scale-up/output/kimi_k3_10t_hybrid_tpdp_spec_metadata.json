@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-02T18:15:05.853487+00:00",
+  "model": "LEGACY_WORKSPACE/experiments/kimi-k3-scale-up/models/k3_10t_trend",
+  "system": "gb300_nvl288",
+  "backend": "sglang",
+  "database_mode": "SOL",
+  "context": 262144,
+  "world_sizes": [
+    64,
+    128,
+    256
+  ],
+  "tp_sizes": [
+    2,
+    4,
+    8
+  ],
+  "rows": 81,
+  "pass_rows": 81,
+  "source_leak_rows": 0,
+  "oom_rows": 0,
+  "acceptance_source": "INFERENCEX_CHECKOUT/golden_al_distribution/kimik3_dspark_probabilistic_sample_method_block_rejection_sample_method.yaml",
+  "acceptance_curve": {
+    "0": 1.0,
+    "1": 1.85,
+    "2": 2.51,
+    "3": 3.0,
+    "4": 3.36,
+    "5": 3.62,
+    "6": 3.75,
+    "7": 3.84,
+    "8": 4.0
+  },
+  "acceptance_is_borrowed_from_k3": true
+}

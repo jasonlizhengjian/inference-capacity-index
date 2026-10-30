@@ -1,0 +1,8 @@
+{
+  "architecture_rows": 106056,
+  "boundary_rows": 35352,
+  "controlled_architectures": 982,
+  "native_geometries": 82,
+  "status": "AIC plus analytical extensions; no measured 10T hardware validation",
+  "topology_rows": 6240
+}

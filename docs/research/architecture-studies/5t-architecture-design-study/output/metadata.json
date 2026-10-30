@@ -1,0 +1,79 @@
+{
+  "aic_commit": "4197820c5e69f2e9c7553f98c98520d602e03845",
+  "architecture_count": 448,
+  "attention_profile_count": 16,
+  "body_count": 28,
+  "contexts": [
+    32768,
+    262144,
+    1048576
+  ],
+  "deps": [
+    16,
+    32,
+    64
+  ],
+  "dspark_acceptance_curve": {
+    "0": 1.0,
+    "1": 1.85,
+    "2": 2.51,
+    "3": 3.0,
+    "4": 3.36,
+    "5": 3.62,
+    "6": 3.75,
+    "7": 3.84,
+    "8": 4.0
+  },
+  "generated_at": "2026-09-03T15:41:26.114841+00:00",
+  "inferencex_al_source": "INFERENCEX_CHECKOUT/golden_al_distribution/kimik3_dspark_probabilistic_sample_method_block_rejection_sample_method.yaml",
+  "inferencex_commit": "1bb270dac74de4f7e76e9000a3e92d3de4d5c664",
+  "native_anchor_count": 4,
+  "native_anchor_result_count": 288,
+  "native_anchor_spec_best_count": 288,
+  "native_anchor_spec_result_count": 2304,
+  "pareto_count": 30,
+  "recommendations": {
+    "Aggressive latency floor": "direct_L48_aggressive_m3072_s1__dsa512",
+    "Balanced recommendation": "direct_L61_balanced_m3072_s1__v4_compressed",
+    "Conservative recommendation": "direct_L78_conservative_m3072_s1__v4_compressed",
+    "Full-attention fallback": "direct_L78_conservative_m3072_s1__kda75_mla25",
+    "KDA+sparse hybrid": "direct_L61_balanced_m3072_s1__kda50_v4_50",
+    "Latent-MoE option": "latent_L61_balanced_m3072_s1__v4_compressed"
+  },
+  "reconstruction_validation": {
+    "direct_cache_bytes": 0.0,
+    "direct_latency_ms": 0.0,
+    "direct_spec_latency_ms": 0.0,
+    "direct_weight_bytes": 0.0,
+    "dsa_aic_vs_formula_ms": 1.2869999996834025e-06,
+    "latent_cache_bytes": 0.0,
+    "latent_latency_ms": 0.0,
+    "latent_spec_latency_ms": 0.0,
+    "latent_weight_bytes": 0.0
+  },
+  "result_count": 32256,
+  "script_sha256": "8072c98466fbe10aae56d7bb36787d155a2d6a3af11c93545c07fa0445a18178",
+  "spec_architecture_summary_count": 448,
+  "spec_best_count": 32256,
+  "spec_result_count": 258048,
+  "systems": {
+    "GB300": {
+      "capacity": 298013687808,
+      "fabric": 900000000000.0,
+      "id": "gb300",
+      "mem_bw": 8000000000000.0
+    },
+    "VR200 HBM": {
+      "capacity": 298013687808,
+      "fabric": 900000000000.0,
+      "id": "vr200_hbm",
+      "mem_bw": 22000000000000.0
+    },
+    "VR200 HBM+NVLink": {
+      "capacity": 298013687808,
+      "fabric": 1800000000000.0,
+      "id": "vr200_hbm_nvlink",
+      "mem_bw": 22000000000000.0
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "scope": "Controlled 5T SWA/global cached-prefix extend-prefill study",
+  "workload": {
+    "prefix_tokens_already_cached": 262144,
+    "new_input_tokens": 1024,
+    "postfill_context_tokens": 263168,
+    "aic_mode": "static_ctx"
+  },
+  "layers": 61,
+  "hidden_size": 7168,
+  "experts": 1216,
+  "topk": 25,
+  "shared_experts": 0,
+  "moe_intermediate": 3072,
+  "dep": 64,
+  "systems": [
+    "GB300",
+    "VR200 HBM+NVLink"
+  ],
+  "capacity_gib": 277.546875,
+  "profile_count": 43,
+  "cpr_range": [
+    1,
+    1024
+  ],
+  "latency_targets_ms": [
+    250,
+    500,
+    1000,
+    2000
+  ],
+  "aic_database_mode": "SOL",
+  "quantization": {
+    "gemm": "fp8_block",
+    "moe": "w4a8_mxfp4_mxfp8_trtllm",
+    "kv_cache": "fp8",
+    "fmha": "bfloat16"
+  },
+  "throughput_definition": "new input tokens completed per synchronized static_ctx forward pass",
+  "memory_method": "Explicit postfill per-layer FP8 KV/state plus AIC body weights and activation/other overhead",
+  "hybrid_methods": {
+    "gqa_swa": "AIC prefix-aware ContextAttention per-layer primitives",
+    "mla_kda": "AIC Kimi-K3 prefix-aware context primitives",
+    "v4": "AIC DeepSeek-V4 prefix-aware context primitive",
+    "dsa": "AIC GLM-5.2 prefix-aware ContextDSAModule averaged across its shared-index cadence"
+  },
+  "excluded": [
+    "prefix lookup and cache-hit probability",
+    "KV transfer or remote cache fetch",
+    "scheduler and queueing",
+    "framework efficiency discount",
+    "prefill/decode interference",
+    "speculative decoding (decode-only technique)"
+  ]
+}

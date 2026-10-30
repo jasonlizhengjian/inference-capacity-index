@@ -18,6 +18,8 @@ does not claim to reproduce Microsoft's exact implementation.
 - **Method and assumptions:** [readable Markdown methodology](docs/METHODOLOGY.md),
   including the workload, precision, model basket, equations and code references.
 - **Report reproduction:** [Figures 1–4, their CSVs and commands](docs/report/README.md).
+- **Alternative architectures:** [exploratory 5T/10T studies](docs/research/architecture-studies/README.md),
+  including historical attention, MoE, depth/width and prefill comparisons.
 - **Versions and experiments:** [snapshot guide](docs/SNAPSHOTS.md), then
   [sensitivity](docs/research/methodology-sensitivity/README.md) and
   [empirical validation](docs/research/inferencex-validation/README.md).

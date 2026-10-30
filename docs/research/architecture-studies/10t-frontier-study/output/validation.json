@@ -1,0 +1,66 @@
+{
+  "datasets": [
+    {
+      "dataset": "architecture_grid.csv",
+      "errors": 0,
+      "rows": 106056
+    },
+    {
+      "dataset": "capacity_slo.csv",
+      "errors": 0,
+      "rows": 35352
+    },
+    {
+      "dataset": "context_sensitivity.csv",
+      "errors": 0,
+      "rows": 320
+    },
+    {
+      "dataset": "matched_5t_10t.csv",
+      "errors": 0,
+      "rows": 78560
+    },
+    {
+      "dataset": "native_capacity_slo.csv",
+      "errors": 0,
+      "rows": 1920
+    },
+    {
+      "dataset": "native_geometry_grid.csv",
+      "errors": 0,
+      "rows": 2952
+    },
+    {
+      "dataset": "precision_sensitivity.csv",
+      "errors": 0,
+      "rows": 480
+    },
+    {
+      "dataset": "prefill_saturation.csv",
+      "errors": 0,
+      "rows": 31424
+    },
+    {
+      "dataset": "rank_balance.csv",
+      "errors": 0,
+      "rows": 80
+    },
+    {
+      "dataset": "resource_counterfactuals.csv",
+      "errors": 0,
+      "rows": 480
+    },
+    {
+      "dataset": "routing_sensitivity.csv",
+      "errors": 0,
+      "rows": 1280
+    },
+    {
+      "dataset": "topology_spec.csv",
+      "errors": 0,
+      "rows": 6240
+    }
+  ],
+  "passed": true,
+  "total_csv_rows": 265144
+}
