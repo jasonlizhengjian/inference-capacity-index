@@ -1,12 +1,12 @@
-# How the Inference Capacity Index is calculated
+# How the Inference Performance Index (IPI) is calculated
 
-**Report snapshot: ICI v1 methodology, 20 October 2026 Rubin profile revision.**
+**Report snapshot: IPI v1 methodology, 20 October 2026 Rubin profile revision.**
 Four equally weighted models; 50–400 tokens/s/request on a logarithmic speed
 axis. GB300 = 1; VR200 = 2.177 GB300e. This is the snapshot behind report
 Figures 1, 3 and 4. [Reproduction and figure map](report/README.md) |
 [Snapshot guide](SNAPSHOTS.md) | [Interactive explorer](visualizations/REPORT.html).
 
-The ICI compares the number of concurrent generating requests supported per
+The IPI compares the number of concurrent generating requests supported per
 allocated chip across a fixed basket of workloads. It combines decode and
 separately provisioned prefill resources. It is not an arithmetic average of
 a decode score and a prefill score.
@@ -17,7 +17,7 @@ Public text uses **output speed** (tokens/s/request), **concurrency**
 (requests/chip), and **output throughput** (tokens/s/chip). Legacy `TPS/user`
 and `speed` mean output speed; `agents_chip` and `capacity` mean concurrent
 continuously generating requests per allocated chip, with the phase denominator
-specified by the table. `agent_index_GB300e` is the combined ICI score.
+specified by the table. `agent_index_GB300e` is the combined IPI score.
 `agent_index` Python imports and legacy column names are retained so old files
 remain readable. “SOL” identifies an analytical estimate, not another unit.
 
@@ -183,18 +183,18 @@ For each model `m`, divide hardware `h`'s area by GB300's area for that same
 model, then average the four ratios:
 
 ```text
-ICI(h) = (1/4) × sum_m [ A(h,m) / A(GB300,m) ]
+IPI(h) = (1/4) × sum_m [ A(h,m) / A(GB300,m) ]
 ```
 
 This keeps a model with more requests/chip from dominating merely because its
 raw capacity is higher. Equal model weights express architectural coverage;
 they are not observed traffic shares or a claim of equal model quality.
 [Basket and proxy-weight sensitivity](research/methodology-sensitivity/README.md#model-basket-sensitivity)
-shows why the ICI is not an architecture-independent hardware multiplier.
+shows why the IPI is not an architecture-independent hardware multiplier.
 
 For the report's Rubin revision the four ratios are 1.224658, 2.476490,
 2.354606 and 2.653713. Their mean is **2.177367**, displayed as **2.18 GB300e**.
-The **2.48** in Figure 3 is Kimi's area ratio, not the final ICI or a ratio
+The **2.48** in Figure 3 is Kimi's area ratio, not the final IPI or a ratio
 holding at every speed. GB300 is 1 by construction.
 
 ## Workload and model assumptions

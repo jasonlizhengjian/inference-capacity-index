@@ -322,7 +322,7 @@ implied by these alternative scenarios.
     data = json.dumps(dict(cases=cases, rows=rows, summary=summary, hardware=hardware),
                       allow_nan=False).replace("<", "\\u003c")
     page = """<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Inference Capacity Index · Methodology sensitivity</title>
+<title>Inference Performance Index · Methodology sensitivity</title>
 <style>body{font:16px/1.6 system-ui;margin:30px auto;max-width:1500px;padding:0 22px;color:#203530;background:#f7f7f0}
 h1{font-size:34px;line-height:1.15}a{color:#225f81}select{font:inherit;padding:8px}table{border-collapse:collapse;font-size:13px;white-space:nowrap;width:100%}
 th,td{padding:9px 12px;border-bottom:1px solid #d6ddd6;text-align:right}th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:#f7f7f0}

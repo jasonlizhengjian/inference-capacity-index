@@ -1,11 +1,11 @@
-# Inference Capacity Index v1: full explainer
+# Inference Performance Index v1: full explainer
 
 **Score snapshot: 20 October 2026 Rubin revision.** Fixed-layout knee examples
 retain the older profiles as labeled. [Snapshot guide](../SNAPSHOTS.md).
 
 Start with the [Markdown methodology](../METHODOLOGY.md) for a complete account
 readable directly on GitHub, or the [report figures and reproduction map](../report/README.md).
-These HTML chapters add interactive exploration. The ICI uses four equally
+These HTML chapters add interactive exploration. The IPI uses four equally
 weighted models, log 50–400 tokens/s/request, and separate prefill/decode pools.
 
 **20 October update:** the main explainer, index CSV and accelerator bars now
