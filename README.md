@@ -10,6 +10,12 @@ memory-admission, topology and search policies live in our Python wrappers.
 The MAI adapter uses native operators with explicitly assumed dimensions; it
 does not claim to reproduce Microsoft's exact implementation.
 
+The project is now named **Inference Performance Index (IPI)**, previously
+Inference Capacity Index (ICI). The canonical repository and Python distribution
+are `inference-performance-index`. This is a naming change; scores and methodology
+are unchanged. See [naming and compatibility](docs/NAMING.md) for legacy identifiers
+and release downloads.
+
 ## Start here
 
 - **Intuition:** the short launch report introduces the IPI. Its public URL will
@@ -88,7 +94,7 @@ connects the narrative, equations, charts and implementation references.
 
 GitHub displays HTML source rather than running these pages. Clone/download the
 repository and open the files in a browser, or download `visualizations.zip` from
-the [v1 release](https://github.com/jasonlizhengjian/inference-capacity-index/releases/tag/v1.0.0)
+the [v1 release](https://github.com/jasonlizhengjian/inference-performance-index/releases/tag/v1.0.0)
 and extract it. Keep the files together so navigation and downloads work.
 These are generated snapshots: `python3 reproduce.py rubin-update` regenerates
 the revised version in `results/rubin-update/`. The no-argument command retains the original snapshot;
@@ -143,7 +149,7 @@ into `vendor/`, or unpack the complete release archive, which includes it:
 ```bash
 mkdir -p vendor
 gh release download v1.0.0 \
-  --repo jasonlizhengjian/inference-capacity-index --pattern '*.whl' --dir vendor
+  --repo jasonlizhengjian/inference-performance-index --pattern '*.whl' --dir vendor
 
 python3 environment/setup_current.py
 .venv-current/bin/python reproduce.py doctor
@@ -207,7 +213,9 @@ guaranteed to produce a byte-identical runtime.
 python3 reproduce.py bundle
 ```
 
-Writes `dist/inference-capacity-index-v1.0.0.tar.gz` and prints its SHA-256.
+Writes `dist/inference-performance-index-v1.0.0.tar.gz` and prints its SHA-256.
+The existing `v1.0.0` release archive retains its original filename and contents;
+new bundles built from this checkout use the IPI name.
 The explicit allowlist excludes environments, private references, credentials,
 logs and unrelated research scripts. Native setup still needs package-index
 access for dependencies; the quick rebuild is fully offline.
