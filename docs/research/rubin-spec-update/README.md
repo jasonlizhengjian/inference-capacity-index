@@ -1,6 +1,6 @@
 # Rubin bandwidth revision — 20 October 2026
 
-The revised VR200 combined Inference Capacity Index is **2.177 GB300e**, versus
+The revised VR200 combined Inference Performance Index is **2.177 GB300e**, versus
 **2.389** in the original v1.0.0 snapshot (−8.86%). This is a native AISim
 re-search of both phases, not a rescaling of the final score. Only Rubin changes.
 

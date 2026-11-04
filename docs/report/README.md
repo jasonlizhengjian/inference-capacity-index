@@ -1,6 +1,6 @@
 # Launch report figures and reproduction
 
-**Report calculation snapshot: 20 October 2026 Rubin revision of ICI v1.**
+**Report calculation snapshot: 20 October 2026 Rubin revision of IPI v1.**
 Documentation and figure wording updated 29 October 2026. GB300 = 1;
 VR200 = 2.177366570368923. The report's publication URL will be linked here
 when available; no private draft link is needed to use this repository.
@@ -71,7 +71,7 @@ release, archive the chart's exact public observations and metadata first.
 
 ## Figure previews
 
-![Selected accelerator ICI scores](figures/figure_1_selected_chips.png)
+![Selected accelerator IPI scores](figures/figure_1_selected_chips.png)
 
 *Figure 1. Modeled inference capacity for eleven selected chips, in GB300 equivalents.*
 
@@ -84,7 +84,7 @@ Concurrency is divided by 64 decode chips. The line connects evaluated batch siz
 
 *Figure 3. Shading marks each capacity curve's area over 50–400 tokens/s/request.
 Each shaded area extends from zero to its curve; the overlapping region counts toward both.
-The ratio is 2.48 for Kimi, not VR200's overall ICI.*
+The ratio is 2.48 for Kimi, not VR200's overall IPI.*
 
 ![Averaging the four model ratios](figures/figure_4_model_average.png)
 
@@ -100,4 +100,4 @@ Its five-point Kimi/GB300 result is about 12% average absolute throughput
 difference with both modeled phases at 50% of SOL speed. It does not establish
 12% accuracy across the index, across hardware, or for the report's newer
 benchmark chart. The validation retains layout, workload, precision and
-sampling limitations. None of its efficiency scenarios discount the ICI scores.
+sampling limitations. None of its efficiency scenarios discount the IPI scores.

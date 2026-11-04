@@ -60,7 +60,7 @@ preserves the former outputs, source scripts and hashes.
 
 On 29 October, `v1.0.0` was updated to include the revised Rubin inputs,
 refreshed supporting analyses and report documentation. The methodology remains
-ICI v1. The original release commit `a7f3e7406fae4c2da0d2597177d413c8e7460b84`
+IPI v1. The original release commit `a7f3e7406fae4c2da0d2597177d413c8e7460b84`
 is preserved as `v1.0.0-original-2026-10-16`. The release bundle and visualization
 ZIP are refreshed with the tag; the pinned AISim wheel is unchanged.
 Use `python3 reproduce.py rubin-update` for the report scores. The no-argument

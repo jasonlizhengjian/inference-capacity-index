@@ -137,7 +137,7 @@ def average_figure(ratios,ici,pdf):
     fig.text(.065,.86,'Each model’s ratio compares the area under VR200’s capacity curve with GB300’s.',fontsize=11.5,va='top')
     positions=[0,1,2,3,5]
     vals=list(ratios.values())+[ici]
-    labels=[NAMES[m] for m in MODELS]+['ICI score']
+    labels=[NAMES[m] for m in MODELS]+['IPI score']
     for pos,v in zip(positions,vals):
         ax.barh(pos,v,color=COL['VR200'],alpha=.85 if pos==5 else .48,height=.58)
         ax.text(v+.045,pos,f'{v:.2f}',va='center',weight='bold' if pos==5 else 'normal',fontsize=13)
@@ -198,7 +198,7 @@ assert next(q['ici_relative_to_gb300'] for q in rows if q['chip']=='Nvidia GB300
 
 fig, ax = plt.subplots(figsize=(11,8.2))
 fig.subplots_adjust(left=.30,right=.94,top=.78,bottom=.22)
-heading(fig, 'Inference Capacity Index v1',
+heading(fig, 'Inference Performance Index v1',
           'Modeled inference capacity per chip, relative to Nvidia GB300.')
 ys=list(range(len(rows)))
 for i,q in enumerate(rows):
@@ -211,7 +211,7 @@ ax.set_yticks(ys,[q['chip'] for q in rows],fontsize=11.5)
 ax.invert_yaxis()
 ax.set_xlim(0,3.25)
 ax.set_xticks([0,.5,1,1.5,2,2.5,3],['0','0.5','1','1.5','2','2.5','3'])
-ax.set_xlabel('Inference Capacity Index (GB300e)',labelpad=12)
+ax.set_xlabel('Inference Performance Index (GB300e)',labelpad=12)
 ax.grid(axis='x',color='#e7eaec',lw=.7,zorder=0)
 ax.set_axisbelow(True)
 ax.axvline(1,color='#344958',lw=1,ls=(0,(3,3)),zorder=2)
@@ -223,7 +223,7 @@ save(fig,'figure_1_selected_chips')
 csvout('figure_1_selected_chips',rows)
 
 inputs=[ROOT/'reference/2026-10-15/manifest.json',ROOT/'reference/2026-10-20-rubin/manifest.json',INPUT,Path(__file__)]
-provenance=dict(score_revision='2026-10-20-rubin',methodology='ICI v1, four models, log 50–400, separate prefill/decode provisioning',
+provenance=dict(score_revision='2026-10-20-rubin',methodology='IPI v1, four models, log 50–400, separate prefill/decode provisioning',
     input_sha256={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},
     output_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in OUT.iterdir() if p.suffix in ('.csv','.png','.svg')},
     matplotlib_version=matplotlib.__version__,numpy_version=np.__version__,

@@ -1,4 +1,4 @@
-# Inference Capacity Index v1
+# Inference Performance Index v1
 
 Portable reproduction of the **four-model, 23-accelerator** study:
 GLM-5.2, Kimi-K3, Qwen3-Coder 480B and the MAI-Base-2 2.8T proxy, equally weighted.
@@ -12,7 +12,7 @@ does not claim to reproduce Microsoft's exact implementation.
 
 ## Start here
 
-- **Intuition:** the short launch report introduces the ICI. Its public URL will
+- **Intuition:** the short launch report introduces the IPI. Its public URL will
   be added when published; the repository does not require access to a draft.
 - **Official scores:** [Epoch AI ML Hardware Data Explorer](https://epoch.ai/data/machine-learning-hardware).
 - **Method and assumptions:** [readable Markdown methodology](docs/METHODOLOGY.md),
